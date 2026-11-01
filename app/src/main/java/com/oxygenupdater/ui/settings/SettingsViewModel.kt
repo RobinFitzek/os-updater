@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.oxygenupdater.extensions.get
 import com.oxygenupdater.extensions.remove
 import com.oxygenupdater.extensions.set
@@ -41,7 +40,6 @@ class SettingsViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences,
     private val serverRepository: ServerRepository,
     private val fcmUtils: FcmUtils,
-    private val crashlytics: FirebaseCrashlytics,
 ) : ViewModel() {
 
     private var recommendedDeviceId = NotSetL
@@ -173,7 +171,6 @@ class SettingsViewModel @Inject constructor(
 
     /**
      * Saves method ID & name in [SharedPreferences].
-     * Additionally, updates [FirebaseCrashlytics] user identifier.
      */
     fun saveSelectedMethod(
         method: UpdateMethod,
@@ -192,13 +189,6 @@ class SettingsViewModel @Inject constructor(
             )
         }
 
-        updateCrashlyticsUserId()
-    }
-
-    fun updateCrashlyticsUserId() {
-        val device = sharedPreferences[KeyDevice, "<UNKNOWN>"]
-        val method = sharedPreferences[KeyUpdateMethod, "<UNKNOWN>"]
-        crashlytics.setUserId("Device: $device, Update Method: $method")
     }
 
     fun resubscribeToFcmTopic() = viewModelScope.launch(Dispatchers.IO) {

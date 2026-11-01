@@ -1,5 +1,6 @@
 package com.oxygenupdater.activities
 
+import android.util.Log
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build.VERSION.SDK_INT
@@ -65,7 +66,6 @@ import androidx.navigation3.ui.NavDisplay
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.size.Size
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.oxygenupdater.BuildConfig
 import com.oxygenupdater.OxygenUpdater
 import com.oxygenupdater.R
@@ -146,7 +146,6 @@ import com.oxygenupdater.utils.LocalNotifications
 import com.oxygenupdater.utils.UpdateCheckScheduler
 import com.oxygenupdater.utils.Utils.checkPlayServices
 import com.oxygenupdater.utils.logDebug
-import com.oxygenupdater.utils.logWarning
 import com.oxygenupdater.viewmodels.MainViewModel
 import com.oxygenupdater.workers.WorkDataDownloadBytesDone
 import com.oxygenupdater.workers.WorkDataDownloadEta
@@ -176,9 +175,6 @@ class MainActivity : AppCompatActivity() {
 
     @Volatile
     private var currentRoute: Route? = null
-
-    @Inject
-    lateinit var crashlytics: FirebaseCrashlytics
 
     @Inject
     lateinit var updateCheckScheduler: UpdateCheckScheduler
@@ -263,6 +259,7 @@ class MainActivity : AppCompatActivity() {
 
         val deviceConfig by settingsViewModel.deviceConfigState.collectAsStateWithLifecycle()
         val methodConfig by settingsViewModel.methodConfigState.collectAsStateWithLifecycle()
+        val deviceListLoadFailed by viewModel.deviceFetchFailedState.collectAsStateWithLifecycle()
         OnboardingScreen(
             windowWidthSize = windowSize.widthSizeClass,
             scrollBehavior = scrollBehavior,
@@ -270,6 +267,8 @@ class MainActivity : AppCompatActivity() {
             onDeviceSelect = settingsViewModel::saveSelectedDevice,
             methodConfig = methodConfig,
             onMethodSelect = settingsViewModel::saveSelectedMethod,
+            deviceListLoadFailed = deviceListLoadFailed,
+            onRetryLoadDevices = { viewModel.fetchAllDevices() },
             getPrefStr = viewModel::getPref,
             getPrefBool = viewModel::getPref,
             persistBool = viewModel::persist,
@@ -278,10 +277,9 @@ class MainActivity : AppCompatActivity() {
 
                 if (viewModel.isDeviceAndMethodSet) {
                     viewModel.persist(KeySetupDone, true)
-                    (application as? OxygenUpdater)?.setupCrashReporting()
                     viewModel.shouldShowOnboarding = false
                 } else {
-                    crashlytics.logWarning(TAG, "Required preferences not valid: ${viewModel.deviceId}, ${viewModel.updateMethodId}")
+                    Log.w(TAG, "Required preferences not valid: ${viewModel.deviceId}, ${viewModel.updateMethodId}")
                     showToast(R.string.settings_entered_incorrectly)
                     viewModel.shouldShowOnboarding = true
                 }
@@ -555,7 +553,6 @@ class MainActivity : AppCompatActivity() {
         DisposableEffect(Unit) {
             // Run this every time this screen is visited: always a real (no-cache)
             // fetch, so reloading the screen always reloads from the server
-            settingsViewModel.updateCrashlyticsUserId()
             updateViewModel.refresh()
 
             // Prune finished work when leaving this composable, e.g. when
@@ -581,7 +578,6 @@ class MainActivity : AppCompatActivity() {
             windowWidthSize = windowWidthSize,
             state = state,
             onRefresh = {
-                settingsViewModel.updateCrashlyticsUserId()
                 viewModel.fetchServerStatus()
                 updateViewModel.refresh()
             },
@@ -698,6 +694,7 @@ class MainActivity : AppCompatActivity() {
 
         val deviceConfig by settingsViewModel.deviceConfigState.collectAsStateWithLifecycle()
         val methodConfig by settingsViewModel.methodConfigState.collectAsStateWithLifecycle()
+        val deviceListLoadFailed by viewModel.deviceFetchFailedState.collectAsStateWithLifecycle()
         SettingsScreen(
             navType = navType,
             deviceConfig = deviceConfig,
@@ -717,6 +714,8 @@ class MainActivity : AppCompatActivity() {
             onThemeSelect = settingsViewModel::updateTheme,
             onAdvancedModeChange = { viewModel.persist(KeyAdvancedMode, it) },
             onUpdateCheckIntervalChange = { updateCheckScheduler.schedule(this@MainActivity, it) },
+            deviceListLoadFailed = deviceListLoadFailed,
+            onRetryLoadDevices = { viewModel.fetchAllDevices() },
             openAboutScreen = openAboutScreen,
             getPrefStr = viewModel::getPref,
             getPrefBool = viewModel::getPref,
@@ -918,7 +917,7 @@ class MainActivity : AppCompatActivity() {
         val updateMethodId = viewModel.updateMethodId
 
         if (deviceId == NotSetL || updateMethodId == NotSetL) {
-            crashlytics.logWarning(TAG, "Required preferences not valid: $deviceId, $updateMethodId")
+            Log.w(TAG, "Required preferences not valid: $deviceId, $updateMethodId")
             showToast(R.string.settings_entered_incorrectly)
         } else showToast(R.string.settings_saving)
     }

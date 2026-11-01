@@ -6,7 +6,6 @@ import com.oxygenupdater.models.DownloadErrorBody
 import com.oxygenupdater.models.FreshUpdateDataDownloadUrlBody
 import com.oxygenupdater.models.InAppFaq
 import com.oxygenupdater.models.InstallGuide
-import com.oxygenupdater.models.OsInfoBody
 import com.oxygenupdater.models.ServerMessage
 import com.oxygenupdater.models.ServerPostResult
 import com.oxygenupdater.models.ServerStatus
@@ -101,9 +100,6 @@ interface ServerApi {
 
     @POST("news-read")
     suspend fun markArticleRead(@Body id: Map<String, Long>): Response<ServerPostResult>
-
-    @POST("osInfoHeartbeat")
-    suspend fun osInfoHeartbeat(@Body body: OsInfoBody): Response<ServerPostResult>
 
     /**
      * @param body includes the following fields:

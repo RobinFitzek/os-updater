@@ -1,5 +1,6 @@
 package com.oxygenupdater.viewmodels
 
+import android.util.Log
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -36,7 +37,6 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
 import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.oxygenupdater.BuildConfig
 import com.oxygenupdater.activities.MainActivity
 import com.oxygenupdater.extensions.get
@@ -70,7 +70,6 @@ import com.oxygenupdater.ui.update.DownloadStatus
 import com.oxygenupdater.ui.update.WorkInfoWithStatus
 import com.oxygenupdater.utils.Utils
 import com.oxygenupdater.utils.logDebug
-import com.oxygenupdater.utils.logWarning
 import com.oxygenupdater.workers.DirectoryRoot
 import com.oxygenupdater.workers.DownloadWorker
 import com.oxygenupdater.workers.WorkDataDownloadFailureExtraFilename
@@ -103,7 +102,6 @@ class MainViewModel @Inject constructor(
     private val appUpdateManager: AppUpdateManager,
     private val serverRepository: ServerRepository,
     private val workManager: WorkManager,
-    private val crashlytics: FirebaseCrashlytics,
 ) : ViewModel() {
 
     private val allDevicesFlow = MutableStateFlow<List<Device>?>(null)
@@ -270,8 +268,21 @@ class MainViewModel @Inject constructor(
         deviceMismatch = Triple(it.first, savedDeviceName, it.second ?: DefaultDeviceName)
     }
 
-    private fun fetchAllDevices() = viewModelScope.launch(Dispatchers.IO) {
-        val response = serverRepository.fetchDevices(DeviceRequestFilter.All) ?: listOf()
+    private var deviceFetchFailed = MutableStateFlow(false)
+
+    /** `true` when the last device-list fetch failed (server unreachable) */
+    val deviceFetchFailedState = deviceFetchFailed.asStateFlow()
+
+    fun fetchAllDevices() = viewModelScope.launch(Dispatchers.IO) {
+        val response = serverRepository.fetchDevices(DeviceRequestFilter.All)
+        if (response == null) {
+            // fetch failed: keep previous list but flag the error so the UI can
+            // show an error + retry instead of "please wait" forever
+            deviceFetchFailed.value = true
+            if (allDevicesFlow.value.isNullOrEmpty()) allDevicesFlow.emit(listOf())
+            return@launch
+        }
+        deviceFetchFailed.value = false
         deviceOsSpec = Utils.checkDeviceOsSpec(response)
         updateDeviceMismatch(response)
         allDevicesFlow.emit(response)
@@ -292,7 +303,7 @@ class MainViewModel @Inject constructor(
      */
     fun deleteDownloadedFile(context: Context, filename: String?): Boolean {
         if (filename == null) {
-            crashlytics.logWarning(TAG, "Can't delete downloaded file: filename null")
+            Log.w(TAG, "Can't delete downloaded file: filename null")
             return false
         }
 
@@ -301,12 +312,12 @@ class MainViewModel @Inject constructor(
         logDebug(TAG, "Deleting downloaded update file $filename")
 
         File(context.getExternalFilesDir(null), filename).run {
-            if (exists() && !delete()) crashlytics.logWarning(TAG, "Can't delete temporary file $filename")
+            if (exists() && !delete()) Log.w(TAG, "Can't delete temporary file $filename")
         }
 
         return File(Environment.getExternalStoragePublicDirectory(DirectoryRoot).absolutePath, filename).run {
             if (exists() && !delete()) {
-                crashlytics.logWarning(TAG, "Can't delete downloaded file $filename")
+                Log.w(TAG, "Can't delete downloaded file $filename")
                 false
             } else true
         }
@@ -389,7 +400,7 @@ class MainViewModel @Inject constructor(
             /**
              * [IntentSender.SendIntentException] is probably thrown if a stale [appUpdateInfo] is being used, not sure
              */
-            crashlytics.logWarning(TAG, "`appUpdateManager.startUpdateFlowForResult` failed", e)
+            Log.w(TAG, "`appUpdateManager.startUpdateFlowForResult` failed", e)
         }
     }
 
@@ -434,7 +445,7 @@ class MainViewModel @Inject constructor(
             /**
              * [IntentSender.SendIntentException] is probably thrown if a stale [appUpdateInfo] is being used, not sure
              */
-            crashlytics.logWarning(TAG, "`appUpdateManager.startUpdateFlowForResult` failed", e)
+            Log.w(TAG, "`appUpdateManager.startUpdateFlowForResult` failed", e)
         }
     }
 

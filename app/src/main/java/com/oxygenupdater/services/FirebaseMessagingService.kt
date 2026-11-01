@@ -1,5 +1,6 @@
 package com.oxygenupdater.services
 
+import android.util.Log
 import android.content.SharedPreferences
 import androidx.core.app.NotificationCompat.PRIORITY_HIGH
 import androidx.core.app.NotificationManagerCompat
@@ -10,7 +11,6 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.oxygenupdater.dao.ArticleDao
@@ -27,8 +27,6 @@ import com.oxygenupdater.utils.NotifUtils.NotifTypeNews
 import com.oxygenupdater.utils.NotifUtils.handleImmediateNotifs
 import com.oxygenupdater.utils.UpdateCheckScheduler
 import com.oxygenupdater.utils.logDebug
-import com.oxygenupdater.utils.logError
-import com.oxygenupdater.utils.logWarning
 import com.oxygenupdater.workers.DisplayNewsNotificationWorker
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
@@ -51,9 +49,6 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
     @Inject
     lateinit var fcmUtils: FcmUtils
-
-    @Inject
-    lateinit var crashlytics: FirebaseCrashlytics
 
     @Inject
     lateinit var updateCheckScheduler: UpdateCheckScheduler
@@ -109,7 +104,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
                 }
             },
             unknownTypeError = {
-                crashlytics.logWarning(TAG, it)
+                Log.w(TAG, it)
             }
         )
 
@@ -150,7 +145,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
                     }.build()
             )
         } catch (e: Exception) {
-            crashlytics.logError(TAG, "Error creating worker for news notification", e)
+            Log.e(TAG, "Error creating worker for news notification", e)
         }
     }
 

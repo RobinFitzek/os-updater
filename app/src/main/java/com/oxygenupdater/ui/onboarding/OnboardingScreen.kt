@@ -42,7 +42,6 @@ import com.oxygenupdater.ui.settings.DeviceChooser
 import com.oxygenupdater.ui.settings.DeviceSettingsListConfig
 import com.oxygenupdater.ui.settings.MethodChooser
 import com.oxygenupdater.ui.settings.MethodSettingsListConfig
-import com.oxygenupdater.ui.settings.SettingsAnalytics
 import com.oxygenupdater.ui.theme.PreviewAppTheme
 import com.oxygenupdater.ui.theme.PreviewGetPrefBool
 import com.oxygenupdater.ui.theme.PreviewGetPrefStr
@@ -58,6 +57,8 @@ fun OnboardingScreen(
     onDeviceSelect: (Device) -> Unit,
     methodConfig: SettingsListConfig<UpdateMethod>,
     onMethodSelect: (UpdateMethod) -> Unit,
+    deviceListLoadFailed: Boolean = false,
+    onRetryLoadDevices: () -> Unit = {},
     getPrefStr: (key: String, default: String) -> String,
     getPrefBool: (key: String, default: Boolean) -> Boolean,
     persistBool: (key: String, value: Boolean) -> Unit,
@@ -74,10 +75,9 @@ fun OnboardingScreen(
                 .verticalScroll(rememberScrollState())
                 .testTag(OnboardingScreen_MainColumnTestTag)
         ) {
-            DeviceChooser(config = deviceConfig, getPrefStr = getPrefStr, onSelect = onDeviceSelect)
-            MethodChooser(config = methodConfig, getPrefStr = getPrefStr, onSelect = onMethodSelect)
+            DeviceChooser(config = deviceConfig, getPrefStr = getPrefStr, onSelect = onDeviceSelect, loadFailed = deviceListLoadFailed, onRetry = onRetryLoadDevices)
+            MethodChooser(config = methodConfig, getPrefStr = getPrefStr, onSelect = onMethodSelect, loadFailed = deviceListLoadFailed, onRetry = onRetryLoadDevices)
 
-            SettingsAnalytics(getPrefBool = getPrefBool, persistBool = persistBool)
         }
 
         // Note: if moving this to the right side of the screen, leave space for 2/3-button nav bar in landscape mode (same as Switch)
@@ -137,10 +137,9 @@ fun OnboardingScreen(
             .verticalScroll(rememberScrollState())
             .testTag(OnboardingScreen_MainColumnTestTag)
     ) {
-        DeviceChooser(config = deviceConfig, getPrefStr = getPrefStr, onSelect = onDeviceSelect)
-        MethodChooser(config = methodConfig, getPrefStr = getPrefStr, onSelect = onMethodSelect)
+        DeviceChooser(config = deviceConfig, getPrefStr = getPrefStr, onSelect = onDeviceSelect, loadFailed = deviceListLoadFailed, onRetry = onRetryLoadDevices)
+        MethodChooser(config = methodConfig, getPrefStr = getPrefStr, onSelect = onMethodSelect, loadFailed = deviceListLoadFailed, onRetry = onRetryLoadDevices)
 
-        SettingsAnalytics(getPrefBool = getPrefBool, persistBool = persistBool)
 
         val bodyMedium = typography.bodyMedium
         Text(

@@ -68,10 +68,8 @@ import com.oxygenupdater.icons.Schedule
 import com.oxygenupdater.icons.Policy
 import com.oxygenupdater.icons.Star
 import com.oxygenupdater.icons.Symbols
-import com.oxygenupdater.icons.TrackChanges
 import com.oxygenupdater.internal.settings.KeyAdvancedMode
 import com.oxygenupdater.internal.settings.KeyDevice
-import com.oxygenupdater.internal.settings.KeyShareAnalyticsAndLogs
 import com.oxygenupdater.internal.settings.KeyUpdateCheckIntervalMinutes
 import com.oxygenupdater.internal.settings.KeyUpdateMethod
 import com.oxygenupdater.models.Device
@@ -116,6 +114,8 @@ fun SettingsScreen(
     onThemeSelect: (Theme) -> Unit,
     onAdvancedModeChange: (Boolean) -> Unit,
     onUpdateCheckIntervalChange: (Long) -> Unit,
+    deviceListLoadFailed: Boolean = false,
+    onRetryLoadDevices: () -> Unit = {},
     openAboutScreen: () -> Unit,
     getPrefStr: (key: String, default: String) -> String,
     getPrefBool: (key: String, default: Boolean) -> Boolean,
@@ -130,8 +130,20 @@ fun SettingsScreen(
     // region Device
     Header(R.string.preference_header_device)
 
-    DeviceChooser(config = deviceConfig, getPrefStr = getPrefStr, onSelect = onDeviceSelect)
-    MethodChooser(config = methodConfig, getPrefStr = getPrefStr, onSelect = onMethodSelect)
+    DeviceChooser(
+        config = deviceConfig,
+        getPrefStr = getPrefStr,
+        onSelect = onDeviceSelect,
+        loadFailed = deviceListLoadFailed,
+        onRetry = onRetryLoadDevices,
+    )
+    MethodChooser(
+        config = methodConfig,
+        getPrefStr = getPrefStr,
+        onSelect = onMethodSelect,
+        loadFailed = deviceListLoadFailed,
+        onRetry = onRetryLoadDevices,
+    )
 
     UpdateCheckInterval(
         getPrefLong = getPrefLong,
@@ -150,7 +162,6 @@ fun SettingsScreen(
     // region Advanced
     Header(R.string.preference_header_advanced)
     AdvancedMode(getPrefBool = getPrefBool, onChange = onAdvancedModeChange)
-    SettingsAnalytics(getPrefBool = getPrefBool, persistBool = persistBool)
     ClearCache()
     // endregion
 
@@ -190,6 +201,8 @@ fun DeviceChooser(
     config: SettingsListConfig<Device>,
     getPrefStr: (key: String, default: String) -> String,
     onSelect: (Device) -> Unit,
+    loadFailed: Boolean = false,
+    onRetry: () -> Unit = {},
 ) {
     var showSheet by rememberState(false)
 
@@ -197,15 +210,17 @@ fun DeviceChooser(
     @SuppressLint("PrivateResource") val notSelected = stringResource(androidx.compose.ui.R.string.not_selected)
     val subtitle = if (deviceSelectionEnabled) {
         getPrefStr(KeyDevice, notSelected)
+    } else if (loadFailed) {
+        stringResource(R.string.summary_device_list_load_failed)
     } else stringResource(R.string.summary_please_wait)
 
     SettingsItem(
-        onClick = { showSheet = true },
+        onClick = { if (loadFailed) onRetry() else showSheet = true },
         icon = Symbols.Mobile,
         titleResId = R.string.settings_device,
         subtitle = subtitle,
-        subtitleIsError = subtitle == notSelected,
-        enabled = deviceSelectionEnabled,
+        subtitleIsError = subtitle == notSelected || loadFailed,
+        enabled = true, // tappable even on failure, so the user can retry
     )
 
     if (showSheet) ModalBottomSheet({ showSheet = false }) { hide ->
@@ -225,6 +240,8 @@ fun MethodChooser(
     config: SettingsListConfig<UpdateMethod>,
     getPrefStr: (key: String, default: String) -> String,
     onSelect: (UpdateMethod) -> Unit,
+    loadFailed: Boolean = false,
+    onRetry: () -> Unit = {},
 ) {
     var showSheet by rememberState(false)
 
@@ -232,15 +249,17 @@ fun MethodChooser(
     @SuppressLint("PrivateResource") val notSelected = stringResource(androidx.compose.ui.R.string.not_selected)
     val subtitle = if (methodSelectionEnabled) {
         getPrefStr(KeyUpdateMethod, notSelected)
+    } else if (loadFailed) {
+        stringResource(R.string.summary_device_list_load_failed)
     } else stringResource(R.string.summary_update_method)
 
     SettingsItem(
-        onClick = { showSheet = true },
+        onClick = { if (loadFailed) onRetry() else showSheet = true },
         icon = Symbols.CloudDownload,
         titleResId = R.string.settings_update_method,
         subtitle = subtitle,
-        subtitleIsError = subtitle == notSelected,
-        enabled = methodSelectionEnabled,
+        subtitleIsError = subtitle == notSelected || loadFailed,
+        enabled = true,
     )
 
     if (showSheet) ModalBottomSheet({ showSheet = false }) { hide ->
@@ -427,23 +446,6 @@ private fun AdvancedMode(
             hide()
         }
     }
-}
-
-@Composable
-fun SettingsAnalytics(
-    getPrefBool: (key: String, default: Boolean) -> Boolean,
-    persistBool: (key: String, value: Boolean) -> Unit,
-) {
-    var shareLogs by rememberState(getPrefBool(KeyShareAnalyticsAndLogs, true))
-    SettingsSwitchItem(
-        checked = shareLogs,
-        onCheckedChange = {
-            shareLogs = it
-            persistBool(KeyShareAnalyticsAndLogs, it)
-        },
-        icon = Symbols.TrackChanges,
-        titleResId = R.string.settings_upload_logs,
-    )
 }
 
 @Composable

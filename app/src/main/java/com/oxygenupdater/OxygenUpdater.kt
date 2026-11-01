@@ -20,16 +20,12 @@ import coil3.annotation.ExperimentalCoilApi
 import coil3.network.cachecontrol.CacheControlCacheStrategy
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import coil3.util.DebugLogger
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.oxygenupdater.database.SqliteMigrations
 import com.oxygenupdater.extensions.get
 import com.oxygenupdater.extensions.set
-import com.oxygenupdater.internal.settings.KeyShareAnalyticsAndLogs
 import com.oxygenupdater.internal.settings.KeyVersionCode
 import com.oxygenupdater.models.SystemVersionProperties
 import com.oxygenupdater.utils.NotifUtils
-import com.oxygenupdater.utils.logError
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -51,12 +47,6 @@ class OxygenUpdater : Application(), Configuration.Provider, SingletonImageLoade
             .setWorkerFactory(workerFactory)
             .setMinimumLoggingLevel(if (BuildConfig.DEBUG) Log.DEBUG else Log.ERROR)
             .build()
-
-    @Inject
-    lateinit var analytics: FirebaseAnalytics
-
-    @Inject
-    lateinit var crashlytics: FirebaseCrashlytics
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -95,7 +85,6 @@ class OxygenUpdater : Application(), Configuration.Provider, SingletonImageLoade
         super.onCreate()
         setupStrictMode()
 
-        setupCrashReporting()
         setupNetworkCallback()
 
         if (SDK_INT >= VERSION_CODES.O) NotifUtils.refreshNotificationChannels(this)
@@ -157,22 +146,6 @@ class OxygenUpdater : Application(), Configuration.Provider, SingletonImageLoade
             add(OkHttpNetworkFetcherFactory(cacheStrategy = { CacheControlCacheStrategy() }))
         }.build()
 
-    /**
-     * Syncs analytics and crashlytics collection to user's preference.
-     *
-     * @see [FirebaseAnalytics.setAnalyticsCollectionEnabled]
-     * @see [FirebaseCrashlytics.setCrashlyticsCollectionEnabled]
-     */
-    fun setupCrashReporting() {
-        analytics.setUserProperty("device_name", SystemVersionProperties.deviceProductName)
-
-        val shouldShareLogs = sharedPreferences[KeyShareAnalyticsAndLogs, true]
-        // Sync analytics collection to user's preference
-        analytics.setAnalyticsCollectionEnabled(shouldShareLogs)
-        // Sync crashlytics collection to user's preference, but only if we're on a release build
-        crashlytics.isCrashlyticsCollectionEnabled = shouldShareLogs && !BuildConfig.DEBUG
-    }
-
     private fun setupNetworkCallback() = getSystemService<ConnectivityManager>()?.run {
         // Posting initial value is required, as [networkCallback]'s
         // methods get called only when network connectivity changes
@@ -183,8 +156,8 @@ class OxygenUpdater : Application(), Configuration.Provider, SingletonImageLoade
             if (SDK_INT >= VERSION_CODES.N) {
                 registerDefaultNetworkCallback(networkCallback)
             } else registerNetworkCallback(NetworkRequest.Builder().build(), networkCallback)
-        } catch (e: SecurityException) {
-            crashlytics.logError(TAG, "Couldn't setup network callback", e)
+        } catch (_: SecurityException) {
+            // ignore; network availability will just stay at its last known value
         }
     }
 

@@ -1,6 +1,7 @@
 package com.oxygenupdater.workers
 
 import androidx.compose.runtime.getValue
+import android.util.Log
 import android.app.Notification
 import android.app.Notification.CATEGORY_PROGRESS
 import android.content.Context
@@ -23,7 +24,6 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import androidx.work.WorkerParameters
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.oxygenupdater.R
 import com.oxygenupdater.apis.DownloadApi
 import com.oxygenupdater.extensions.formatFileSize
@@ -49,10 +49,8 @@ import com.oxygenupdater.utils.NotificationIds
 import com.oxygenupdater.utils.UpdateDataVersionFormatter
 import com.oxygenupdater.utils.isNetworkError
 import com.oxygenupdater.utils.logDebug
-import com.oxygenupdater.utils.logError
 import com.oxygenupdater.utils.logInfo
 import com.oxygenupdater.utils.logVerbose
-import com.oxygenupdater.utils.logWarning
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CancellationException
@@ -90,7 +88,6 @@ class DownloadWorker @AssistedInject constructor(
     private val downloadApi: DownloadApi,
     private val serverRepository: ServerRepository,
     private val workManager: WorkManager,
-    private val crashlytics: FirebaseCrashlytics,
 ) : CoroutineWorker(context, parameters) {
 
     private var isFirstPublish = true
@@ -238,7 +235,7 @@ class DownloadWorker @AssistedInject constructor(
     private suspend fun trySetForeground(notification: Notification) = try {
         setForeground(foregroundInfo(notification))
     } catch (e: Exception) {
-        crashlytics.logError(TAG, "setForeground failed", e)
+        Log.e(TAG, "setForeground failed", e)
     }
 
     /** Must be overridden because we use [WorkRequest.Builder.setExpedited] */
@@ -263,14 +260,8 @@ class DownloadWorker @AssistedInject constructor(
         if (startingByte != NotSetL) {
             logDebug(TAG, "Looks like a resume operation. Adding $rangeHeader to the request")
 
-            if (tempFile.length() > startingByte) crashlytics.logWarning(
-                TAG,
-                "Partially downloaded ZIP size differs from skipped bytes (${tempFile.length()} vs $startingByte)."
-            ) else if (tempFile.length() < startingByte) {
-                crashlytics.logWarning(
-                    TAG,
-                    "Partially downloaded ZIP size (${tempFile.length()}) is lesser than skipped bytes ($startingByte). Resetting state."
-                )
+            if (tempFile.length() > startingByte) Log.w(TAG, "Partially downloaded ZIP size differs from skipped bytes (${tempFile.length()} vs $startingByte).") else if (tempFile.length() < startingByte) {
+                Log.w(TAG, "Partially downloaded ZIP size (${tempFile.length()}) is lesser than skipped bytes ($startingByte). Resetting state.")
 
                 startingByte = NotSetL
                 rangeHeader = null
@@ -374,10 +365,7 @@ class DownloadWorker @AssistedInject constructor(
                     val contentLength = bytesRead + body.contentLength()
 
                     if (abs(contentLength - updateData.downloadSize) > ThresholdBytesDifferenceWithBackend) {
-                        crashlytics.logWarning(
-                            TAG,
-                            "Content length reported by the download server differs from UpdateData.downloadSize ($contentLength vs ${updateData.downloadSize})"
-                        )
+                        Log.w(TAG, "Content length reported by the download server differs from UpdateData.downloadSize ($contentLength vs ${updateData.downloadSize})")
                     }
 
                     if (startingByte != NotSetL) {
@@ -430,7 +418,7 @@ class DownloadWorker @AssistedInject constructor(
         try {
             moveTempFileToCorrectLocation()
         } catch (e: IOException) {
-            crashlytics.logError(TAG, "Could not rename file", e)
+            Log.e(TAG, "Could not rename file", e)
 
             return@withContext Result.failure(Data.Builder().apply {
                 putInt(WorkDataDownloadFailureType, DownloadFailure.CouldNotMoveTempFile.value)
@@ -503,7 +491,7 @@ class DownloadWorker @AssistedInject constructor(
 
     private suspend fun verify() = withContext(Dispatchers.IO) {
         if (updateData == null) {
-            crashlytics.logWarning(TAG, "updateData = null")
+            Log.w(TAG, "updateData = null")
             return@withContext Result.failure(Data.Builder().apply {
                 putInt(WorkDataMd5VerificationFailureType, Md5VerificationFailure.NullUpdateData.value)
             }.build())
@@ -512,7 +500,7 @@ class DownloadWorker @AssistedInject constructor(
         val filename = updateData.filename
         val md5 = updateData.md5sum
         if (filename.isNullOrEmpty() || md5.isNullOrEmpty()) {
-            crashlytics.logWarning(TAG, "Required parameters are null/empty: filename=$filename, md5=$md5")
+            Log.w(TAG, "Required parameters are null/empty: filename=$filename, md5=$md5")
             return@withContext Result.failure(Data.Builder().apply {
                 putInt(WorkDataMd5VerificationFailureType, Md5VerificationFailure.EmptyFilenameOrMd5.value)
             }.build())
@@ -521,7 +509,7 @@ class DownloadWorker @AssistedInject constructor(
         logDebug(TAG, "Verifying $filename")
         val calculatedDigest = calculateMd5()
         if (calculatedDigest == null) {
-            crashlytics.logWarning(TAG, "calculatedDigest = null")
+            Log.w(TAG, "calculatedDigest = null")
             return@withContext Result.failure(Data.Builder().apply {
                 putInt(WorkDataMd5VerificationFailureType, Md5VerificationFailure.NullCalculatedChecksum.value)
             }.build())
@@ -538,7 +526,7 @@ class DownloadWorker @AssistedInject constructor(
             }.build())
         } else {
             LocalNotifications.showVerificationFailedNotification(context)
-            crashlytics.logWarning(TAG, "md5 != calculatedDigest")
+            Log.w(TAG, "md5 != calculatedDigest")
             Result.failure(Data.Builder().apply {
                 putInt(WorkDataMd5VerificationFailureType, Md5VerificationFailure.ChecksumsNotEqual.value)
             }.build())
@@ -549,14 +537,14 @@ class DownloadWorker @AssistedInject constructor(
         val digest = try {
             MessageDigest.getInstance("MD5")
         } catch (e: NoSuchAlgorithmException) {
-            crashlytics.logError(TAG, "Exception while getting digest", e)
+            Log.e(TAG, "Exception while getting digest", e)
             return@withContext null
         }
 
         var retryCount = 0
         while (!zipFile.exists()) {
             if (retryCount >= 3) {
-                crashlytics.logError(
+                Log.e(
                     TAG,
                     "File doesn't exist, even after retrying thrice every 2s",
                     FileNotFoundException("File doesn't exist, even after retrying thrice every 2s")
@@ -566,9 +554,7 @@ class DownloadWorker @AssistedInject constructor(
             }
 
             val suffix = "after 2s (${2 - retryCount} retries left)"
-            crashlytics.logWarning(
-                TAG, "File doesn't exist yet, retrying $suffix"
-            )
+            Log.w(TAG, "File doesn't exist yet, retrying $suffix")
 
             retryCount++
 
@@ -578,7 +564,7 @@ class DownloadWorker @AssistedInject constructor(
             try {
                 delay(2000)
             } catch (e: CancellationException) {
-                crashlytics.logError(TAG, "Error while trying to re-verify file $suffix", e)
+                Log.e(TAG, "Error while trying to re-verify file $suffix", e)
             }
         }
 
@@ -711,7 +697,7 @@ class DownloadWorker @AssistedInject constructor(
             return@withContext Result.success()
         }
 
-        crashlytics.logError(TAG, exception.message ?: "handleException", exception)
+        Log.e(TAG, exception.message ?: "handleException", exception)
         val retryCount = runAttemptCount + 1
 
         // TODO(download): handle SSLProtocolException: Read error for a URL that hasn't
@@ -786,9 +772,7 @@ class DownloadWorker @AssistedInject constructor(
 
             // Try deleting the file to allow retrying this work with a fresh state
             // Even if it doesn't get deleted, we can overwrite data to the same file
-            if (!tempFile.delete()) crashlytics.logWarning(
-                TAG, "Could not delete the partially downloaded ZIP"
-            )
+            if (!tempFile.delete()) Log.w(TAG, "Could not delete the partially downloaded ZIP")
 
             Result.failure(Data.Builder().apply {
                 putInt(WorkDataDownloadFailureType, DownloadFailure.Unknown.value)

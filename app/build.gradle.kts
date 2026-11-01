@@ -1,11 +1,9 @@
 import com.android.build.api.dsl.ApplicationBuildType
-import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import java.net.URI
 import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.gms.services)
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.kotlin.parcelize)
@@ -52,12 +50,6 @@ fun ApplicationBuildType.setupBuildConfig(
     val release = buildName == "release"
 
     if (release) assert(!localOverride) { "`release = true` is incompatible with localOverride" }
-    // Disable Crashlytics upload for non-release builds
-    else configure<CrashlyticsExtension> {
-        nativeSymbolUploadEnabled = false
-        mappingFileUploadEnabled = false
-    }
-
     val minify = release || !localOverride
     isMinifyEnabled = minify
     isShrinkResources = minify

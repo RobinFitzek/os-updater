@@ -1,8 +1,8 @@
 package com.oxygenupdater.repositories
 
+import android.util.Log
 import android.content.SharedPreferences
 import androidx.collection.ArrayMap
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.oxygenupdater.BuildConfig
 import com.oxygenupdater.OxygenUpdater
 import com.oxygenupdater.apis.ServerApi
@@ -19,14 +19,11 @@ import com.oxygenupdater.models.Article
 import com.oxygenupdater.models.DeviceRequestFilter
 import com.oxygenupdater.models.DownloadErrorBody
 import com.oxygenupdater.models.FreshUpdateDataDownloadUrlBody
-import com.oxygenupdater.models.OsInfoBody
 import com.oxygenupdater.models.ServerStatus
 import com.oxygenupdater.models.SystemVersionProperties
 import com.oxygenupdater.models.UpdateData
-import com.oxygenupdater.utils.logError
 import com.oxygenupdater.utils.logInfo
 import com.oxygenupdater.utils.logVerbose
-import com.oxygenupdater.utils.logWarning
 import kotlinx.coroutines.CancellationException
 import retrofit2.Response
 import javax.inject.Inject
@@ -38,7 +35,6 @@ class ServerRepository @Inject constructor(
     private val serverApi: ServerApi,
     private val updateDataDao: UpdateDataDao,
     private val articleDao: ArticleDao,
-    private val crashlytics: FirebaseCrashlytics,
 ) {
 
     suspend fun fetchFaq() = performServerRequest { serverApi.fetchFaq() }
@@ -171,18 +167,11 @@ class ServerRepository @Inject constructor(
     suspend fun markArticleRead(id: Long) = performServerRequest {
         serverApi.markArticleRead(ArrayMap<String, Long>(1).apply { put("news_item_id", id) })
     }?.also {
-        if (!it.success) crashlytics.logWarning(
-            TAG,
-            "Failed to mark article as read on the server: ${it.errorMessage}"
-        )
+        if (!it.success) Log.w(TAG, "Failed to mark article as read on the server: ${it.errorMessage}")
     }
 
     suspend fun fetchUpdateMethodsForDevice(deviceId: Long) = performServerRequest {
         serverApi.fetchUpdateMethodsForDevice(deviceId)
-    }
-
-    suspend fun osInfoHeartbeat(fromIntentAction: String) = performServerRequest {
-        serverApi.osInfoHeartbeat(OsInfoBody.from(fromIntentAction))
     }
 
     suspend fun logDownloadError(
@@ -215,9 +204,9 @@ class ServerRepository @Inject constructor(
             logVerbose(TAG, "Response: $this")
         } else null
     } catch (e: Exception) {
-        // Don't log cancellations to crashlytics, we don't care
+        // Don't log cancellations, we don't care
         if (e is CancellationException) logInfo(TAG, e.message ?: "CancellationException")
-        else crashlytics.logError(TAG, "Error performing request", e)
+        else Log.e(TAG, "Error performing request", e)
         null
     }
 

@@ -4,7 +4,6 @@
 agp = "9.4.1"
 
 # https://firebase.google.com/support/release-notes/android
-crashlytics-plugin = "3.0.8"
 
 # https://developers.google.com/android/guides/releases#:~:text=com.google.gms%3Agoogle%2Dservices
 google-services-plugin = "4.5.0"
@@ -171,8 +170,6 @@ coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp" }
 coil-network-cache = { module = "io.coil-kt.coil3:coil-network-cache-control" }
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 
 google-play-app-update = { module = "com.google.android.play:app-update", version.ref = "play-app-update" }
@@ -262,8 +259,6 @@ coil = [
 ]
 
 firebase = [
-    "firebase-analytics",
-    "firebase-crashlytics",
     "firebase-messaging",
 ]
 
@@ -288,7 +283,6 @@ androidx-test = [
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics-plugin" }
 gms-services = { id = "com.google.gms.google-services", version.ref = "google-services-plugin" }
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }

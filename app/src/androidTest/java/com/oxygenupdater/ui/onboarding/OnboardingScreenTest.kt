@@ -12,7 +12,6 @@ import com.oxygenupdater.UsesSharedPreferencesTest
 import com.oxygenupdater.assertAndPerformClick
 import com.oxygenupdater.assertHasScrollAction
 import com.oxygenupdater.get
-import com.oxygenupdater.internal.settings.KeyShareAnalyticsAndLogs
 import com.oxygenupdater.ui.common.IconTextButtonTestTag
 import com.oxygenupdater.ui.dialogs.BottomSheetTestTag
 import com.oxygenupdater.ui.dialogs.BottomSheet_ItemRowTestTag
@@ -30,7 +29,7 @@ class OnboardingScreenTest : UsesSharedPreferencesTest() {
 
         common(rule[OnboardingScreen_MainColumnTestTag].run {
             assertHasScrollAction()
-            validateColumnLayout(3)
+            validateColumnLayout(2)
         })
 
         rule[OnboardingScreen_SecondaryColumnTestTag].assertHasScrollAction().validateColumnLayout(2).run {
@@ -47,13 +46,13 @@ class OnboardingScreenTest : UsesSharedPreferencesTest() {
 
         val children = rule[OnboardingScreen_MainColumnTestTag].run {
             assertHasScrollAction()
-            validateColumnLayout(5)
+            validateColumnLayout(4)
         }
 
         common(children)
 
-        children[3].assertHasTextExactly(R.string.onboarding_app_uses)
-        children[4].assertHasTextExactly(R.string.onboarding_caption)
+        children[2].assertHasTextExactly(R.string.onboarding_app_uses)
+        children[3].assertHasTextExactly(R.string.onboarding_caption)
         rule[OnboardingScreen_DisclaimerTestTag].assertHasTextExactly(R.string.onboarding_disclaimer)
     }
 
@@ -92,20 +91,6 @@ class OnboardingScreenTest : UsesSharedPreferencesTest() {
             sheet.assertIsNotDisplayed()
         }
 
-        // Analytics
-        children[2].run {
-            assertHasTextExactly(
-                R.string.settings_upload_logs,
-                R.string.summary_on, // default is on
-            )
-
-            assertAndPerformClick() // should be toggled off now
-            assertHasTextExactly(
-                R.string.settings_upload_logs,
-                R.string.summary_off,
-            )
-            ensureCallbackInvokedExactlyOnce("persistBool: $KeyShareAnalyticsAndLogs=false")
-        }
     }
 
     private fun setContent(windowWidthSize: WindowWidthSizeClass) = setContent {

@@ -8,8 +8,6 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.WorkManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.messaging.FirebaseMessaging
 import com.oxygenupdater.apis.DownloadApi
 import com.oxygenupdater.apis.ServerApi
@@ -106,14 +104,6 @@ object MiscellaneousModule {
     @Singleton
     @Provides
     fun appUpdateManager(@ApplicationContext context: Context) = AppUpdateManagerFactory.create(context)
-
-    @Singleton
-    @Provides
-    fun firebaseAnalytics(@ApplicationContext context: Context) = FirebaseAnalytics.getInstance(context)
-
-    @Singleton
-    @Provides
-    fun firebaseCrashlytics() = FirebaseCrashlytics.getInstance()
 
     @Singleton
     @Provides
