@@ -40,6 +40,9 @@ const val KeyUpdateCheckIntervalMinutes = "update_check_interval_minutes"
 /** OTA version of the newest update that a background check has notified about */
 const val KeyLastNotifiedOtaVersion = "last_notified_ota_version"
 
+/** JSON map of methodId -> [com.oxygenupdater.models.MethodRolloutSnapshot], written by the background check */
+const val KeyMethodRolloutSnapshots = "method_rollout_snapshots"
+
 // Notifications properties
 const val KeyFirebaseToken = "firebase_token"
 const val KeyFirebaseInstallationId = "firebase_installation_id"

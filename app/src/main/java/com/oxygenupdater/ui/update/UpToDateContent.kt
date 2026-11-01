@@ -63,6 +63,7 @@ fun UpToDate(
     windowWidthSize: WindowWidthSizeClass,
     refreshing: Boolean,
     updateData: UpdateData,
+    rolloutSnapshotsJson: String,
     getPrefStr: (key: String, default: String) -> String,
 ) {
     val currentOtaVersion = SystemVersionProperties.otaVersion
@@ -158,6 +159,9 @@ fun UpToDate(
         OsEraInfo()
         HorizontalDivider(modifierDefaultPaddingTop)
 
+        MethodRolloutTable(snapshotsJson = rolloutSnapshotsJson, refreshing = refreshing)
+        HorizontalDivider(modifierDefaultPaddingTop)
+
         ExpandableChangelog(
             refreshing = refreshing,
             updateData = updateData,
@@ -246,6 +250,7 @@ fun PreviewUpToDate() = PreviewAppTheme {
         windowWidthSize = windowWidthSize,
         refreshing = false,
         updateData = PreviewUpdateData,
+        rolloutSnapshotsJson = "",
         getPrefStr = PreviewGetPrefStr,
     )
 }

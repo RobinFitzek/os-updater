@@ -41,6 +41,7 @@ fun UpdateScreen(
     forceDownloadErrorDialog: Boolean,
     getPrefStr: (key: String, default: String) -> String,
     getPrefBool: (key: String, default: Boolean) -> Boolean,
+    rolloutSnapshotsJson: String,
     setSubtitleResId: (Int) -> Unit,
     enqueueDownload: () -> Unit,
     pauseDownload: () -> Unit,
@@ -88,6 +89,7 @@ fun UpdateScreen(
             windowWidthSize = windowWidthSize,
             refreshing = refreshing,
             updateData = updateData,
+            rolloutSnapshotsJson = rolloutSnapshotsJson,
             getPrefStr = getPrefStr,
         )
     } else {
@@ -125,6 +127,7 @@ fun UpdateScreen(
             windowWidthSize = windowWidthSize,
             refreshing = refreshing,
             updateData = updateData,
+            rolloutSnapshotsJson = rolloutSnapshotsJson,
             downloadStatus = downloadStatus,
             failureType = failureType,
             httpFailureCodeAndMessage = httpFailureCodeAndMessage,

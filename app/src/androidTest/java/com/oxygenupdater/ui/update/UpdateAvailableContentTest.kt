@@ -107,6 +107,7 @@ class UpdateAvailableContentTest : ComposeBaseTest() {
                 windowWidthSize = windowWidthSize,
                 refreshing = false,
                 updateData = updateData,
+                rolloutSnapshotsJson = "",
                 downloadStatus = downloadStatus,
                 failureType = failureType,
                 httpFailureCodeAndMessage = { NotSet to "" },

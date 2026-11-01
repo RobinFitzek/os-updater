@@ -10,7 +10,10 @@ import com.oxygenupdater.extensions.set
 import com.oxygenupdater.internal.NotSetL
 import com.oxygenupdater.internal.settings.KeyDeviceId
 import com.oxygenupdater.internal.settings.KeyLastNotifiedOtaVersion
+import com.oxygenupdater.internal.settings.KeyMethodRolloutSnapshots
+import com.oxygenupdater.models.MethodRolloutSnapshot
 import com.oxygenupdater.models.UpdateData
+import com.oxygenupdater.utils.json
 import com.oxygenupdater.repositories.ServerRepository
 import com.oxygenupdater.utils.LocalNotifications
 import com.google.firebase.crashlytics.FirebaseCrashlytics.logWarning
@@ -51,15 +54,35 @@ class UpdateCheckWorker @AssistedInject constructor(
         }
 
         var newest: UpdateData? = null
+        val snapshots = HashMap<Long, MethodRolloutSnapshot>(methods.size)
+        val checkedAt = System.currentTimeMillis()
         for (method in methods) {
-            val updateData = serverRepository.fetchUpdateData(deviceId, method.id ?: continue, persist = false)
+            val methodId = method.id ?: continue
+            val updateData = serverRepository.fetchUpdateData(deviceId, methodId, persist = false)
             if (updateData == null) continue
+
+            // Record what this method currently reports, even if up-to-date, so the
+            // rollout table can show the latest known build per method
+            val ota = updateData.otaVersionNumber
+            snapshots[methodId] = MethodRolloutSnapshot(
+                methodId = methodId,
+                methodName = method.name,
+                otaVersionNumber = ota,
+                buildDate = UpdateData.getBuildDate(ota),
+                checkedAtEpochMs = checkedAt,
+            )
+
             if (updateData.systemIsUpToDate || !updateData.isUpdateInformationAvailable) continue
 
             val candidate = newest
             if (candidate == null || UpdateData.getBuildDate(updateData.otaVersionNumber) >
                 UpdateData.getBuildDate(candidate.otaVersionNumber)
             ) newest = updateData
+        }
+
+        // Persist snapshots (client-side only; no backend endpoint needed)
+        if (snapshots.isNotEmpty()) {
+            sharedPreferences[KeyMethodRolloutSnapshots] = json.encodeToString(snapshots)
         }
 
         val latest = newest

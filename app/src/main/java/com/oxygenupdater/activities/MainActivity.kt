@@ -564,6 +564,13 @@ class MainActivity : AppCompatActivity() {
 
         val state = updateViewModel.state.collectAsStateWithLifecycle(null).value ?: return@surfacedEntry
         val (workInfo, downloadStatus) = viewModel.workInfoWithStatus.collectAsStateWithLifecycle().value
+        val rolloutSnapshotsJson by viewModel.rolloutSnapshotsJson.collectAsStateWithLifecycle()
+
+        // Pick up snapshots written by the background check while the app was closed
+        DisposableEffect(Unit) {
+            viewModel.refreshRolloutSnapshots()
+            onDispose {}
+        }
 
         val outputData = workInfo?.outputData
         val progress = workInfo?.progress
@@ -597,6 +604,7 @@ class MainActivity : AppCompatActivity() {
             forceDownloadErrorDialog = downloadErrorMessage != null,
             getPrefStr = viewModel::getPref,
             getPrefBool = viewModel::getPref,
+            rolloutSnapshotsJson = rolloutSnapshotsJson,
             setSubtitleResId = setSubtitleResId,
             enqueueDownload = viewModel::enqueueDownloadWork,
             pauseDownload = viewModel::pauseDownloadWork,

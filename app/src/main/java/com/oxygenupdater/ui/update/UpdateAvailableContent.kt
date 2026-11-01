@@ -110,6 +110,7 @@ fun UpdateAvailable(
     windowWidthSize: WindowWidthSizeClass,
     refreshing: Boolean,
     updateData: UpdateData,
+    rolloutSnapshotsJson: String,
     downloadStatus: DownloadStatus,
     failureType: Int,
     httpFailureCodeAndMessage: () -> Pair<Int, String>?,
@@ -136,6 +137,8 @@ fun UpdateAvailable(
             updateData = updateData,
             getPrefStr = getPrefStr,
         )
+
+        MethodRolloutTable(snapshotsJson = rolloutSnapshotsJson, refreshing = refreshing)
 
         ConditionalNavBarPadding(navType)
     }
@@ -188,6 +191,8 @@ fun UpdateAvailable(
             refreshing = refreshing,
             updateData = updateData,
             getPrefStr = getPrefStr,
+
+        MethodRolloutTable(snapshotsJson = rolloutSnapshotsJson, refreshing = refreshing)
         )
 
         Spacer(Modifier.weight(1f))
@@ -627,6 +632,7 @@ fun PreviewUpdateAvailable() = PreviewAppTheme {
         windowWidthSize = windowWidthSize,
         refreshing = false,
         updateData = PreviewUpdateData,
+        rolloutSnapshotsJson = "",
         downloadStatus = NotDownloading,
         failureType = NotSet,
         httpFailureCodeAndMessage = { NotSet to "" },

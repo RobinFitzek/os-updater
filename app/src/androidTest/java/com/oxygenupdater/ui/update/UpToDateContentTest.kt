@@ -173,6 +173,7 @@ class UpToDateContentTest : ComposeBaseTest() {
             windowWidthSize = windowWidthSize,
             refreshing = false,
             updateData = PreviewUpdateData,
+            rolloutSnapshotsJson = "",
             getPrefStr = GetPrefStrForUpdateMethod,
         )
     }

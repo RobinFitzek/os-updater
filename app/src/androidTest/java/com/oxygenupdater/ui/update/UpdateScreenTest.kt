@@ -123,6 +123,7 @@ class UpdateScreenTest : UsesSharedPreferencesTest() {
             forceDownloadErrorDialog = false,
             getPrefStr = ::getPrefStr,
             getPrefBool = currentGetPrefBool,
+            rolloutSnapshotsJson = "",
             setSubtitleResId = { trackCallback("setSubtitleResId: $it") },
             enqueueDownload = { trackCallback("enqueueDownload") },
             pauseDownload = { trackCallback("pauseDownload") },

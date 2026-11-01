@@ -54,6 +54,7 @@ import com.oxygenupdater.internal.settings.KeyFlexibleAppUpdateIgnoreCount
 import com.oxygenupdater.internal.settings.KeyIgnoreIncorrectDeviceWarnings
 import com.oxygenupdater.internal.settings.KeyIgnoreNotificationPermissionSheet
 import com.oxygenupdater.internal.settings.KeyIgnoreUnsupportedDeviceWarnings
+import com.oxygenupdater.internal.settings.KeyMethodRolloutSnapshots
 import com.oxygenupdater.internal.settings.KeySetupDone
 import com.oxygenupdater.internal.settings.KeyUpdateMethod
 import com.oxygenupdater.internal.settings.KeyUpdateMethodId
@@ -445,6 +446,16 @@ class MainViewModel @Inject constructor(
     fun unregisterAppUpdateListener() = appUpdateManager.unregisterListener(flexibleAppUpdateListener)
     override fun onCleared() {
         unregisterAppUpdateListener()
+    }
+
+    private val rolloutSnapshotsJsonFlow = MutableStateFlow(sharedPreferences[KeyMethodRolloutSnapshots, ""])
+
+    /** JSON of methodId -> [com.oxygenupdater.models.MethodRolloutSnapshot]; re-emitted when a background check writes it */
+    val rolloutSnapshotsJson = rolloutSnapshotsJsonFlow.asStateFlow()
+
+    /** Call after a background update check may have written new snapshots */
+    fun refreshRolloutSnapshots() {
+        rolloutSnapshotsJsonFlow.value = sharedPreferences[KeyMethodRolloutSnapshots, ""]
     }
 
     fun getPref(key: String, default: String) = sharedPreferences[key, default]
