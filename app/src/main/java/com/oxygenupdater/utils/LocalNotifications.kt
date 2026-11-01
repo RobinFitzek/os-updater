@@ -20,60 +20,58 @@ import com.oxygenupdater.activities.MainActivity
 import com.oxygenupdater.extensions.setBigTextStyle
 import com.oxygenupdater.extensions.tryNotify
 import com.oxygenupdater.ui.main.DeepLinkGuide
+import com.oxygenupdater.ui.main.DeepLinkUpdate
 import com.oxygenupdater.ui.main.DownloadedArg
 import com.oxygenupdater.ui.main.OuSchemeSuffixed
 import com.oxygenupdater.ui.update.KeyDownloadErrorMessage
 import com.oxygenupdater.ui.update.KeyDownloadErrorResumable
 import com.oxygenupdater.utils.NotificationChannels.DownloadAndInstallationGroup.DownloadStatusNotifChannelId
 import com.oxygenupdater.utils.NotificationChannels.DownloadAndInstallationGroup.VerificationStatusNotifChannelId
-import com.oxygenupdater.utils.NotificationChannels.MiscellaneousGroup.OtaUrlSubmittedNotifChannelId
+import com.oxygenupdater.utils.NotificationChannels.PushNotificationsGroup.UpdateNotifChannelId
 
 object LocalNotifications {
 
     /**
-     * Contribute: shows a notification that a update file has been submitted successfully.
+     * Shows a high-priority notification that a new system update is available,
+     * posted by the background [com.oxygenupdater.workers.UpdateCheckWorker].
+     * Tapping it opens the app's update screen.
      */
-    fun showContributionSuccessfulNotification(context: Context, filenameSet: Set<String>) {
+    fun showUpdateAvailableNotification(
+        context: Context,
+        versionNumber: String,
+        otaVersionNumber: String,
+    ) {
         val contentIntent = PendingIntent.getActivity(
             context,
             0,
             // Since MainActivity's `launchMode` is `singleTask`, we don't
             // need to add any flags to avoid creating multiple instances
-            Intent(context, MainActivity::class.java),
+            Intent(context, MainActivity::class.java).apply {
+                action = Intent.ACTION_VIEW
+                data = "$OuSchemeSuffixed$DeepLinkUpdate".toUri()
+            },
             FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
         )
 
-        val title = context.getString(R.string.contribute_successful_notification_title)
-        val text = context.getString(R.string.contribute_successful_notification_text)
+        val title = context.getString(R.string.update_notification_channel_name)
+        val text = context.getString(R.string.notification_version, versionNumber, otaVersionNumber)
 
-        val inboxStyle = NotificationCompat.InboxStyle().addLine(text)
-        filenameSet.forEach {
-            // Only the first 5-6 filenames will be shown
-            inboxStyle.addLine("• $it")
-        }
-
-        val notification = NotificationCompat.Builder(context, OtaUrlSubmittedNotifChannelId)
+        val notification = NotificationCompat.Builder(context, UpdateNotifChannelId)
             .setSmallIcon(R.drawable.logo_notification)
-            .setSubText(context.getString(R.string.url_submitted_notification_channel_name))
+            .setSubText(title)
             .setContentTitle(title)
-            .setContentText(text)
+            .setBigTextStyle(text)
             .setContentIntent(contentIntent)
-            .setOngoing(false)
             .setAutoCancel(true)
-            .setCategory(CATEGORY_STATUS)
-            .setPriority(PRIORITY_LOW)
-            .setStyle(inboxStyle)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(Notification.CATEGORY_STATUS)
             .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            .setVisibility(VISIBILITY_PUBLIC)
             .build()
 
-        with(NotificationManagerCompat.from(context)) {
-            tryNotify(NotificationIds.LocalContribution, notification)
-        }
+        NotificationManagerCompat.from(context).tryNotify(NotificationIds.LocalUpdateAvailable, notification)
     }
 
-    /**
-     * Shows a notification that the downloaded update file is downloaded successfully.
-     */
     fun showDownloadCompleteNotification(context: Context) {
         val contentIntent = PendingIntent.getActivity(
             context,

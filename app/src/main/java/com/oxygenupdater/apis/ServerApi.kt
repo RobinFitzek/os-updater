@@ -10,13 +10,10 @@ import com.oxygenupdater.models.OsInfoBody
 import com.oxygenupdater.models.ServerMessage
 import com.oxygenupdater.models.ServerPostResult
 import com.oxygenupdater.models.ServerStatus
-import com.oxygenupdater.models.SubmitOtaDbBody
 import com.oxygenupdater.models.UpdateData
 import com.oxygenupdater.models.UpdateMethod
-import com.oxygenupdater.models.VerifyPurchaseBody
 import com.oxygenupdater.ui.currentLanguage
 import com.oxygenupdater.ui.currentLocale
-import com.oxygenupdater.utils.HeaderReadTimeout
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -42,6 +39,7 @@ interface ServerApi {
     suspend fun fetchDevices(@Path("filter") filter: String): Response<List<Device>>
 
     @GET("updateData/{deviceId}/{updateMethodId}/{incrementalSystemVersion}")
+    @Headers("Cache-Control: no-store")
     suspend fun fetchUpdateData(
         @Path("deviceId") deviceId: Long,
         @Path("updateMethodId") updateMethodId: Long,
@@ -58,6 +56,7 @@ interface ServerApi {
     ): Response<UpdateData>
 
     @GET("mostRecentUpdateData/{deviceId}/{updateMethodId}")
+    @Headers("Cache-Control: no-store")
     suspend fun fetchMostRecentUpdateData(
         @Path("deviceId") deviceId: Long,
         @Path("updateMethodId") updateMethodId: Long,
@@ -108,18 +107,6 @@ interface ServerApi {
 
     /**
      * @param body includes the following fields:
-     * * `rows: List<Map<String, Any?>>`,
-     * * `otaVersion: String`,
-     * * `isEuBuild: Boolean`,
-     * * `appVersion: String`,
-     * * `deviceName: String`,
-     * * `actualDeviceName: String`,
-     */
-    @POST("submit-update-url")
-    suspend fun submitOtaDbRows(@Body body: SubmitOtaDbBody): Response<ServerPostResult>
-
-    /**
-     * @param body includes the following fields:
      * * `url: String`
      * * `otaVersion: String`,
      * * `httpCode: Int`,
@@ -130,7 +117,4 @@ interface ServerApi {
     @POST("log-download-error")
     suspend fun logDownloadError(@Body body: DownloadErrorBody): Response<ServerPostResult>
 
-    @POST("verify-purchase")
-    @Headers("$HeaderReadTimeout:99")
-    suspend fun verifyPurchase(@Body body: VerifyPurchaseBody): Response<ServerPostResult>
 }

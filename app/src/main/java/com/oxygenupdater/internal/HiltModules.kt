@@ -87,10 +87,6 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun submittedUpdateFileDao(localAppDb: LocalAppDb) = localAppDb.submittedUpdateFileDao()
-
-    @Singleton
-    @Provides
     fun updateDataDao(localAppDb: LocalAppDb) = localAppDb.updateDataDao()
 }
 

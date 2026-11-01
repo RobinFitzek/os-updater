@@ -62,14 +62,7 @@ class OnboardingScreenTest : UsesSharedPreferencesTest() {
         rule[IconTextButtonTestTag].run {
             assertHasTextExactly(R.string.onboarding_finished_button)
             assertAndPerformClick()
-            ensureCallbackInvokedExactlyOnce("onStartAppClick: true")
-            /**
-             * TODO(test/contributor): checkbox can be tested only on rooted devices
-             *  above API 29, because checkbox & buttons are guarded behind
-             *  `ContributorUtils.isAtLeastQAndPossiblyRooted`.
-             *  "PossiblyRooted" is determined by Shell.isAppGrantedRoot(),
-             *  which is false for emulators and managed devices.
-             */
+            ensureCallbackInvokedExactlyOnce("onStartAppClick")
         }
 
         val sheet = rule[BottomSheetTestTag]
@@ -126,7 +119,7 @@ class OnboardingScreenTest : UsesSharedPreferencesTest() {
             getPrefStr = ::getPrefStr,
             getPrefBool = ::getPrefBool,
             persistBool = ::persistBool,
-            onStartAppClick = { trackCallback("onStartAppClick: $it") },
+            onStartAppClick = { trackCallback("onStartAppClick") },
         )
     }
 }

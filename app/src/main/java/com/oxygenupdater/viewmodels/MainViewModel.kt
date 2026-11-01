@@ -130,9 +130,6 @@ class MainViewModel @Inject constructor(
 
     var shouldShowOnboarding by mutableStateOf(!sharedPreferences[KeySetupDone, false])
 
-    /** @see [com.oxygenupdater.ui.common.BannerAd] */
-    var forceAdReload by mutableStateOf(false)
-
     val canShowNotifPermissionSheet = !sharedPreferences[KeyIgnoreNotificationPermissionSheet, false]
 
     val shouldShowUnsupportedDeviceDialog
@@ -452,7 +449,9 @@ class MainViewModel @Inject constructor(
 
     fun getPref(key: String, default: String) = sharedPreferences[key, default]
     fun getPref(key: String, default: Boolean) = sharedPreferences[key, default]
+    fun getPref(key: String, default: Long) = sharedPreferences[key, default]
     fun persist(key: String, value: Boolean) = sharedPreferences.set(key, value)
+    fun persist(key: String, value: Long) = sharedPreferences.set(key, value)
 
     fun openEmail(context: Context) {
         val chosenDevice = sharedPreferences[KeyDevice, "<UNKNOWN>"]

@@ -28,17 +28,17 @@ const val KeyDownloadBytesDone = "download_bytes_done"
  */
 const val KeyShareAnalyticsAndLogs = "upload_logs"
 
-/**
- * Note: contribution was a feature in app v2.7.0 - v5.8.3. v5.9.0 removed it, as it wasn't useful anymore.
- * Post Oppo-merger, OnePlus phones used either Google OTA (doesn't save files anywhere), or Component OTA
- * (saves in a directory accessible only via root). URLs in the latter case couldn't be constructed via names alone.
- *
- * It was brought back in app v5.11.0, because we failed to realize that URLs were saved in a SQLite database.
- */
-const val KeyContribute = "contribute"
-const val KeyContributionCount = "contribution_count"
-
 const val KeyFlexibleAppUpdateIgnoreCount = "flexibleAppUpdateIgnoreCount"
+
+/**
+ * Interval (in minutes) between automatic background update checks.
+ *
+ * WorkManager enforces a minimum periodic interval of 15 minutes.
+ */
+const val KeyUpdateCheckIntervalMinutes = "update_check_interval_minutes"
+
+/** OTA version of the newest update that a background check has notified about */
+const val KeyLastNotifiedOtaVersion = "last_notified_ota_version"
 
 // Notifications properties
 const val KeyFirebaseToken = "firebase_token"
@@ -59,6 +59,3 @@ const val KeyNotificationFullTopic = "notification_topic"
 const val KeyNotificationDeviceTopic = "notification_topic_device"
 
 const val KeyNotificationDelayInSeconds = "notification_delay_in_seconds"
-
-// IAB properties
-const val KeyAdFree = "34ejrtgalsJKDf;awljker;2k3jrpwosKjdfpio24uj3tp3oiwfjdscPOKj"

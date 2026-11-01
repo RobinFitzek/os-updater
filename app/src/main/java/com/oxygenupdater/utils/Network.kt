@@ -32,6 +32,9 @@ var okHttpCache: Cache? = null
 /** Allows per-request read timeout override via application interceptor */
 const val HeaderReadTimeout = "X-Read-Timeout"
 
+/** Cache-Control value that forces a real network fetch (no cache read, no cache store) */
+const val NoStore = "no-store"
+
 @VisibleForTesting
 val json = Json {
     ignoreUnknownKeys = true
@@ -96,10 +99,13 @@ private fun httpClient(cache: Cache) = OkHttpClient.Builder().apply {
     // Note that this won't be invoked for cached responses as they short-circuit the network.
     if (BuildConfig.DEBUG) addNetworkInterceptor(HttpLoggingInterceptor().setLevel(Level.BASIC))
 
-    // Use an application interceptor to add a custom user agent
+    // Use an application interceptor to add a custom user agent, and to opt
+    // out of the HTTP cache so every request is a real fetch from the server.
     addInterceptor { chain ->
         val request = chain.request()
-        val builder = request.newBuilder().header(UserAgentTag, AppUserAgent)
+        val builder = request.newBuilder()
+            .header(UserAgentTag, AppUserAgent)
+            .header("Cache-Control", NoStore)
         val readTimeout = request.header(HeaderReadTimeout)?.let {
             builder.removeHeader(HeaderReadTimeout)
             it.toIntOrNull()

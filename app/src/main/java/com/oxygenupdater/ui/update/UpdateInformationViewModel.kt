@@ -49,14 +49,4 @@ class UpdateInformationViewModel @Inject constructor(
         serverRepository.fetchUpdateData(previousDeviceId, previousMethodId)
         refreshingFlow.value = false
     }
-
-    /**
-     * Calls [refresh] only if device or method ID changed from the last invocation.
-     * This can happen if user changed settings and then came back to this screen.
-     */
-    fun refreshIfNeeded() {
-        val deviceId = sharedPreferences[KeyDeviceId, NotSetL]
-        val methodId = sharedPreferences[KeyUpdateMethodId, NotSetL]
-        if (previousDeviceId != deviceId || previousMethodId != methodId) refresh(deviceId, methodId)
-    }
 }

@@ -3,13 +3,8 @@ package com.oxygenupdater.receivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.os.Handler
-import android.os.Looper
-import com.oxygenupdater.extensions.get
-import com.oxygenupdater.internal.settings.KeyContribute
 import com.oxygenupdater.repositories.ServerRepository
-import com.oxygenupdater.utils.ContributorUtils
+import com.oxygenupdater.utils.UpdateCheckScheduler
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,13 +21,10 @@ import javax.inject.Inject
 class DeviceBootOrAppUpdateReceiver : BroadcastReceiver() {
 
     @Inject
-    lateinit var sharedPreferences: SharedPreferences
-
-    @Inject
-    lateinit var contributorUtils: ContributorUtils
-
-    @Inject
     lateinit var serverRepository: ServerRepository
+
+    @Inject
+    lateinit var updateCheckScheduler: UpdateCheckScheduler
 
     override fun onReceive(context: Context, intent: Intent) {
         val action = intent.action
@@ -44,10 +36,9 @@ class DeviceBootOrAppUpdateReceiver : BroadcastReceiver() {
             serverRepository.osInfoHeartbeat(action.substringAfterLast('.'))
         }
 
-        if (!ContributorUtils.isAtLeastQ || !sharedPreferences[KeyContribute, false]) return
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            contributorUtils.startOrStop(context)
-        }, 5000) // 5s
+        // Ensure the periodic update check survives reboots & app updates,
+        // then run an immediate check
+        updateCheckScheduler.schedule(context)
+        updateCheckScheduler.checkNow(context)
     }
 }

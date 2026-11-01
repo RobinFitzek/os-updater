@@ -17,10 +17,8 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -61,9 +59,7 @@ fun ArticleScreen(
     viewModel: ArticleViewModel,
     id: Long,
     scrollBehavior: TopAppBarScrollBehavior,
-    showAds: () -> Boolean,
     onLoadFinished: (Article) -> Unit,
-    loadInterstitialAd: () -> Unit,
 ) {
     DisposableEffect(Unit) {
         viewModel.refreshItem(id)
@@ -73,8 +69,6 @@ fun ArticleScreen(
 
     val webViewState = rememberWebViewState()
     val onRefresh: () -> Unit = {
-        if (showAds()) loadInterstitialAd()
-
         viewModel.refreshItem(id)
         webViewState.webView?.reload()
     }
@@ -84,7 +78,6 @@ fun ArticleScreen(
         state = state,
         onRefresh = onRefresh,
         webViewState = webViewState,
-        showAds = showAds,
         onLoadFinished = onLoadFinished,
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
     )
@@ -97,7 +90,6 @@ fun ArticleScreen(
     state: RefreshAwareState<Article?>,
     onRefresh: () -> Unit,
     webViewState: WebViewState,
-    showAds: () -> Boolean,
     onLoadFinished: (Article) -> Unit,
 ) {
     val (refreshing, data) = state
@@ -152,7 +144,7 @@ fun ArticleScreen(
             // We can't edit CSS in WebViews, so pass theme to backend to style it accordingly
             val language = if (currentLocale().language == "nl") "NL" else "EN"
             val theme = if (MaterialTheme.colorScheme.light) "Light" else "Dark"
-            val url = "${item.apiUrl}/$language/$theme?ads=${showAds()}"
+            val url = "${item.apiUrl}/$language/$theme"
             RefreshAwareWebView(
                 refreshing = refreshing,
                 webViewState = webViewState,
@@ -273,7 +265,6 @@ fun PreviewArticleScreen() = PreviewAppTheme {
         state = RefreshAwareState(false, PreviewArticleData),
         onRefresh = {},
         webViewState = rememberWebViewState(),
-        showAds = { true },
         onLoadFinished = {},
         modifier = Modifier,
     )

@@ -29,7 +29,6 @@ import com.oxygenupdater.internal.settings.KeyVersionCode
 import com.oxygenupdater.models.SystemVersionProperties
 import com.oxygenupdater.utils.NotifUtils
 import com.oxygenupdater.utils.logError
-import com.topjohnwu.superuser.Shell
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -60,13 +59,6 @@ class OxygenUpdater : Application(), Configuration.Provider, SingletonImageLoade
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
-
-    init {
-        // Set settings before the main shell can be created
-        Shell.enableVerboseLogging = BuildConfig.DEBUG
-        // Accessing non-scoped storage (e.g. /data/data/) requires running in the global namespace
-        Shell.setDefaultBuilder(Shell.Builder.create().setFlags(Shell.FLAG_MOUNT_MASTER))
-    }
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
 

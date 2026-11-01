@@ -12,7 +12,6 @@ import com.oxygenupdater.get
 import com.oxygenupdater.models.ServerMessage
 import com.oxygenupdater.ui.dialogs.BottomSheetTestTag
 import com.oxygenupdater.ui.dialogs.PreviewServerMessagesList
-import com.oxygenupdater.ui.theme.PreviewGetPrefBool
 import com.oxygenupdater.validateColumnLayout
 import org.junit.Test
 
@@ -26,13 +25,9 @@ class MainMenuTest : ComposeBaseTest() {
             Row {
                 MainMenu(
                     serverMessages = serverMessages,
-                    getPrefBool = PreviewGetPrefBool,
                     showMarkAllRead = showMarkAllRead,
                     onMarkAllReadClick = {
                         trackCallback("onMarkAllReadClick")
-                    },
-                    onContributorEnrollmentChange = {
-                        trackCallback("onContributorEnrollmentChange: $it")
                     },
                 )
             }
@@ -66,18 +61,5 @@ class MainMenuTest : ComposeBaseTest() {
         }
         ensureCallbackInvokedExactlyOnce("onMarkAllReadClick")
         rule[MainMenu_DropdownMenuTestTag].assertDoesNotExist()
-
-        /**
-         * TODO(test/contributor): this can be tested only on rooted devices
-         *  above API 29, because checkbox & buttons are guarded behind
-         *  `ContributorUtils.isAtLeastQAndPossiblyRooted`.
-         *  "PossiblyRooted" is determined by Shell.isAppGrantedRoot(),
-         *  which is false for emulators and managed devices.
-         */
-        // // Should trigger onContributorEnrollmentChange() and hide dropdown menu
-        // children[1].assertAndPerformClick()
-        // ensureCallbackInvokedExactlyOnce("onContributorEnrollmentChange: false")
-        // composeTestRule[MainMenu_DropdownMenuTestTag].assertDoesNotExist()
-        // composeTestRule[BottomSheetTestTag].assertExists()
     }
 }

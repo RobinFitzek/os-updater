@@ -5,7 +5,7 @@ package com.oxygenupdater.workers
  */
 
 const val WorkUniqueDownload = "WorkUniqueDownload"
-const val WorkUniqueReadOtaDb = "WorkUniqueReadOtaDb"
+const val WorkUniqueUpdateCheck = "WorkUniqueUpdateCheck"
 
 const val WorkDataDownloadBytesDone = "DownloadBytesDone"
 const val WorkDataDownloadTotalBytes = "DownloadTotalBytes"

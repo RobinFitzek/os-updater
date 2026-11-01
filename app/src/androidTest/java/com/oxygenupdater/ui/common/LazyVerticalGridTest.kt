@@ -16,7 +16,6 @@ import com.oxygenupdater.icons.Help
 import com.oxygenupdater.icons.Link
 import com.oxygenupdater.icons.Logos
 import com.oxygenupdater.icons.Mail
-import com.oxygenupdater.icons.Patreon
 import com.oxygenupdater.icons.Star
 import com.oxygenupdater.icons.Symbols
 import org.junit.Test
@@ -30,7 +29,6 @@ class LazyVerticalGridTest : ComposeBaseTest() {
         GridItem(Symbols.Mail, R.string.about_email_button_text) {},
         GridItem(Logos.GitHub, R.string.about_github_button_text) {},
         GridItem(Symbols.Link, R.string.about_website_button_text) {},
-        GridItem(Logos.Patreon, R.string.about_patreon_button_text) {},
         GridItem(Symbols.Star, R.string.about_rate_button_text) {},
     )
 

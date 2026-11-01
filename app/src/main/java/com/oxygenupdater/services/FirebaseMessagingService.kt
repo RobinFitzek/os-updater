@@ -22,8 +22,10 @@ import com.oxygenupdater.utils.NotifUtils.NotifElementNewsItemId
 import com.oxygenupdater.utils.NotifUtils.NotifElementNewsItemImage
 import com.oxygenupdater.utils.NotifUtils.NotifElementNewsItemIsBump
 import com.oxygenupdater.utils.NotifUtils.NotifElementType
+import com.oxygenupdater.utils.NotifUtils.NotifTypeNewVersion
 import com.oxygenupdater.utils.NotifUtils.NotifTypeNews
 import com.oxygenupdater.utils.NotifUtils.handleImmediateNotifs
+import com.oxygenupdater.utils.UpdateCheckScheduler
 import com.oxygenupdater.utils.logDebug
 import com.oxygenupdater.utils.logError
 import com.oxygenupdater.utils.logWarning
@@ -52,6 +54,9 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
     @Inject
     lateinit var crashlytics: FirebaseCrashlytics
+
+    @Inject
+    lateinit var updateCheckScheduler: UpdateCheckScheduler
 
     /**
      * Doesn't get called if `firebase_messaging_installation_id_enabled` is enabled in AndroidManifest.xml.
@@ -107,6 +112,10 @@ class FirebaseMessagingService : FirebaseMessagingService() {
                 crashlytics.logWarning(TAG, it)
             }
         )
+
+        // A "new version" push means a rollout is live somewhere: run an immediate
+        // update check across all update methods so we detect it ourselves, fast.
+        if (type == NotifTypeNewVersion) updateCheckScheduler.checkNow(applicationContext)
 
         // Then, we optionally spawn a worker to download the news image in BigPicture style
         if (type == NotifTypeNews) try {

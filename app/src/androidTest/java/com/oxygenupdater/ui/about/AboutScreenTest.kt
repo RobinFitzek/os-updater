@@ -25,15 +25,14 @@ class AboutScreenTest : ComposeBaseTest() {
 
         rule[LazyVerticalGridTestTag].assertExists()
         rule[AboutScreen_DescriptionTestTag].assertExists()
-        rule[AboutScreen_SupportTestTag].assertExists()
         rule[AboutScreen_BackgroundStoryHeaderTestTag].assertExists()
         rule[AboutScreen_BackgroundStoryTestTag].assertExists()
         rule[AboutScreen_ThirdPartyNoticeTestTag].assertExists()
 
         rule[AboutScreenTestTag].run {
             assertHasScrollAction()
-            // buttons, description, support, bg story (header + text), notice
-            validateColumnLayout(6)
+            // buttons, description, bg story (header + text), notice
+            validateColumnLayout(5)
         }
     }
 }

@@ -7,7 +7,6 @@ import android.provider.Settings
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,11 +28,9 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -55,10 +52,8 @@ import com.oxygenupdater.extensions.openAppLocalePage
 import com.oxygenupdater.extensions.openPlayStorePage
 import com.oxygenupdater.extensions.rememberCustomTabsIntent
 import com.oxygenupdater.extensions.showToast
-import com.oxygenupdater.icons.AdsClick
 import com.oxygenupdater.icons.Check
 import com.oxygenupdater.icons.CloudDownload
-import com.oxygenupdater.icons.Crowdsource
 import com.oxygenupdater.icons.DeleteSweep
 import com.oxygenupdater.icons.Language
 import com.oxygenupdater.icons.LockOpen
@@ -66,18 +61,18 @@ import com.oxygenupdater.icons.LogoNotification
 import com.oxygenupdater.icons.Logos
 import com.oxygenupdater.icons.Mobile
 import com.oxygenupdater.icons.Notifications
-import com.oxygenupdater.icons.Paid
 import com.oxygenupdater.icons.Palette
 import com.oxygenupdater.icons.Policy
 import com.oxygenupdater.icons.Star
 import com.oxygenupdater.icons.Symbols
 import com.oxygenupdater.icons.TrackChanges
-import com.oxygenupdater.internal.settings.KeyAdFree
 import com.oxygenupdater.internal.settings.KeyAdvancedMode
 import com.oxygenupdater.internal.settings.KeyDevice
 import com.oxygenupdater.internal.settings.KeyShareAnalyticsAndLogs
+import com.oxygenupdater.internal.settings.KeyUpdateCheckIntervalMinutes
 import com.oxygenupdater.internal.settings.KeyUpdateMethod
 import com.oxygenupdater.models.Device
+import com.oxygenupdater.models.SelectableModel
 import com.oxygenupdater.models.UpdateMethod
 import com.oxygenupdater.ui.SettingsListConfig
 import com.oxygenupdater.ui.Theme
@@ -89,7 +84,6 @@ import com.oxygenupdater.ui.common.modifierMaxWidth
 import com.oxygenupdater.ui.common.rememberState
 import com.oxygenupdater.ui.currentLocale
 import com.oxygenupdater.ui.dialogs.AdvancedModeSheet
-import com.oxygenupdater.ui.dialogs.ContributorSheet
 import com.oxygenupdater.ui.dialogs.LanguageSheet
 import com.oxygenupdater.ui.dialogs.ModalBottomSheet
 import com.oxygenupdater.ui.dialogs.SelectableSheet
@@ -100,7 +94,8 @@ import com.oxygenupdater.ui.theme.PreviewAppTheme
 import com.oxygenupdater.ui.theme.PreviewGetPrefBool
 import com.oxygenupdater.ui.theme.PreviewGetPrefStr
 import com.oxygenupdater.ui.theme.PreviewThemes
-import com.oxygenupdater.utils.ContributorUtils
+import com.oxygenupdater.utils.DefaultUpdateCheckIntervalMinutes
+import com.oxygenupdater.utils.MinUpdateCheckIntervalMinutes
 import com.oxygenupdater.utils.NotifStatus
 import com.oxygenupdater.utils.NotifUtils
 import com.oxygenupdater.utils.logInfo
@@ -111,58 +106,35 @@ import kotlinx.coroutines.launch
 @Composable
 fun SettingsScreen(
     navType: NavType,
-    adFreePrice: String?,
-    adFreeConfig: Triple<Boolean, Int, (() -> Unit)?>?,
-    onContributorEnrollmentChange: (Boolean) -> Unit,
     deviceConfig: SettingsListConfig<Device>,
     onDeviceSelect: (Device) -> Unit,
     methodConfig: SettingsListConfig<UpdateMethod>,
     onMethodSelect: (UpdateMethod) -> Unit,
     onThemeSelect: (Theme) -> Unit,
     onAdvancedModeChange: (Boolean) -> Unit,
-    isPrivacyOptionsRequired: Boolean,
-    showPrivacyOptionsForm: () -> Unit,
+    onUpdateCheckIntervalChange: (Long) -> Unit,
     openAboutScreen: () -> Unit,
     getPrefStr: (key: String, default: String) -> String,
     getPrefBool: (key: String, default: Boolean) -> Boolean,
+    getPrefLong: (key: String, default: Long) -> Long,
     persistBool: (key: String, value: Boolean) -> Unit,
+    persistLong: (key: String, value: Long) -> Unit,
 ) = Column(
     Modifier
         .verticalScroll(rememberScrollState())
         .testTag(SettingsScreenTestTag)
 ) {
-    // region Support us
-    Column(Modifier.background(MaterialTheme.colorScheme.surfaceContainer)) {
-        Header(R.string.preference_header_support)
-
-        val config = adFreeConfig ?: previousAdFreeConfig
-        previousAdFreeConfig = config
-        val (enabled, subtitleResId, onClick) = config
-        val subtitle = if (onClick != null && adFreePrice != null) {
-            stringResource(subtitleResId, adFreePrice)
-        } else stringResource(subtitleResId)
-
-        SettingsItem(
-            onClick = { onClick?.invoke() },
-            icon = Symbols.Paid,
-            titleResId = R.string.label_buy_ad_free,
-            subtitle = subtitle,
-            enabled = enabled,
-        )
-
-        BecomeContributor(
-            getPrefBool = getPrefBool,
-            onContributorEnrollmentChange = onContributorEnrollmentChange,
-        )
-    }
-    // endregion
-
     // region Device
     Header(R.string.preference_header_device)
 
     DeviceChooser(config = deviceConfig, getPrefStr = getPrefStr, onSelect = onDeviceSelect)
     MethodChooser(config = methodConfig, getPrefStr = getPrefStr, onSelect = onMethodSelect)
 
+    UpdateCheckInterval(
+        getPrefLong = getPrefLong,
+        persistLong = persistLong,
+        onIntervalChange = onUpdateCheckIntervalChange,
+    )
     Notifications()
     // endregion
 
@@ -176,11 +148,6 @@ fun SettingsScreen(
     Header(R.string.preference_header_advanced)
     AdvancedMode(getPrefBool = getPrefBool, onChange = onAdvancedModeChange)
     SettingsAnalytics(getPrefBool = getPrefBool, persistBool = persistBool)
-    PrivacyOptionsItem(
-        isPrivacyOptionsRequired = isPrivacyOptionsRequired,
-        showPrivacyOptionsForm = showPrivacyOptionsForm,
-        getPrefBool = getPrefBool,
-    )
     ClearCache()
     // endregion
 
@@ -285,25 +252,49 @@ fun MethodChooser(
 }
 
 @Composable
-private fun BecomeContributor(
-    getPrefBool: (key: String, default: Boolean) -> Boolean,
-    onContributorEnrollmentChange: (Boolean) -> Unit,
+private fun UpdateCheckInterval(
+    getPrefLong: (key: String, default: Long) -> Long,
+    persistLong: (key: String, value: Long) -> Unit,
+    onIntervalChange: (Long) -> Unit,
 ) {
     var showSheet by rememberState(false)
-    if (ContributorUtils.isAtLeastQAndPossiblyRooted) SettingsItem(
+
+    val intervals = remember { listOf(15L, 30L, 60L, 120L, 360L, 720L, 1440L) }
+    val current = getPrefLong(KeyUpdateCheckIntervalMinutes, DefaultUpdateCheckIntervalMinutes)
+        .coerceAtLeast(MinUpdateCheckIntervalMinutes)
+    val subtitle = stringResource(R.string.settings_update_check_interval_summary, current)
+
+    SettingsItem(
         onClick = { showSheet = true },
-        icon = Symbols.Crowdsource,
-        titleResId = R.string.contribute,
-        subtitle = stringResource(R.string.settings_contribute_label),
+        icon = Symbols.Schedule,
+        titleResId = R.string.settings_update_check_interval,
+        subtitle = subtitle,
     )
 
-    if (showSheet) ModalBottomSheet({ showSheet = false }) {
-        ContributorSheet(
-            hide = it,
-            getPrefBool = getPrefBool,
-            confirm = onContributorEnrollmentChange,
+    if (showSheet) ModalBottomSheet({ showSheet = false }) { hide ->
+        SelectableSheet(
+            hide = hide,
+            config = SettingsListConfig(
+                list = intervals.map { IntervalOption(it) },
+                recommendedId = DefaultUpdateCheckIntervalMinutes,
+                selectedId = current,
+            ),
+            titleResId = R.string.settings_update_check_interval,
+            captionResId = R.string.settings_update_check_interval_caption,
+            onClick = {
+                persistLong(KeyUpdateCheckIntervalMinutes, it.id)
+                onIntervalChange(it.id)
+                hide()
+            },
         )
     }
+}
+
+private data class IntervalOption(
+    override val id: Long,
+) : SelectableModel {
+    override val name: String = "$id min"
+    override val subtitle: String? = null
 }
 
 @Composable
@@ -509,23 +500,6 @@ private fun ClearCache() {
 }
 
 @Composable
-fun PrivacyOptionsItem(
-    isPrivacyOptionsRequired: Boolean,
-    showPrivacyOptionsForm: () -> Unit,
-    getPrefBool: (key: String, default: Boolean) -> Boolean,
-) {
-    if (!isPrivacyOptionsRequired) return
-    if (getPrefBool(KeyAdFree, false)) return
-
-    SettingsItem(
-        onClick = showPrivacyOptionsForm,
-        icon = Symbols.AdsClick,
-        titleResId = R.string.settings_ad_privacy,
-        subtitle = stringResource(R.string.settings_ad_privacy_subtitle),
-    )
-}
-
-@Composable
 fun SettingsSwitchItem(
     checked: Boolean,
     onCheckedChange: (checked: Boolean) -> Unit,
@@ -670,30 +644,23 @@ val MethodSettingsListConfig = SettingsListConfig(
     selectedId = 1,
 )
 
-@VisibleForTesting
-var previousAdFreeConfig = Triple<Boolean, Int, (() -> Unit)?>(
-    false, R.string.settings_buy_ad_free_label, null
-)
-
 @PreviewThemes
 @Composable
 fun PreviewSettingsScreen() = PreviewAppTheme {
     SettingsScreen(
         navType = NavType.BottomBar,
-        adFreePrice = null,
-        adFreeConfig = previousAdFreeConfig,
-        onContributorEnrollmentChange = {},
         deviceConfig = DeviceSettingsListConfig,
         onDeviceSelect = {},
         methodConfig = MethodSettingsListConfig,
         onMethodSelect = {},
         onThemeSelect = {},
         onAdvancedModeChange = {},
-        isPrivacyOptionsRequired = true,
-        showPrivacyOptionsForm = {},
+        onUpdateCheckIntervalChange = {},
         openAboutScreen = {},
         getPrefStr = PreviewGetPrefStr,
         getPrefBool = PreviewGetPrefBool,
+        getPrefLong = { _, default -> default },
         persistBool = { _, _ -> },
+        persistLong = { _, _ -> },
     )
 }

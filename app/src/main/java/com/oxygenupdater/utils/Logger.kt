@@ -3,10 +3,8 @@ package com.oxygenupdater.utils
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES
 import android.util.Log
-import com.google.android.ump.FormError
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.oxygenupdater.BuildConfig
-import com.oxygenupdater.exceptions.GooglePlayBillingException
 
 fun logVerbose(tag: String, message: String, cause: Throwable? = null) {
     if (!BuildConfig.DEBUG) return
@@ -21,11 +19,6 @@ fun logInfo(tag: String, message: String, cause: Throwable? = null) {
     if (!BuildConfig.DEBUG) return
     if (cause != null) Log.i(tag.ensureLength(), message, cause) else Log.i(tag.ensureLength(), message)
 }
-
-fun FirebaseCrashlytics.logUmpConsentFormError(
-    tag: String,
-    error: FormError,
-) = logWarning(tag, "UMP consent failed: ${error.errorCode} ${error.message}")
 
 /** Log a recoverable exception at warning level */
 fun FirebaseCrashlytics.logWarning(
@@ -44,12 +37,6 @@ fun FirebaseCrashlytics.logWarning(
     setCustomKey(KeyErrorTag, tag)
     setCustomKey(KeyErrorMessage, message)
     log(message)
-}
-
-/** Log an in-app billing error message */
-fun FirebaseCrashlytics.logBillingError(tag: String, message: String) {
-    Log.e(tag.ensureLength(), message)
-    logException(tag, message, GooglePlayBillingException(message))
 }
 
 /** Log a recoverable exception at error level */

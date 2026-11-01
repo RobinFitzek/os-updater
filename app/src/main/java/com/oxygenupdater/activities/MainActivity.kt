@@ -1,14 +1,10 @@
 package com.oxygenupdater.activities
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.provider.Settings
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -36,15 +32,11 @@ import androidx.compose.runtime.ComposeRuntimeFlags
 import androidx.compose.runtime.Composer
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.ExperimentalComposeApi
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.referentialEqualityPolicy
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.tooling.ComposeStackTraceMode
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -59,11 +51,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
-import androidx.core.os.postDelayed
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.dropUnlessResumed
@@ -73,26 +63,10 @@ import androidx.navigation3.ui.NavDisplay
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.size.Size
-import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.Purchase
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.android.ump.ConsentDebugSettings
-import com.google.android.ump.ConsentDebugSettings.DebugGeography
-import com.google.android.ump.ConsentInformation
-import com.google.android.ump.ConsentInformation.PrivacyOptionsRequirementStatus
-import com.google.android.ump.ConsentRequestParameters
-import com.google.android.ump.UserMessagingPlatform
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.oxygenupdater.BuildConfig
 import com.oxygenupdater.OxygenUpdater
 import com.oxygenupdater.R
-import com.oxygenupdater.enums.PurchaseType
 import com.oxygenupdater.extensions.openPlayStorePage
 import com.oxygenupdater.extensions.showToast
 import com.oxygenupdater.icons.ImageFilled
@@ -102,7 +76,6 @@ import com.oxygenupdater.icons.Symbols
 import com.oxygenupdater.internal.NotSet
 import com.oxygenupdater.internal.NotSetL
 import com.oxygenupdater.internal.settings.KeyAdvancedMode
-import com.oxygenupdater.internal.settings.KeyContribute
 import com.oxygenupdater.internal.settings.KeyIgnoreIncorrectDeviceWarnings
 import com.oxygenupdater.internal.settings.KeyIgnoreNotificationPermissionSheet
 import com.oxygenupdater.internal.settings.KeyIgnoreUnsupportedDeviceWarnings
@@ -113,8 +86,6 @@ import com.oxygenupdater.models.SystemVersionProperties
 import com.oxygenupdater.ui.CollapsingAppBar
 import com.oxygenupdater.ui.TopAppBar
 import com.oxygenupdater.ui.about.AboutScreen
-import com.oxygenupdater.ui.common.BannerAd
-import com.oxygenupdater.ui.common.buildAdRequest
 import com.oxygenupdater.ui.common.rememberState
 import com.oxygenupdater.ui.device.DefaultDeviceName
 import com.oxygenupdater.ui.device.DeviceScreen
@@ -163,23 +134,17 @@ import com.oxygenupdater.ui.news.NewsListViewModel
 import com.oxygenupdater.ui.onboarding.OnboardingScreen
 import com.oxygenupdater.ui.settings.SettingsScreen
 import com.oxygenupdater.ui.settings.SettingsViewModel
-import com.oxygenupdater.ui.settings.adFreeConfig
 import com.oxygenupdater.ui.theme.AppTheme
 import com.oxygenupdater.ui.theme.light
 import com.oxygenupdater.ui.update.KeyDownloadErrorMessage
 import com.oxygenupdater.ui.update.UpdateInformationViewModel
 import com.oxygenupdater.ui.update.UpdateScreen
 import com.oxygenupdater.ui.update.WorkProgress
-import com.oxygenupdater.utils.ContributorUtils
 import com.oxygenupdater.utils.LocalNotifications
+import com.oxygenupdater.utils.UpdateCheckScheduler
 import com.oxygenupdater.utils.Utils.checkPlayServices
-import com.oxygenupdater.utils.hasRootAccess
-import com.oxygenupdater.utils.logBillingError
 import com.oxygenupdater.utils.logDebug
-import com.oxygenupdater.utils.logError
-import com.oxygenupdater.utils.logUmpConsentFormError
 import com.oxygenupdater.utils.logWarning
-import com.oxygenupdater.viewmodels.BillingViewModel
 import com.oxygenupdater.viewmodels.MainViewModel
 import com.oxygenupdater.workers.WorkDataDownloadBytesDone
 import com.oxygenupdater.workers.WorkDataDownloadEta
@@ -189,18 +154,7 @@ import com.oxygenupdater.workers.WorkDataDownloadFailureType
 import com.oxygenupdater.workers.WorkDataDownloadProgress
 import com.oxygenupdater.workers.WorkDataDownloadTotalBytes
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import java.math.BigInteger
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
-import java.util.Locale
-import java.util.Timer
-import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
-import kotlin.concurrent.schedule
 
 /**
  * Single activity.
@@ -217,93 +171,17 @@ class MainActivity : AppCompatActivity() {
     private val updateViewModel: UpdateInformationViewModel by viewModels()
     private val newsListViewModel: NewsListViewModel by viewModels()
     private val settingsViewModel: SettingsViewModel by viewModels()
-    private val billingViewModel: BillingViewModel by viewModels()
-
-    private val validatePurchaseTimer = Timer()
-
-    @Volatile
-    private var interstitialAd: InterstitialAd? = null
 
     @Volatile
     private var currentRoute: Route? = null
 
-    private val fullScreenAdContentCallback = object : FullScreenContentCallback() {
-        override fun onAdDismissedFullScreenContent() {
-            interstitialAd = null
-            logDebug(TAG, "Interstitial ad was dismissed")
-        }
-
-        override fun onAdFailedToShowFullScreenContent(error: AdError) {
-            interstitialAd = null
-            crashlytics.logWarning(TAG, "Interstitial ad failed to show: $error")
-        }
-
-        override fun onAdShowedFullScreenContent() = logDebug(TAG, "Interstitial ad was shown")
-    }
-
-    private var interstitialAdLoadType = InterstitialAdLoadType.LoadOnly
-    private val interstitialAdLoadCallback = object : InterstitialAdLoadCallback() {
-        override fun onAdFailedToLoad(error: LoadAdError) {
-            interstitialAd = null
-            crashlytics.logWarning(TAG, "Interstitial ad failed to load: $error")
-        }
-
-        override fun onAdLoaded(ad: InterstitialAd) {
-            val ms = System.currentTimeMillis() - interstitialLoadCallMs
-            logDebug(TAG, "Interstitial ad loaded in ${ms}ms")
-
-            ad.fullScreenContentCallback = fullScreenAdContentCallback
-            interstitialAd = ad
-
-            when (interstitialAdLoadType) {
-                InterstitialAdLoadType.LoadAndShowImmediately -> {
-                    logDebug(TAG, "Showing interstitial ad now")
-                    ad.show(this@MainActivity)
-                }
-
-                // Note: AdMob won't show the interstitial if app is not
-                // in foreground, so we don't need to handle it ourselves.
-                InterstitialAdLoadType.LoadAndShowDelayed -> {
-                    logDebug(TAG, "Showing interstitial ad in 5s")
-
-                    // Show immediately if roughly 5s have already passed
-                    // between requesting an ad load, and the ad being loaded.
-                    // Also, show only if we're still in the article screen.
-                    if (ms >= 4900L && currentRoute?.let { it is ArticleRoute } == true) {
-                        logDebug(TAG, "Showing interstitial ad now")
-                        ad.show(this@MainActivity)
-                    }
-                    // If 5s have not yet passed, schedule (main thread) to show
-                    // it in however much time is left for the 5s mark.
-                    // We don't need to add debounce logic here, because AdMob
-                    // frequency capping ensures that `onAdLoaded` is entered only
-                    // once within the 5m window (and our delay is 5s).
-                    else {
-                        val diffMs = 5000L - ms
-                        logDebug(TAG, "Showing interstitial ad in ${diffMs}ms")
-                        Handler(Looper.getMainLooper()).postDelayed(diffMs) {
-                            // Show only if we're still in the article screen.
-                            // Note: AdMob won't show the interstitial if app is not
-                            // in foreground, so we don't need to handle it ourselves.
-                            if (currentRoute?.let { it is ArticleRoute } == true) {
-                                interstitialAd?.show(this@MainActivity)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @Inject
-    lateinit var contributorUtils: ContributorUtils
-
     @Inject
     lateinit var crashlytics: FirebaseCrashlytics
 
-    private var downloadErrorMessage: String? = null
+    @Inject
+    lateinit var updateCheckScheduler: UpdateCheckScheduler
 
-    private lateinit var consentInformation: ConsentInformation
+    private var downloadErrorMessage: String? = null
 
     private lateinit var startRoute: MainRoute
     private lateinit var backStack: SnapshotStateList<Route>
@@ -393,27 +271,13 @@ class MainActivity : AppCompatActivity() {
             getPrefStr = viewModel::getPref,
             getPrefBool = viewModel::getPref,
             persistBool = viewModel::persist,
-            onStartAppClick = { contribute ->
+            onStartAppClick = {
                 settingsViewModel.resubscribeToFcmTopic()
 
                 if (viewModel.isDeviceAndMethodSet) {
                     viewModel.persist(KeySetupDone, true)
                     (application as? OxygenUpdater)?.setupCrashReporting()
-
-                    // If user enables OTA contribution, check if device is rooted and ask for root permission
-                    if (ContributorUtils.isAtLeastQAndPossiblyRooted && contribute) {
-                        showToast(R.string.contribute_allow_storage)
-                        hasRootAccess {
-                            viewModel.persist(KeyContribute, true)
-                            viewModel.shouldShowOnboarding = false
-                            contributorUtils.startOrStop(this@MainActivity)
-                        }
-                    } else {
-                        // Skip shell creation and thus don't show root permission prompt
-                        viewModel.persist(KeyContribute, false)
-                        viewModel.shouldShowOnboarding = false
-                        contributorUtils.startOrStop(this@MainActivity)
-                    }
+                    viewModel.shouldShowOnboarding = false
                 } else {
                     crashlytics.logWarning(TAG, "Required preferences not valid: ${viewModel.deviceId}, ${viewModel.updateMethodId}")
                     showToast(R.string.settings_entered_incorrectly)
@@ -569,9 +433,6 @@ class MainActivity : AppCompatActivity() {
                             getPrefBool = viewModel::getPref,
                             showMarkAllRead = currentRoute === MainRoute.NewsList,
                             onMarkAllReadClick = newsListViewModel::markAllRead,
-                            onContributorEnrollmentChange = {
-                                contributorUtils.flushSettings(this@MainActivity, it)
-                            },
                         )
                     }
                 }
@@ -591,9 +452,6 @@ class MainActivity : AppCompatActivity() {
                 ServerStatusDialogs(serverStatus.status, ::openPlayStorePage)
                 ServerStatusBanner(serverStatus, ::openPlayStorePage)
 
-                // Note: if using `by`, they must be passed lazily, i.e. via a lambda.
-                // Otherwise updated values don't propagate to children that use them.
-                val showAds by billingViewModel.shouldShowAds.collectAsStateWithLifecycle()
                 NavDisplay(
                     backStack = backStack,
                     onBack = dropUnlessResumed {
@@ -616,7 +474,6 @@ class MainActivity : AppCompatActivity() {
                         newsListScreen(
                             navType = navType,
                             windowSize = windowSize,
-                            showAds = { showAds },
                         ) {
                             // Manage `dropUnlessResumed` ourselves, because we have an argument to pass
                             if (currentLifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
@@ -647,7 +504,7 @@ class MainActivity : AppCompatActivity() {
                             openAboutScreen = dropUnlessResumed { backStack.navigate(MainRoute.About) },
                         )
 
-                        articleScreen(showAds = { showAds }, scrollBehavior = scrollBehavior)
+                        articleScreen(scrollBehavior = scrollBehavior)
                         installGuideScreen()
                         faqScreen()
                     },
@@ -657,14 +514,6 @@ class MainActivity : AppCompatActivity() {
                 )
 
                 val showNavBar = isNavTypeBottomBar && isMainScreen
-
-                /** Load only if [setupMobileAds] has been called via [setupUmp] */
-                if (showAds && mobileAdsInitDone.get()) BannerAd(
-                    activity = this@MainActivity,
-                    navType = navType,
-                    forceAdReload = viewModel.forceAdReload,
-                    addNavBarPadding = !showNavBar,
-                )
 
                 AnimatedVisibility(showNavBar) {
                     MainNavigationBar(
@@ -703,9 +552,10 @@ class MainActivity : AppCompatActivity() {
         openInstallGuide: () -> Unit,
     ) = surfacedEntry<MainRoute.Update> {
         DisposableEffect(Unit) {
-            // Run this every time this screen is visited
+            // Run this every time this screen is visited: always a real (no-cache)
+            // fetch, so reloading the screen always reloads from the server
             settingsViewModel.updateCrashlyticsUserId()
-            updateViewModel.refreshIfNeeded()
+            updateViewModel.refresh()
 
             // Prune finished work when leaving this composable, e.g. when
             // switching to another screen or opening a new activity
@@ -771,15 +621,8 @@ class MainActivity : AppCompatActivity() {
     private fun EntryProviderScope<Route>.newsListScreen(
         navType: NavType,
         windowSize: WindowSizeClass,
-        showAds: () -> Boolean,
         openArticle: (Long) -> Unit,
     ) = surfacedEntry<MainRoute.NewsList> {
-        val showAdsState by rememberUpdatedState(showAds)
-        SideEffect(Unit) {
-            // Eagerly load an interstitial ad to eventually show when clicking on an item
-            if (showAdsState()) loadInterstitialAd(InterstitialAdLoadType.LoadOnly)
-        }
-
         val state by newsListViewModel.state.collectAsStateWithLifecycle()
         NewsListScreen(
             navType = navType,
@@ -794,14 +637,6 @@ class MainActivity : AppCompatActivity() {
             onMarkAllReadClick = newsListViewModel::markAllRead,
             onToggleReadClick = newsListViewModel::toggleReadLocally,
             openItem = {
-                // Show interstitial ad at a natural transition point. Frequency
-                // is capped to once in a 5m window in the AdMob dashboard.
-                if (showAds()) interstitialAd.let { ad ->
-                    if (ad != null) ad.show(this@MainActivity) else {
-                        loadInterstitialAd(InterstitialAdLoadType.LoadAndShowImmediately)
-                    }
-                }
-
                 // TODO(compose/news): handle shared element transition, see
                 //  https://developer.android.com/develop/ui/compose/animation/shared-elements
                 openArticle(it)
@@ -852,52 +687,10 @@ class MainActivity : AppCompatActivity() {
     ) = surfacedEntry<MainRoute.Settings> {
         PassthroughEnabledDevicesToSettingsViewModel(cachedEnabledDevices)
 
-        val adFreePrice by billingViewModel.adFreePrice.collectAsStateWithLifecycle(null)
-        val adFreeState by billingViewModel.adFreeState.collectAsStateWithLifecycle(null)
-
-        val adFreeConfig = remember(adFreeState) {
-            adFreeConfig(
-                state = adFreeState,
-                logBillingError = {
-                    crashlytics.logBillingError("AdFreeConfig", "SKU '${PurchaseType.AD_FREE.sku}' is not available")
-                },
-                makePurchase = { billingViewModel.makePurchase(this@MainActivity, it) },
-                markPending = { showToast(R.string.purchase_error_pending_payment) },
-            )
-        }
-
-        // Note: we use `this` instead of LocalLifecycleOwner because the latter can change, which results
-        // in an IllegalArgumentException (can't reuse the same observer with different lifecycles)
-        billingViewModel.newPurchase.observe(this@MainActivity, remember {
-            Observer<Pair<Int, Purchase?>> {
-                val (responseCode, purchase) = it
-                when (responseCode) {
-                    BillingClient.BillingResponseCode.OK -> if (purchase != null) validateAdFreePurchase(
-                        purchase, adFreePrice, PurchaseType.AD_FREE
-                    )
-
-                    BillingClient.BillingResponseCode.USER_CANCELED -> logDebug(TAG, "Purchase of ad-free version was cancelled by the user")
-
-                    else -> {
-                        crashlytics.logBillingError(
-                            TAG,
-                            "Purchase of the ad-free version failed due to an unknown error during the purchase flow: $responseCode"
-                        )
-                        showToast(R.string.purchase_error_after_payment)
-                    }
-                }
-            }
-        })
-
         val deviceConfig by settingsViewModel.deviceConfigState.collectAsStateWithLifecycle()
         val methodConfig by settingsViewModel.methodConfigState.collectAsStateWithLifecycle()
         SettingsScreen(
             navType = navType,
-            adFreePrice = adFreePrice,
-            adFreeConfig = adFreeConfig,
-            onContributorEnrollmentChange = {
-                contributorUtils.flushSettings(this@MainActivity, it)
-            },
             deviceConfig = deviceConfig,
             onDeviceSelect = {
                 settingsViewModel.saveSelectedDevice(it)
@@ -914,22 +707,18 @@ class MainActivity : AppCompatActivity() {
             },
             onThemeSelect = settingsViewModel::updateTheme,
             onAdvancedModeChange = { viewModel.persist(KeyAdvancedMode, it) },
-            isPrivacyOptionsRequired = consentInformation.privacyOptionsRequirementStatus == PrivacyOptionsRequirementStatus.REQUIRED,
-            showPrivacyOptionsForm = {
-                UserMessagingPlatform.showPrivacyOptionsForm(this@MainActivity) { error ->
-                    if (error != null) crashlytics.logUmpConsentFormError(TAG, error)
-                }
-            },
+            onUpdateCheckIntervalChange = { updateCheckScheduler.schedule(this@MainActivity, it) },
             openAboutScreen = openAboutScreen,
             getPrefStr = viewModel::getPref,
             getPrefBool = viewModel::getPref,
+            getPrefLong = viewModel::getPref,
             persistBool = viewModel::persist,
+            persistLong = viewModel::persist,
         )
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
     private fun EntryProviderScope<Route>.articleScreen(
-        showAds: () -> Boolean,
         scrollBehavior: TopAppBarScrollBehavior,
     ) = surfacedEntry<ArticleRoute> { // no transition override, looks worse than default
         val id = it.id
@@ -939,11 +728,7 @@ class MainActivity : AppCompatActivity() {
             viewModel = hiltViewModel<ArticleViewModel>(this@MainActivity),
             id = id,
             scrollBehavior = scrollBehavior,
-            showAds = showAds,
             onLoadFinished = newsListViewModel::markRead,
-            loadInterstitialAd = {
-                loadInterstitialAd(InterstitialAdLoadType.LoadAndShowDelayed)
-            },
         )
     }
 
@@ -964,50 +749,20 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    /**
-     * Validate the in app purchase on the app's server
-     *
-     * @param purchase Purchase which must be validated
-     * @param amount Localized price
-     * @param purchaseType the purchase type
-     */
-    private fun validateAdFreePurchase(
-        purchase: Purchase,
-        amount: String?,
-        purchaseType: PurchaseType,
-    ): Job = billingViewModel.verifyPurchase(
-        purchase,
-        amount,
-        purchaseType
-    ) {
-        validatePurchaseTimer.cancel() // ensure only the latest task goes through
-        if (isFinishing) return@verifyPurchase
-
-        when {
-            // If server can't be reached, keep trying until it can
-            it == null -> validatePurchaseTimer.schedule(2000) {
-                validateAdFreePurchase(purchase, amount, purchaseType)
-            }
-
-            !it.success -> crashlytics.logBillingError(
-                TAG,
-                "[validateAdFreePurchase] couldn't purchase ad-free: (${it.errorMessage})"
-            )
-        }
-    }
-
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        consentInformation = UserMessagingPlatform.getConsentInformation(this)
 
-        if (viewModel.isDeviceAndMethodSet) settingsViewModel.resubscribeToFcmTopic()
+        if (viewModel.isDeviceAndMethodSet) {
+            settingsViewModel.resubscribeToFcmTopic()
+            // (Re)schedule the periodic background update check and run one now
+            updateCheckScheduler.schedule(this)
+            updateCheckScheduler.checkNow(this)
+        }
         if (!checkPlayServices(this, false)) {
             showToast(R.string.notification_no_notification_support)
         }
-
-        lifecycle.addObserver(billingViewModel.lifecycleObserver)
 
         /** Do this as early as possible because it's used in [onNewIntent] */
         var deepLink: Route? = null
@@ -1066,8 +821,6 @@ class MainActivity : AppCompatActivity() {
                                 return@Crossfade // we shouldn't be here; exit
                             }
 
-                            SideEffect(Unit, effect = ::setupUmp)
-
                             if (SDK_INT >= VERSION_CODES.TIRAMISU) NotificationPermission(
                                 canShow = viewModel.canShowNotifPermissionSheet,
                                 hide = { viewModel.persist(KeyIgnoreNotificationPermissionSheet, it) }
@@ -1080,89 +833,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if (!viewModel.shouldShowOnboarding) contributorUtils.startOrStop(this)
-    }
-
-    private fun setupUmp() {
-        val params = ConsentRequestParameters.Builder()
-        if (BuildConfig.DEBUG) params.setConsentDebugSettings(
-            ConsentDebugSettings.Builder(this)
-                .setDebugGeography(DebugGeography.DEBUG_GEOGRAPHY_EEA)
-                .setForceTesting(true)
-                .build()
-        )
-
-        if (!::consentInformation.isInitialized) {
-            consentInformation = UserMessagingPlatform.getConsentInformation(this)
-        }
-
-        consentInformation.requestConsentInfoUpdate(this, params.build(), {
-            UserMessagingPlatform.loadAndShowConsentFormIfRequired(this@MainActivity) { error ->
-                if (error != null) crashlytics.logUmpConsentFormError(TAG, error)
-
-                if (error != null || consentInformation.canRequestAds()) setupMobileAds()
-            }
-        }, { error ->
-            crashlytics.logUmpConsentFormError(TAG, error)
-            setupMobileAds()
-        })
-
-        // Check if SDK can be initialized in parallel while checking for new consent info.
-        // Consent obtained in the previous session can be used to request ads.
-        if (consentInformation.canRequestAds()) setupMobileAds()
-    }
-
-    private val mobileAdsInitDone = AtomicBoolean(false)
-    private fun setupMobileAds() {
-        if (mobileAdsInitDone.get()) return else mobileAdsInitDone.set(true)
-
-        // Init Google Mobile Ads SDK on a background thread
-        CoroutineScope(Dispatchers.IO).launch {
-            MobileAds.initialize(this@MainActivity) {
-                // Adapter init complete
-                // If the banner ad hasn't yet loaded (or failed to), try again after adapter init
-                viewModel.forceAdReload = !viewModel.forceAdReload
-
-                if (BuildConfig.DEBUG) it.adapterStatusMap.forEach { (adapterClass, status) ->
-                    logDebug(
-                        TAG,
-                        "$adapterClass: ${status.description.ifEmpty { status.initializationState.name }} (${status.latency}ms)"
-                    )
-                }
-            }
-
-            // This must be called *after* `MobileAds.initialize()`, so it's kept in this coroutine block.
-            // By default video ads run at device volume, which could be annoying
-            // to some users. We're reducing ad volume to be 10% of device volume.
-            // Note that this doesn't always guarantee that ads will run at a
-            // reduced volume. This is either a longstanding SDK bug or due to
-            // an undocumented behaviour.
-            MobileAds.setAppVolume(0.1f)
-        }
-        // SDK init complete, but adapters may be pending
-
-        if (BuildConfig.DEBUG) MobileAds.setRequestConfiguration(MobileAds.getRequestConfiguration().toBuilder().apply {
-            // If it's a debug build, add current device's ID to the list of test device IDs for ads
-            setTestDeviceIds(buildList(2) {
-                /** (uppercase) MD5 checksum of "emulator" */
-                add(AdRequest.DEVICE_ID_EMULATOR)
-
-                /**
-                 * (uppercase) MD5 checksum of [Settings.Secure.ANDROID_ID],
-                 * which is what Play Services Ads expects.
-                 */
-                try {
-                    @SuppressLint("HardwareIds")
-                    val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-                    val digest = MessageDigest.getInstance("MD5").digest(androidId.toByteArray())
-
-                    // Create a 32-length uppercase hex string (`x` for lowercase)
-                    add(String.format(Locale.US, "%032X", BigInteger(1, digest)))
-                } catch (e: NoSuchAlgorithmException) {
-                    crashlytics.logError(TAG, e.message ?: "MD5 algorithm not found", e)
-                }
-            })
-        }.build())
     }
 
     /** Required because we use `android:launchMode="singleTask"` in AndroidManifest.xml */
@@ -1245,26 +915,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Interstitial ads are limited to only once per 5 minutes for better UX.
-     *
-     * v5.2.0 onwards, this frequency capping is configured within AdMob dashboard itself,
-     * because it seemed to be more reliable than custom SharedPreferences-based handling
-     * done prior to v5.2.0.
-     */
-    private fun loadInterstitialAd(type: InterstitialAdLoadType) {
-        interstitialAdLoadType = type
-        InterstitialAd.load(
-            this,
-            BuildConfig.AD_INTERSTITIAL_NEWS_ID,
-            buildAdRequest(),
-            interstitialAdLoadCallback
-        )
-        interstitialLoadCallMs = System.currentTimeMillis()
-    }
-
-    private var interstitialLoadCallMs = 0L
-
-    /**
      * Used in [onNewIntent] and also in [onCreate] for cold launches.
      *
      * @param intent the [Intent], whose [data][Intent.getData] we check
@@ -1324,12 +974,6 @@ class MainActivity : AppCompatActivity() {
                     if (id <= 0L) null else {
                         // It's marked as "external" only if intent is from a notification
                         val external = uri.getBooleanQueryParameter(ExternalArg, false)
-                        if (external && billingViewModel.shouldShowAds.value) {
-                            // If an article deep link came from outside the app, we
-                            // need to delay showing the interstitial ad for better UX.
-                            loadInterstitialAd(InterstitialAdLoadType.LoadAndShowDelayed)
-                        }
-
                         ArticleRoute(id, external)
                     }
                 }
@@ -1351,24 +995,6 @@ class MainActivity : AppCompatActivity() {
         }.also {
             if (it == null) logDebug(TAG, "Intent data: $uri")
             else logDebug(TAG, "Handled deep link for '$uri': $it")
-        }
-    }
-
-    @Immutable
-    @JvmInline
-    private value class InterstitialAdLoadType private constructor(val value: Int) {
-
-        override fun toString() = "InterstitialAdLoadType." + when (this) {
-            LoadOnly -> "LoadOnly"
-            LoadAndShowImmediately -> "LoadAndShowImmediately"
-            LoadAndShowDelayed -> "LoadAndShowDelayed"
-            else -> "Invalid"
-        }
-
-        companion object {
-            val LoadOnly get() = InterstitialAdLoadType(0)
-            val LoadAndShowImmediately get() = InterstitialAdLoadType(1)
-            val LoadAndShowDelayed get() = InterstitialAdLoadType(2)
         }
     }
 

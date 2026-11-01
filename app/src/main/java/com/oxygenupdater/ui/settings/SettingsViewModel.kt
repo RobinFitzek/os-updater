@@ -28,7 +28,6 @@ import com.oxygenupdater.ui.SettingsListConfig
 import com.oxygenupdater.ui.Theme
 import com.oxygenupdater.utils.FcmUtils
 import com.oxygenupdater.utils.logDebug
-import com.topjohnwu.superuser.Shell
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -118,9 +117,8 @@ class SettingsViewModel @Inject constructor(
             it.id == methodId
         }
 
-        val rooted = Shell.isAppGrantedRoot() == true
         recommendedMethodId = methods.findLast {
-            if (rooted) it.recommendedForRootedDevice else it.recommendedForNonRootedDevice
+            it.recommendedForNonRootedDevice
         }?.id ?: NotSetL
 
         // Fallback to recommended index

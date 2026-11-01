@@ -23,7 +23,6 @@ class ArticleScreenTest : ComposeBaseTest() {
                 state = RefreshAwareState(false, PreviewArticleData),
                 onRefresh = {},
                 webViewState = webViewState,
-                showAds = { true },
                 onLoadFinished = { trackCallback("onLoadFinished: ${it.id}") },
                 modifier = Modifier
             )

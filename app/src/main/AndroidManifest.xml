@@ -22,6 +22,7 @@
 
 	<!-- Push notification permissions -->
 	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
 	<!-- For DeviceBootOrAppUpdateReceiver -->
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -183,7 +184,7 @@
 				tools:node="remove" />
 		</provider>
 
-		<!-- Receiver to auto start RootFileService at device startup or app update -->
+		<!-- Receiver to re-schedule the background update check at device startup or app update -->
 		<receiver
 			android:name="com.oxygenupdater.receivers.DeviceBootOrAppUpdateReceiver"
 			android:exported="false">
@@ -196,20 +197,6 @@
 		<meta-data
 			android:name="com.google.android.gms.version"
 			android:value="@integer/google_play_services_version" />
-
-		<meta-data
-			android:name="com.google.android.gms.ads.APPLICATION_ID"
-			android:value="${advertisingAppId}" />
-
-		<!-- Delay app measurement until MobileAds.initialize() is called. -->
-		<meta-data
-			android:name="com.google.android.gms.ads.DELAY_APP_MEASUREMENT_INIT"
-			android:value="true" />
-
-		<!-- Opt out of WebView usage statistics collection -->
-		<meta-data
-			android:name="android.webkit.WebView.MetricsOptOut"
-			android:value="true" />
 
 		<!-- https://firebase.google.com/docs/cloud-messaging/android/get-started#enable-registration-via-firebase-installation-id -->
 		<meta-data

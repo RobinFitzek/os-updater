@@ -46,9 +46,6 @@ appcompat = "1.8.0"
 # https://developer.android.com/jetpack/androidx/releases/annotation
 annotation = "1.11.0"
 
-# https://developer.android.com/google/play/billing/release-notes
-billing = "9.1.0"
-
 # https://developer.android.com/jetpack/androidx/releases/browser
 browser = "1.10.0"
 
@@ -78,9 +75,6 @@ junit = "4.13.2"
 # https://github.com/jacoco/jacoco/releases
 jacoco = "0.8.16"
 
-# https://github.com/topjohnwu/libsu/blob/master/CHANGELOG.md
-libsu = "6.0.0"
-
 # https://developer.android.com/jetpack/androidx/releases/lifecycle
 lifecycle = "2.11.0"
 
@@ -94,11 +88,6 @@ play-app-update = "2.1.0"
 # https://developers.google.com/android/guides/releases#:~:text=com.google.android.gms%3Aplay%2Dservices%2Dbase%3A
 #noinspection GradleDependency 18.11+ requires minSdk 24
 play-services-base = "18.10.1"
-# https://developers.google.com/admob/android/rel-notes
-#noinspection GradleDependency 25.5+ requires minSdk 24
-play-services-ads = "25.4.0"
-# https://developers.google.com/admob/android/privacy/release-notes
-ump = "4.0.0"
 
 # https://github.com/lysine-dev/retrofit/tags
 # https://github.com/lysine-dev/retrofit/blob/master/CHANGELOG.md
@@ -186,12 +175,8 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 
-billing = { module = "com.android.billingclient:billing", version.ref = "billing" }
-billing-ktx = { module = "com.android.billingclient:billing-ktx", version.ref = "billing" }
 google-play-app-update = { module = "com.google.android.play:app-update", version.ref = "play-app-update" }
 google-play-services-base = { module = "com.google.android.gms:play-services-base", version.ref = "play-services-base" }
-google-play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "play-services-ads" }
-google-ump = { module = "com.google.android.ump:user-messaging-platform", version.ref = "ump" }
 
 libsu-core = { module = "com.github.topjohnwu.libsu:core", version.ref = "libsu" }
 libsu-nio = { module = "com.github.topjohnwu.libsu:nio", version.ref = "libsu" }
@@ -286,18 +271,8 @@ firebase = [
 ]
 
 google-play = [
-    "billing",
-    "billing-ktx",
     "google-play-app-update",
     "google-play-services-base",
-    "google-play-services-ads",
-    "google-ump",
-]
-
-libsu = [
-    "libsu-core",
-    "libsu-nio",
-    "libsu-service",
 ]
 
 junit = [

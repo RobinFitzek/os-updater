@@ -142,13 +142,6 @@ android {
         versionCode = 135
         versionName = "7.1.0"
 
-        addManifestPlaceholders(mapOf("advertisingAppId" to "ca-app-pub-1816831161514116~4275332954"))
-        buildConfigField("String", "AD_BANNER_MAIN_ID", "\"ca-app-pub-1816831161514116/9792024147\"")
-        buildConfigField("String", "AD_INTERSTITIAL_NEWS_ID", "\"ca-app-pub-1816831161514116/2367225965\"")
-
-        val base64PublicKey = loadProperties("billing", "base64PublicKey" to "")["base64PublicKey"] as String
-        buildConfigField("String", "BASE64_PUBLIC_KEY", "\"$base64PublicKey\"")
-
         val languages = fileTree("src/main/res") {
             include("values-*/strings.xml")
         }.files.run {
@@ -327,8 +320,6 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.bundles.firebase)
     implementation(libs.bundles.google.play)
-
-    implementation(libs.bundles.libsu)
 
     testImplementation(libs.bundles.junit)
     testImplementation(libs.androidx.annotation)

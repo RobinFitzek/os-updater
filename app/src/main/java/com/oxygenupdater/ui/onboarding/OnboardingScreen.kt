@@ -12,8 +12,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -21,8 +19,6 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -32,21 +28,16 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import com.oxygenupdater.R
 import com.oxygenupdater.icons.DoneAll
-import com.oxygenupdater.icons.Info
 import com.oxygenupdater.icons.Symbols
 import com.oxygenupdater.models.Device
 import com.oxygenupdater.models.UpdateMethod
 import com.oxygenupdater.ui.SettingsListConfig
-import com.oxygenupdater.ui.common.CheckboxText
 import com.oxygenupdater.ui.common.IconTextButton
 import com.oxygenupdater.ui.common.ListItemTextIndent
 import com.oxygenupdater.ui.common.modifierDefaultPadding
 import com.oxygenupdater.ui.common.modifierDefaultPaddingStartTopEnd
 import com.oxygenupdater.ui.common.modifierMaxSize
 import com.oxygenupdater.ui.common.modifierMaxWidth
-import com.oxygenupdater.ui.common.rememberState
-import com.oxygenupdater.ui.dialogs.ContributorSheet
-import com.oxygenupdater.ui.dialogs.ModalBottomSheet
 import com.oxygenupdater.ui.settings.DeviceChooser
 import com.oxygenupdater.ui.settings.DeviceSettingsListConfig
 import com.oxygenupdater.ui.settings.MethodChooser
@@ -57,7 +48,6 @@ import com.oxygenupdater.ui.theme.PreviewGetPrefBool
 import com.oxygenupdater.ui.theme.PreviewGetPrefStr
 import com.oxygenupdater.ui.theme.PreviewThemes
 import com.oxygenupdater.ui.theme.PreviewWindowSize
-import com.oxygenupdater.utils.ContributorUtils
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,7 +61,7 @@ fun OnboardingScreen(
     getPrefStr: (key: String, default: String) -> String,
     getPrefBool: (key: String, default: Boolean) -> Boolean,
     persistBool: (key: String, value: Boolean) -> Unit,
-    onStartAppClick: (contribute: Boolean) -> Unit,
+    onStartAppClick: () -> Unit,
 ) = if (windowWidthSize == WindowWidthSizeClass.Expanded) Row(
     Modifier.nestedScroll(scrollBehavior.nestedScrollConnection) then modifierMaxWidth
 ) {
@@ -185,35 +175,14 @@ fun OnboardingScreen(
 }
 
 @Composable
-private fun StartApp(onClick: (contribute: Boolean) -> Unit) = Row(
+private fun StartApp(onClick: () -> Unit) = Row(
     verticalAlignment = Alignment.CenterVertically,
     modifier = Modifier.padding(end = 16.dp)
 ) {
-    var contribute by rememberState(true)
-    if (ContributorUtils.isAtLeastQAndPossiblyRooted) {
-        CheckboxText(
-            checked = contribute,
-            onCheckedChange = { contribute = it },
-            textResId = R.string.contribute_agree,
-            textModifier = Modifier.padding(end = 16.dp),
-            modifier = Modifier
-                .weight(1f)
-                .padding(start = 4.dp)
-        )
-
-        var showSheet by rememberState(false)
-        IconButton(
-            onClick = { showSheet = true },
-            modifier = Modifier.testTag(OnboardingScreen_ContributorInfoButtonTestTag),
-        ) {
-            Icon(Symbols.Info, stringResource(R.string.contribute_more_info))
-        }
-
-        if (showSheet) ModalBottomSheet({ showSheet = false }) { ContributorSheet(it) }
-    } else Spacer(Modifier.weight(1f)) // always right-align start button
+    Spacer(Modifier.weight(1f)) // always right-align start button
 
     IconTextButton(
-        onClick = { onClick(contribute) },
+        onClick = onClick,
         icon = Symbols.DoneAll,
         textResId = R.string.onboarding_finished_button,
     )
@@ -228,7 +197,6 @@ const val OnboardingScreen_MainColumnTestTag = TAG + "_MainColumn"
 const val OnboardingScreen_SecondaryColumnTestTag = TAG + "_SecondaryColumn"
 
 @VisibleForTesting
-const val OnboardingScreen_ContributorInfoButtonTestTag = TAG + "_ContributorInfoButton"
 
 @VisibleForTesting
 const val OnboardingScreen_DisclaimerTestTag = TAG + "_Disclaimer"

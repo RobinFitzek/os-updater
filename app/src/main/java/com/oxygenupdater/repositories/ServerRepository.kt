@@ -2,14 +2,12 @@ package com.oxygenupdater.repositories
 
 import android.content.SharedPreferences
 import androidx.collection.ArrayMap
-import com.android.billingclient.api.Purchase
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.oxygenupdater.BuildConfig
 import com.oxygenupdater.OxygenUpdater
 import com.oxygenupdater.apis.ServerApi
 import com.oxygenupdater.dao.ArticleDao
 import com.oxygenupdater.dao.UpdateDataDao
-import com.oxygenupdater.enums.PurchaseType
 import com.oxygenupdater.extensions.get
 import com.oxygenupdater.extensions.set
 import com.oxygenupdater.internal.NotSetL
@@ -23,10 +21,8 @@ import com.oxygenupdater.models.DownloadErrorBody
 import com.oxygenupdater.models.FreshUpdateDataDownloadUrlBody
 import com.oxygenupdater.models.OsInfoBody
 import com.oxygenupdater.models.ServerStatus
-import com.oxygenupdater.models.SubmitOtaDbBody
 import com.oxygenupdater.models.SystemVersionProperties
 import com.oxygenupdater.models.UpdateData
-import com.oxygenupdater.models.VerifyPurchaseBody
 import com.oxygenupdater.utils.logError
 import com.oxygenupdater.utils.logInfo
 import com.oxygenupdater.utils.logVerbose
@@ -56,30 +52,39 @@ class ServerRepository @Inject constructor(
     val updateDataFlow
         get() = updateDataDao.getFlow()
 
-    suspend fun fetchUpdateData(deviceId: Long, methodId: Long) = performServerRequest {
-        serverApi.fetchUpdateData(
-            deviceId = deviceId,
-            updateMethodId = methodId,
-            incrementalSystemVersion = SystemVersionProperties.otaVersion,
-            osVersion = SystemVersionProperties.osVersion,
-            osType = SystemVersionProperties.osType,
-            fingerprint = SystemVersionProperties.fingerprint,
-            oplusPipeline = SystemVersionProperties.pipeline,
-            oplusPipelineCode = SystemVersionProperties.pipelineCode,
-            oplusManifestHash = SystemVersionProperties.manifestHash,
-            deviceMarketName = SystemVersionProperties.deviceMarketName,
-            isEuBuild = SystemVersionProperties.isEuBuild,
-            appVersion = BuildConfig.VERSION_NAME,
-        )
-    }.let {
-        if (it?.shouldFetchMostRecent == true) performServerRequest {
+    /**
+     * Always hits the network (requests carry `Cache-Control: no-store`), and updates
+     * the local [updateDataDao] only when [persist] is `true` (UI-driven refreshes).
+     *
+     * @return the freshly fetched [UpdateData], or `null` on failure
+     */
+    suspend fun fetchUpdateData(deviceId: Long, methodId: Long, persist: Boolean = true): UpdateData? {
+        val fetched = performServerRequest {
+            serverApi.fetchUpdateData(
+                deviceId = deviceId,
+                updateMethodId = methodId,
+                incrementalSystemVersion = SystemVersionProperties.otaVersion,
+                osVersion = SystemVersionProperties.osVersion,
+                osType = SystemVersionProperties.osType,
+                fingerprint = SystemVersionProperties.fingerprint,
+                oplusPipeline = SystemVersionProperties.pipeline,
+                oplusPipelineCode = SystemVersionProperties.pipelineCode,
+                oplusManifestHash = SystemVersionProperties.manifestHash,
+                deviceMarketName = SystemVersionProperties.deviceMarketName,
+                isEuBuild = SystemVersionProperties.isEuBuild,
+                appVersion = BuildConfig.VERSION_NAME,
+            )
+        } ?: return null
+
+        val result = if (fetched.shouldFetchMostRecent) performServerRequest {
             serverApi.fetchMostRecentUpdateData(
                 deviceId = deviceId,
                 updateMethodId = methodId,
             )
-        } else it
-    }.let {
-        updateDataDao.refresh(it)
+        } ?: fetched else fetched
+
+        if (persist) updateDataDao.refresh(result)
+        return result
     }
 
     suspend fun getFreshUpdateDataDownloadUrl(
@@ -180,10 +185,6 @@ class ServerRepository @Inject constructor(
         serverApi.osInfoHeartbeat(OsInfoBody.from(fromIntentAction))
     }
 
-    suspend fun submitOtaDbRows(rows: List<Map<String, String?>>) = performServerRequest {
-        serverApi.submitOtaDbRows(SubmitOtaDbBody.from(rows, sharedPreferences[KeyDevice, "<UNKNOWN>"]))
-    }
-
     suspend fun logDownloadError(
         url: String?,
         filename: String?,
@@ -203,20 +204,6 @@ class ServerRepository @Inject constructor(
                 appVersion = BuildConfig.VERSION_NAME,
                 deviceName = sharedPreferences[KeyDevice, "<UNKNOWN>"],
                 actualDeviceName = SystemVersionProperties.deviceProductName,
-            )
-        )
-    }
-
-    suspend fun verifyPurchase(
-        purchase: Purchase,
-        amount: String?,
-        purchaseType: PurchaseType,
-    ) = performServerRequest {
-        serverApi.verifyPurchase(
-            VerifyPurchaseBody.from(
-                purchase = purchase,
-                purchaseType = purchaseType,
-                amount = amount,
             )
         )
     }

@@ -77,7 +77,6 @@
 	<string name="download_verifying_start">Your download will now be verified…</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">Support us</string>
 	<string name="preference_header_device">Device</string>
 	<string name="preference_header_ui">UI</string>
 	<string name="preference_header_notifications">Notifications</string>
@@ -92,7 +91,6 @@
 	<string name="summary_privacy_policy">View online</string>
 	<string name="summary_rate_app">Leave a 5 star review</string>
 
-	<string name="label_buy_ad_free">Remove ads</string>
 	<string name="label_theme">Theme</string>
 	<string name="label_language">Language</string>
 	<string name="label_privacy_policy">Privacy policy</string>
@@ -110,12 +108,7 @@
 	<string name="theme_additional_note">All themes are Material 3/You-enabled. Note: if the \"Auto\" theme is active and battery saver is enabled, dark theme will automatically be used regardless of time of day to conserve battery.</string>
 
 	<string name="settings">Settings</string>
-	<string name="settings_buy_button_buy">Purchase (%1$s)</string>
-	<string name="settings_buy_button_bought">Purchased</string>
-	<string name="settings_buy_button_not_possible">Unavailable</string>
-	<string name="settings_buy_ad_free_label">Upgrade to ad-free</string>
 
-	<string name="settings_contribute_label">Help improve the app</string>
 
 	<string name="settings_device">Device</string>
 	<string name="settings_search_devices">Search devices</string>
@@ -135,9 +128,11 @@ This can be useful if you want to:"</string>
 
 	<string name="settings_update_method">Update method</string>
 	<string name="settings_upload_logs">Share usage data and logs</string>
-	<string name="settings_ad_privacy">GDPR ad consent</string>
-	<string name="settings_ad_privacy_subtitle">"For EEA/UK users"</string>
 	<string name="settings_clear_cache">Clear cache</string>
+
+	<string name="settings_update_check_interval">Background update check</string>
+	<string name="settings_update_check_interval_summary">Every %1$d min</string>
+	<string name="settings_update_check_interval_caption">"The app automatically checks for new updates in the background — for every update method of your device, so whichever (full or incremental) rolls out first is detected. Minimum: 15 minutes."</string>
 
 	<!-- FAQ strings -->
 	<string name="faq">FAQ</string>
@@ -189,7 +184,6 @@ This can be useful if you want to:"</string>
 	<!-- About screen strings -->
 	<string name="about">About</string>
 	<string name="about_description"><![CDATA[This app downloads official updates directly from OPPO/OnePlus/realme servers, and even verifies the integrity of the downloaded ZIP before allowing you to install. By doing so, the app allows you to skip the rollout queue and install official updates ASAP. If you encounter bugs in the OS, report them to OPPO/OnePlus/realme directly: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. You might want to join our <a href="https://discord.gg/5TXdhKJ">Discord server</a> as well, so that you can talk to other users about the latest updates. Otherwise feel free to email us at <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> with your suggestions/feedback.]]></string>
-	<string name="about_support"><![CDATA[If you\'d like to support us, you can either buy the ad-free unlock (app\'s settings), or check our <a href="https://patreon.com/oxygenupdater">Patreon page</a>.]]></string>
 	<string name="about_background_story_header">Background story</string>
 	<string name="about_background_story"><![CDATA[This app was originally developed by Arjan Vlek as a follow-up of another one of his apps, called <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a> (it provides similar functionality for Cyanogen OS users).\n\nAfter 4 years, in July 2019, Arjan decided to step down from both projects and transferred ownership of the app to a team of developers hailing from different countries. They took on the responsibility of providing the community with excellent service &amp; support of getting OPPO/OnePlus/realme updates faster.\nYou can find more information about the announcement <a href="https://oxygenupdater.com/article/81/">here</a>.\n\n14th August 2019 marked the first release under new ownership, which came with new features like dark mode and a complete redesign.\n\nFor more information on the team, check <a href="https://oxygenupdater.com/team/">the website</a>.]]></string>
 	<string name="about_third_party_app_notice">Please note, this is not an official OPPO/OnePlus/realme application.\nThe OPPO/OnePlus/realme name, the OPPO/OnePlus/realme Logo and OxygenOS/ColorOS are property of OPPO/OnePlus/realme.\nAndroid, Google, Google Play and the Google Play logo are registered trademarks of Google Inc.\nThis app uses data from OPPO/OnePlus/realme and its parent company Oppo to show update information.</string>
@@ -198,7 +192,6 @@ This can be useful if you want to:"</string>
 	<string name="about_email_button_text">Email</string>
 	<string name="about_github_button_text" translatable="false">GitHub</string>
 	<string name="about_discord_button_text" translatable="false">Discord</string>
-	<string name="about_patreon_button_text" translatable="false">Patreon</string>
 
 	<!-- LocalNotifications strings -->
 	<string name="notification_permission_title">"Stay notified"</string>
@@ -208,7 +201,6 @@ This can be useful if you want to:"</string>
 	<string name="notification_version">%1$s is now available for the %2$s!</string>
 	<string name="download_and_installation_notifications_group_name">Download &amp; Installation</string>
 	<string name="push_notifications_group_name">Push notifications</string>
-	<string name="miscellaneous_notifications_group_name">Miscellaneous</string>
 	<string name="download_and_installation_notifications_group_description">Displays all non-important notifications of the OS Updater app. Contains the status indicators shown during downloading.</string>
 	<string name="push_notifications_group_description">Displays all important notifications of the OS Updater app. These include system update notifications and breaking news notifications.</string>
 	<string name="download_status_notification_channel_name">Download status</string>
@@ -218,7 +210,6 @@ This can be useful if you want to:"</string>
 	<string name="news_notification_channel_name">News article</string>
 	<string name="device_notification_channel_name">New device supported</string>
 	<string name="general_notification_channel_name">General</string>
-	<string name="url_submitted_notification_channel_name">OTA URL submitted</string>
 	<string name="download_status_notification_channel_description">Notifications that reflect the current state of a download: pending, active, completed, or failed</string>
 	<string name="verification_status_notification_channel_description">Notifications that reflect the current state of a file verification task: in-progress, completed, or failed.\nMD5 checksums for downloaded files are verified to ensure the file hasn\'t been tampered with, and is a valid update file.</string>
 	<string name="installation_status_notification_channel_description">Get notified if an update was successfully installed or not</string>
@@ -226,7 +217,6 @@ This can be useful if you want to:"</string>
 	<string name="news_notification_channel_description">Get notified when we publish a news article</string>
 	<string name="device_notification_channel_description">Get notified when the app adds support for a new device</string>
 	<string name="general_notification_channel_description">General notifications that don\'t fit into other categories</string>
-	<string name="url_submitted_notification_channel_description">Get notified when you\'ve submitted OTA URLs successfully to our team.\nYou can opt-out of automatically submitting URLs in the app\'s settings.</string>
 
 	<!-- News strings -->
 	<string name="news">News</string>
@@ -241,16 +231,6 @@ This can be useful if you want to:"</string>
 	<string name="news_empty_state_none_available_text">There aren\'t any articles available at this moment, check back later.</string>
 	<string name="news_empty_state_all_read_text">You\'ve read all articles. Good job! We hope you enjoyed reading our articles, and learnt something new from them. Tap the banner again to show all news articles.</string>
 
-	<!-- Contribute strings -->
-	<string name="contribute">Become a contributor</string>
-	<string name="contribute_title">Help improve OS Updater</string>
-	<string name="contribute_explanation">In order to give you the latest updates, we need to capture OTA ZIP URLs.\n\nHow can I help?\n\nOS Updater can automatically submit new OTA URLs to our admins. This will use a small amount of data and may use a bit of your battery. You\'ll need to grant root permission to the app, because it reads a database file that\'s accessible only via root. You will be notified when a URL has been successfully submitted.</string>
-	<string name="contribute_agree">Contribute OTA URLs (requires root)</string>
-	<string name="contribute_save">Save settings</string>
-	<string name="contribute_more_info">More info</string>
-	<string name="contribute_allow_storage">Please grant storage &amp; root permissions to help improve the app</string>
-	<string name="contribute_successful_notification_title">Contribution successful</string>
-	<string name="contribute_successful_notification_text">Thanks for sharing OTA URLs with us!</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">Oh no!</string>
@@ -280,8 +260,6 @@ This can be useful if you want to:"</string>
 	<string name="do_not_show_again_checkbox">"Don't show again"</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">Your purchase is in the \"payment pending\" state. Once payment is completed, you\'ll be granted all benefits that you\'re entitled to.</string>
-	<string name="purchase_error_after_payment">The purchase of the ad-free version failed, because an internal error occurred. Please try again in a few minutes. If you have already paid, please contact Google Play support for assistance.</string>
 
 	<!-- Other strings-->
 	<string name="icon">Icon</string>

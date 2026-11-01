@@ -10,14 +10,11 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.oxygenupdater.R
-import com.oxygenupdater.icons.Crowdsource
 import com.oxygenupdater.icons.MoreVert
 import com.oxygenupdater.icons.PlaylistAddCheck
 import com.oxygenupdater.icons.ReleaseAlert
@@ -25,29 +22,23 @@ import com.oxygenupdater.icons.Symbols
 import com.oxygenupdater.models.ServerMessage
 import com.oxygenupdater.ui.common.DropdownMenuItem
 import com.oxygenupdater.ui.common.rememberState
-import com.oxygenupdater.ui.dialogs.ContributorSheet
 import com.oxygenupdater.ui.dialogs.ModalBottomSheet
 import com.oxygenupdater.ui.dialogs.PreviewServerMessagesList
 import com.oxygenupdater.ui.dialogs.ServerMessagesSheet
 import com.oxygenupdater.ui.theme.PreviewAppTheme
-import com.oxygenupdater.ui.theme.PreviewGetPrefBool
 import com.oxygenupdater.ui.theme.PreviewThemes
-import com.oxygenupdater.utils.ContributorUtils
 
 @Suppress("UnusedReceiverParameter")
 @Composable
 fun RowScope.MainMenu(
     serverMessages: List<ServerMessage>,
-    getPrefBool: (key: String, default: Boolean) -> Boolean,
     showMarkAllRead: Boolean,
     onMarkAllReadClick: () -> Unit,
-    onContributorEnrollmentChange: (Boolean) -> Unit,
 ) {
     AnnouncementsMenuItem(serverMessages = serverMessages)
 
     // Don't show menu if there are no items in it
-    val showBecomeContributor = ContributorUtils.isAtLeastQAndPossiblyRooted
-    if (!showMarkAllRead && !showBecomeContributor) return
+    if (!showMarkAllRead) return
 
     // Box layout is required to make DropdownMenu position correctly (directly under icon)
     Box {
@@ -76,12 +67,6 @@ fun RowScope.MainMenu(
                 showMenu = false
             }
 
-            // OTA URL contribution
-            if (showBecomeContributor) ContributorMenuItem(
-                onDismiss = { showMenu = false },
-                getPrefBool = getPrefBool,
-                onContributorEnrollmentChange = onContributorEnrollmentChange,
-            )
         }
     }
 }
@@ -104,30 +89,6 @@ private fun AnnouncementsMenuItem(serverMessages: List<ServerMessage>) {
     if (showSheet) ModalBottomSheet({ showSheet = false }) { ServerMessagesSheet(serverMessages) }
 }
 
-@Composable
-private fun ContributorMenuItem(
-    onDismiss: () -> Unit,
-    getPrefBool: (key: String, default: Boolean) -> Boolean,
-    onContributorEnrollmentChange: (Boolean) -> Unit,
-) {
-    var showSheet by rememberState(false)
-
-    DropdownMenuItem(Symbols.Crowdsource, R.string.contribute) {
-        showSheet = true
-    }
-
-    if (showSheet) ModalBottomSheet({
-        showSheet = false
-        onDismiss()
-    }) {
-        ContributorSheet(
-            hide = it,
-            getPrefBool = getPrefBool,
-            confirm = onContributorEnrollmentChange,
-        )
-    }
-}
-
 private const val TAG = "MainMenu"
 
 @VisibleForTesting
@@ -147,9 +108,7 @@ fun PreviewMainMenu() = PreviewAppTheme {
         MainMenu(
             serverMessages = PreviewServerMessagesList,
             showMarkAllRead = true,
-            getPrefBool = PreviewGetPrefBool,
             onMarkAllReadClick = {},
-            onContributorEnrollmentChange = {},
         )
     }
 }

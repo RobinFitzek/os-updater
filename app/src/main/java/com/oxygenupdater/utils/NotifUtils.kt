@@ -38,7 +38,6 @@ import com.oxygenupdater.utils.NotifUtils.NotifTypeNewDevice
 import com.oxygenupdater.utils.NotifUtils.NotifTypeNews
 import com.oxygenupdater.utils.NotifUtils.getNotifId
 import com.oxygenupdater.utils.NotificationChannels.DownloadAndInstallationGroup
-import com.oxygenupdater.utils.NotificationChannels.MiscellaneousGroup
 import com.oxygenupdater.utils.NotificationChannels.PushNotificationsGroup
 import com.oxygenupdater.utils.NotificationChannels.PushNotificationsGroup.DeviceNotifChannelId
 import com.oxygenupdater.utils.NotificationChannels.PushNotificationsGroup.GeneralNotifChannelId
@@ -196,9 +195,8 @@ object NotifUtils {
 
     fun newsNotifIntent(newsItemId: Int, context: Context): Intent = Intent(
         Intent.ACTION_VIEW,
-        // Open article if ID is valid, and mark it "external" so
-        // that interstitial ad is shown after a delay for better UX.
-        // Otherwise, open NewsListScreen.
+        // Open article if ID is valid, marking it "external" (came from a
+        // notification). Otherwise, open NewsListScreen.
         if (newsItemId != NotSet) {
             "$OuSchemeSuffixed$DeepLinkArticle/$newsItemId?${ExternalArg}=true".toUri()
         } else (OuSchemeSuffixed + DeepLinkNewsList).toUri(),
@@ -313,8 +311,9 @@ object NotifUtils {
     private inline fun NotificationManagerCompat.deleteOldNotificationChannels() {
         deleteNotificationChannel(NotificationChannels.OldPushNotifChannelId)
         deleteNotificationChannel(NotificationChannels.OldProgressNotifChannelId)
-        // No longer used in v5.9.0+
-        deleteNotificationChannel(MiscellaneousGroup.OtaFilenameSubmittedNotifChannelId)
+        // No longer used: OTA URL contribution feature was removed
+        deleteNotificationChannel(NotificationChannels.MiscellaneousGroup.OtaFilenameSubmittedNotifChannelId)
+        deleteNotificationChannel(NotificationChannels.MiscellaneousGroup.OtaUrlSubmittedNotifChannelId)
     }
 
     /**
@@ -340,11 +339,7 @@ object NotifUtils {
                 if (SDK_INT >= VERSION_CODES.P) {
                     description = context.getString(R.string.push_notifications_group_description)
                 }
-            },
-            NotificationChannelGroup(
-                MiscellaneousGroup.ID,
-                context.getString(R.string.miscellaneous_notifications_group_name)
-            )
+            }
         )
     )
 
@@ -353,7 +348,6 @@ object NotifUtils {
      *
      * @see DownloadAndInstallationGroup
      * @see PushNotificationsGroup
-     * @see MiscellaneousGroup
      */
     @RequiresApi(VERSION_CODES.O)
     private inline fun NotificationManagerCompat.createAllNotificationChannels(context: Context) = createNotificationChannels(
@@ -418,16 +412,6 @@ object NotifUtils {
                 vibrationEnabled = true
             ),
             //// END: PushNotificationsGroup
-
-            //// BEGIN: MiscellaneousGroup
-            createNotificationChannel(
-                MiscellaneousGroup.OtaUrlSubmittedNotifChannelId,
-                MiscellaneousGroup.ID,
-                context.getString(R.string.url_submitted_notification_channel_name),
-                context.getString(R.string.url_submitted_notification_channel_description),
-                NotificationManager.IMPORTANCE_LOW
-            ),
-            //// END: MiscellaneousGroup
         )
     )
 
@@ -483,6 +467,7 @@ object NotificationIds {
     const val LocalMd5Verification = 2 * LocalIdMultiplier
     const val LocalContribution = 3 * LocalIdMultiplier
     const val LocalInstallationStatus = 4 * LocalIdMultiplier
+    const val LocalUpdateAvailable = 5 * LocalIdMultiplier
 
     const val RemoteNewUpdate = 1 * RemoteIdMultiplier
 
@@ -570,24 +555,11 @@ object NotificationChannels {
     object MiscellaneousGroup {
 
         /**
-         * This group's ID
+         * This group's ID. The group itself no longer has any channels; it's kept
+         * only so legacy channels can be deleted on app start.
          */
         const val ID = "$GroupPrefix.miscellaneous"
 
-        /**
-         * Name: OTA filename submitted
-         * Description: Get notified when you've submitted OTA filenames successfully to our team.
-         * You can opt-out of automatically submitting filenames in the app's settings.
-         */
-        @Deprecated(
-            message = """
-                No longer used in v5.9.0+, because all OnePlus phones now use either
-                Google OTA (doesn't save files anywhere), or Component OTA (saves in
-                a directory accessible only via root), but URL in this case can't be
-                constructed via filenames alone.
-            """,
-            level = DeprecationLevel.WARNING
-        )
         const val OtaFilenameSubmittedNotifChannelId = "$ChannelPrefix.filename"
 
         const val OtaUrlSubmittedNotifChannelId = "$ChannelPrefix.url"

@@ -26,7 +26,6 @@ import com.oxygenupdater.icons.Help
 import com.oxygenupdater.icons.Link
 import com.oxygenupdater.icons.Logos
 import com.oxygenupdater.icons.Mail
-import com.oxygenupdater.icons.Patreon
 import com.oxygenupdater.icons.Star
 import com.oxygenupdater.icons.Symbols
 import com.oxygenupdater.ui.common.ConditionalNavBarPadding
@@ -63,11 +62,6 @@ fun AboutScreen(
     RichText(
         text = stringResource(R.string.about_description),
         modifier = modifierDefaultPaddingStartTopEnd.testTag(AboutScreen_DescriptionTestTag)
-    )
-
-    RichText(
-        text = stringResource(R.string.about_support),
-        modifier = modifierDefaultPaddingStartTopEnd.testTag(AboutScreen_SupportTestTag)
     )
 
     Text(
@@ -115,7 +109,6 @@ private fun Buttons(
             GridItem(Symbols.Mail, R.string.about_email_button_text, openEmail),
             GridItem(Logos.GitHub, R.string.about_github_button_text) { openLink(LinkType.GitHub.value) },
             GridItem(Symbols.Link, R.string.about_website_button_text) { openLink(LinkType.Website.value) },
-            GridItem(Logos.Patreon, R.string.about_patreon_button_text) { openLink(LinkType.Patreon.value) },
             GridItem(Symbols.Star, R.string.about_rate_button_text, ::openPlayStorePage),
         ),
     )
@@ -129,7 +122,6 @@ private value class LinkType private constructor(val value: String) {
     companion object {
         val Discord get() = LinkType("https://discord.gg/5TXdhKJ")
         val GitHub get() = LinkType("https://github.com/oxygen-updater/oxygen-updater")
-        val Patreon get() = LinkType("https://patreon.com/oxygenupdater")
         val Website get() = LinkType("https://oxygenupdater.com/")
     }
 }

@@ -18,7 +18,6 @@ object SqliteMigrations {
 
     private const val TAG = "DatabaseMigrations"
     private const val NewsItemTable = "news_item"
-    private const val SubmittedUpdateFileTable = "submitted_update_file"
     private const val PurchasesOldDb = "purchase_db"
     private const val NewsItemsOldDb = "NewsItems.db"
     private const val SubmittedUpdateFilesOldDb = "SubmittedUpdateFiles.db"
@@ -40,26 +39,16 @@ object SqliteMigrations {
      * implementation has a common database and child tables, which match the
      * backend structure.
      *
-     * Additional problems with the previous implementation:
-     * - `SubmittedUpdateFiles.db`
-     *    - Table name was `news_item`, likely due to a copy-paste error
-     *    - `id`, despite being a primary key, was marked as nullable
-     *    - `date_submitted` was marked as nullable, and default value was `null`
-     *
      * This migration:
-     * 1. Copies all existing data over (if old databases exist)
+     * 1. Copies all existing news data over (if the old database exists)
      * 2. Deletes old databases since they won't be used after this migration completes
      */
     fun prepopulateFromSqlite(context: Context, db: SupportSQLiteDatabase) {
         logDebug(TAG, "Starting migrations for SQLite to Room")
 
-        db.migrateFromOldDb(
-            context = context,
-            oldDbName = SubmittedUpdateFilesOldDb,
-            oldTableName = NewsItemTable,
-            newTableName = SubmittedUpdateFileTable,
-            columnSqlStr = "`id`, `name`, `date_submitted`",
-        )
+        // Delete the legacy submitted-update-files DB outright; the contribution
+        // feature was removed, so there's nothing to migrate from it.
+        context.deleteDatabase(SubmittedUpdateFilesOldDb)
 
         db.migrateFromOldDb(
             context = context,
