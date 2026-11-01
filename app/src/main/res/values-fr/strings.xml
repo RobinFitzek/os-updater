@@ -79,7 +79,6 @@
 	<string name="download_verifying_start">"Le téléchargement va maintenant être vérifié…"</string>
 
 	<!-- Settings strings -->
-	<string name="preference_header_support">Soutenez-nous</string>
 	<string name="preference_header_device">Appareil</string>
 	<string name="preference_header_ui">Interface utilisateur</string>
 	<string name="preference_header_notifications">Notifications</string>
@@ -95,7 +94,6 @@
 	<string name="summary_privacy_policy">Voir en ligne</string>
 	<string name="summary_rate_app">Donner 5 étoiles</string>
 
-	<string name="label_buy_ad_free">Supprimer les publicités</string>
 	<string name="label_theme">Thème</string>
 	<string name="label_language">Langue</string>
 	<string name="label_privacy_policy">Politique de confidentialité</string>
@@ -113,12 +111,7 @@
 	<string name="theme_additional_note">Tous les thèmes sont compatibles avec Material 3/You. Note: si le thème choisi est « Automatique » et l\'économiseur de batterie activé, le thème sombre sera automatiquement utilisé quelle que soit l\'heure afin d\'économiser de la batterie.</string>
 
 	<string name="settings">"Paramètres"</string>
-	<string name="settings_buy_button_buy">"Achat (%1$s)"</string>
-	<string name="settings_buy_button_bought">"Acheté"</string>
-	<string name="settings_buy_button_not_possible">"Indisponible"</string>
-	<string name="settings_buy_ad_free_label">"Acheter la version sans publicité"</string>
 
-	<string name="settings_contribute_label">Aidez à améliorer l\'application</string>
 
 	<string name="settings_device">"Appareil"</string>
 	<string name="settings_search_devices">"Recherche d'appareils"</string>
@@ -133,9 +126,6 @@ Cela peut s'avérer utile si vous souhaitez:"</string>
 &#8226; Passer à une autre piste de mise à jour"</string>
 	<string name="settings_advanced_mode_caption">"Le mode avancé peut s'avérer nécessaire uniquement dans les situations ci-dessus. Vous ne devez l'activer que si vous savez ce que vous faites."</string>
 	<string name="settings_update_method">"Méthode de mise à jour"</string>
-	<string name="settings_upload_logs">Envoyer les données d\'utilisation et de crash au développeur</string>
-	<string name="settings_ad_privacy">Consentement à la publicité GDPR</string>
-	<string name="settings_ad_privacy_subtitle">"Pour les utilisateurs de l'EEE/du Royaume-Uni"</string>
 	<string name="settings_clear_cache">Vider le cache</string>
 
 	<!-- FAQ strings -->
@@ -195,7 +185,6 @@ Vous pouvez faire cela en visitant la section « Mes applications » dans le P
 	<!-- About screen strings -->
 	<string name="about">"À propos"</string>
 	<string name="about_description">Cette application télécharge les mises à jour officielles directement depuis les serveurs de OPPO/OnePlus/realme et vérifie l\'intégrité des fichiers ZIPs téléchargés avant de vous permettre de les installer. Ce faisant, vous n\'aurez pas à attendre le déploiement progressif afin d\'installer les mises à jour officielles dès que possible. Si vous rencontrez des erreurs dans le système d\'exploitation, veuillez les signalez directement à OPPO/OnePlus/realme: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. Vous souhaiterez peut être joindre notre <a href="https://discord.gg/5TXdhKJ">serveur Discord</a> afin de pouvoir échanger avec les autres utilisateurs de l\'application à propos des dernières mises à jour. Autrement n\'hésitez pas à nous envoyer un email à <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> si vous avez des suggestions ou des commentaires.</string>
-	<string name="about_support">Si vous souhaitez nous supporter, vous pouvez acheter la version sans publicités (à partir des réglages de l\'application) ou vous rendre sur notre <a href="https://patreon.com/oxygenupdater">page Patreon</a>.</string>
 	<string name="about_background_story_header">Histoire</string>
 	<string name="about_background_story">Cette application a été initialement développée par Arjan Vlek à la suite d\'une autre de ses applications appelée <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a> (qui fournit des fonctionnalités similaires pour les utilisateurs de Cyanogen OS).\n\nAprès 4 ans, en Juillet 2019, Arjan a décidé de se retirer des deux projets et a transféré les applications à une équipe de développeurs venant chacun de différents pays. Ils ont pris la responsabilité de continuer à rendre à la communauté le service d\'obtenir les mises à jour réalisées par OPPO/OnePlus/realme plus rapidement.\nVous pouvez trouver plus d\'informations à propos de l\'annonce <a href="https://oxygenupdater.com/article/81/">ici</a>.\n\nLe 14 Août 2019 a marqué la première publication d\'une nouvelle version de l\'application par la nouvelle équipe, qui a introduit de nouvelles fonctionnalités (thème sombre et redesign).\n\nPour plus d\'information à propos de l\'équipe, consultez <a href="https://oxygenupdater.com/team/">le site</a>.</string>
 	<string name="about_third_party_app_notice">Veuillez noter que cette application n\'est pas une application officielle de OPPO/OnePlus/realme.\nLe nom OPPO/OnePlus/realme, le logo OPPO/OnePlus/realme et OxygenOS/ColorOS sont propriétés de OPPO/OnePlus/realme.\nAndroid, Google, Google Play et le logo Google Play sont des marques déposées de Google Inc.\nCette application utilise des données de OPPO/OnePlus/realme et d\'OPPO pour montrer les informations de mise à jour.</string>
@@ -211,7 +200,6 @@ Vous pouvez faire cela en visitant la section « Mes applications » dans le P
 	<string name="notification_version">"%1$s est maintenant disponible pour le %2$s !"</string>
 	<string name="download_and_installation_notifications_group_name">Téléchargement &amp; Installation</string>
 	<string name="push_notifications_group_name">"Notifications push"</string>
-	<string name="miscellaneous_notifications_group_name">Diverses</string>
 	<string name="download_and_installation_notifications_group_description">"Affiche toutes les notifications non importantes d'OS Updater.
 Contient les indicateurs de statut montrés durant le téléchargement."</string>
 	<string name="push_notifications_group_description">"Affiche les notifications importantes d'OS Updater.
@@ -223,7 +211,6 @@ Cela inclut les notifications de mises à jour systèmes et celles de nouveaux a
 	<string name="news_notification_channel_name">Article d\'actualité</string>
 	<string name="device_notification_channel_name">"Nouvel appareil supporté"</string>
 	<string name="general_notification_channel_name">Générales</string>
-	<string name="url_submitted_notification_channel_name">Transmission de l\'URL de l\'OTA</string>
 	<string name="download_status_notification_channel_description">Notifications qui reflètent le statut d\'un téléchargement: en pause, actif, complété, ou échoué</string>
 	<string name="verification_status_notification_channel_description">Notifications qui reflètent le statut de la vérification du fichier de mise à jour: en cours, complété, or échoué.\nLa somme de contrôle MD5 est utilisée pour s\'assurer que le fichier de mise à jour n\'a pas été modifié et est valide.</string>
 	<string name="installation_status_notification_channel_description">Soyez notifié afin de savoir si une mise à jour a été correctement installée ou pas</string>
@@ -231,7 +218,6 @@ Cela inclut les notifications de mises à jour systèmes et celles de nouveaux a
 	<string name="news_notification_channel_description">Soyez notifié lorsque nous publions un nouvel article</string>
 	<string name="device_notification_channel_description">Soyez notifié lorsque l\'application supporte un nouvel appareil</string>
 	<string name="general_notification_channel_description">Notifications générales ne rentrant pas dans le cadre des autres catégories</string>
-	<string name="url_submitted_notification_channel_description">Recevez une notification lorsque vous avez soumis avec succès des URL d\'OTA à notre équipe.\nVous pouvez choisir de ne pas soumettre automatiquement les URL dans les paramètres de l\'application.</string>
 
 	<!-- News strings -->
 	<string name="news">"Articles"</string>
@@ -247,15 +233,6 @@ Cela inclut les notifications de mises à jour systèmes et celles de nouveaux a
 	<string name="news_empty_state_all_read_text">Félicitations, vous avez lu tous les articles! Nous espérons que vous les avez aimé. Appuyez sur la bannière pour les revoir.</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">Devenez un contributeur</string>
-	<string name="contribute_title">Aidez à améliorer OS Updater</string>
-	<string name="contribute_explanation">Afin de vous fournir les dernières mises à jour, nous avons besoin de capturer les URL OTA ZIP.\n\nComment puis-je vous aider ?\n\nOS Updater peut soumettre automatiquement les nouvelles URL OTA à nos administrateurs. Cela utilisera une petite quantité de données et peut utiliser un peu de votre batterie. Vous devrez accorder à l\'application le droit d\'accès à la racine, car elle lit un fichier de base de données qui n\'est accessible que par l\'intermédiaire de la racine. Vous serez averti lorsqu\'une URL aura été soumise avec succès.</string>
-	<string name="contribute_agree">Contribuer aux URL OTA (nécessite un accès root)</string>
-	<string name="contribute_save">Enregistrer</string>
-	<string name="contribute_more_info">Plus d\'informations</string>
-	<string name="contribute_allow_storage">Veuillez accorder les permissions de stockage et d\'accès à la racine pour améliorer l\'application.</string>
-	<string name="contribute_successful_notification_title">Contribution effectuée</string>
-	<string name="contribute_successful_notification_text">Merci de partager les URL des OTA avec nous !</string>
 
 	<!-- Error strings -->
 	<string name="error_app_outdated">"Oh non !"</string>
@@ -286,8 +263,6 @@ Les autres appareils, incluant les appareils OPPO/OnePlus/realme fonctionnant so
 	<string name="do_not_show_again_checkbox">"Ne plus montrer"</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">Votre achat est en attente de confirmation par le Play Store. Vous aurez accès à tous les avantages auxquels vous avez droit une fois que le paiement sera complété.</string>
-	<string name="purchase_error_after_payment">"L'achat de la version sans publicités a échoué en raison d'une erreur interne. Veuillez réessayer dans quelques minutes. Si vous avez déjà payé, veuillez contacter le support du Play Store."</string>
 
 	<!-- Other strings -->
 	<string name="icon">"Icône"</string>

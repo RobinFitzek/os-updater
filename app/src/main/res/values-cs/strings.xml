@@ -77,7 +77,6 @@
 	<string name="download_verifying_start">Vaše stahování bude nyní ověřeno…</string>
 
 	<!-- Řetězce nastavení-->
-	<string name="preference_header_support">Podpořte nás</string>
 	<string name="preference_header_device">Zařízení</string>
 	<string name="preference_header_ui">UI</string>
 	<string name="preference_header_notifications">Notifikace</string>
@@ -93,7 +92,6 @@
 	<string name="summary_privacy_policy">Podívat se online</string>
 	<string name="summary_rate_app">Zanechat pětihvězdičkové hodnocení</string>
 
-	<string name="label_buy_ad_free">Odstranit reklamy</string>
 	<string name="label_theme">Téma</string>
 	<string name="label_language">Jazyk</string>
 	<string name="label_privacy_policy">Zásady ochrany osobních údajů</string>
@@ -111,12 +109,7 @@
 	<string name="theme_additional_note">Všechny šablony podporují Material 3/You. Poznámka: pokud je aktivní téma \"Auto\" a je povolen spořič baterie, bude automaticky použito tmavé téma bez ohledu na denní dobu, aby se šetřila baterie.</string>
 
 	<string name="settings">Nastavení</string>
-	<string name="settings_buy_button_buy">Koupit (%1$s)</string>
-	<string name="settings_buy_button_bought">Koupeno</string>
-	<string name="settings_buy_button_not_possible">Nedostupné</string>
-	<string name="settings_buy_ad_free_label">Povýšit na verzi bez reklam</string>
 
-	<string name="settings_contribute_label">Pomozte aplikaci vylepšit</string>
 
 	<string name="settings_device">Zařízení</string>
 	<string name="settings_search_devices">Vyhledávací zařízení</string>
@@ -135,9 +128,6 @@ To může být užitečné, pokud chcete:"</string>
 	<string name="settings_advanced_mode_caption">"Rozšířený režim může být potřebný pouze ve výše uvedených situacích. Neměli byste jej povolovat, pokud nevíte, co děláte."</string>
 
 	<string name="settings_update_method">Způsob aktualizace</string>
-	<string name="settings_upload_logs">Sdílení dat o používání a sdílení protokolů</string>
-	<string name="settings_ad_privacy">Souhlas s reklamou podle GDPR</string>
-	<string name="settings_ad_privacy_subtitle">"Pro uživatele v EHP/UK"</string>
 	<string name="settings_clear_cache">Vymazat mezipaměť</string>
 
 	<!-- Řetězce FAQ -->
@@ -189,7 +179,6 @@ To může být užitečné, pokud chcete:"</string>
 	<!-- O řetězcích obrazovky -->
 	<string name="about">O nás</string>
 	<string name="about_description">Tato aplikace stahuje oficiální aktualizace přímo ze serverů společnosti OPPO/OnePlus/realme a před povolením instalace dokonce ověří integritu staženého souboru ZIP. Aplikace vám tak umožní přeskočit frontu a nainstalovat oficiální aktualizace co nejdříve. Pokud narazíte na chyby v operačním systému, nahlaste je přímo společnosti OPPO/OnePlus/realme: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. Mohli byste se také chtít připojit na náš <a href="https://discord.gg/5TXdhKJ">Discord server</a>, abyste se mohli s ostatními uživateli poradit o nejnovějších aktualizacích. V opačném případě nám můžete napsat na adresu <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> s vašimi návrhy/zpětnou vazbou.</string>
-	<string name="about_support">Pokud nás chcete podpořit, můžete si zakoupit odblokování bez reklam (nastavení aplikace) nebo se podívat na naši stránku. <a href="https://patreon.com/oxygenupdater">Patreon</a>.</string>
 	<string name="about_background_story_header">Průběh na pozadí</string>
 	<string name="about_background_story">Tuto aplikaci původně vyvinul Arjan Vlek v návaznosti na jinou svou aplikaci s názvem <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a> (ta umožňovala stejným způsobem provádět aktualizaci pro Cyanogen OS uživatele).\n\nPo čtyřech letech, v červenci 2019, se Arjan rozhodl od obou projektů odstoupit a převedl vlastnictví aplikace na tým vývojářů z různých zemí. Ti převzali odpovědnost za poskytování vynikajících služeb komunitě &amp; podporu rychlejšího získávání aktualizací OPPO/OnePlus/realme.\nDalší informace o oznámení najdete <a href="https://oxygenupdater.com/article/81/">zde</a>.\n\n14. srpna 2019 vyšlo první vydání pod novým vlastnictvím, které přišlo s novými funkcemi, jako je tmavý režim a kompletní redesign.\n\nDalší informace o týmu najdete <a href="https://oxygenupdater.com/team/">na webových stránkách</a>.</string>
 	<string name="about_third_party_app_notice">Upozorňujeme, že se nejedná o oficiální aplikaci společnosti OPPO/OnePlus/realme.\nNázev OPPO/OnePlus/realme, logo OPPO/OnePlus/realme a OxygenOS/ColorOS jsou majetkem společnosti OPPO/OnePlus/realme.\nAndroid, Google, Google Play a logo Google Play jsou registrované ochranné známky společnosti Google Inc.\nTato aplikace používá k zobrazení informací o aktualizacích data společnosti OPPO/OnePlus/realme a její mateřské společnosti Oppo.</string>
@@ -205,7 +194,6 @@ To může být užitečné, pokud chcete:"</string>
 	<string name="notification_version">%1$s je nyní k dispozici pro %2$s!</string>
 	<string name="download_and_installation_notifications_group_name">Stahování a instalace</string>
 	<string name="push_notifications_group_name">Push oznámení</string>
-	<string name="miscellaneous_notifications_group_name">Různé</string>
 	<string name="download_and_installation_notifications_group_description">Zobrazí všechna nedůležitá oznámení aplikace OS Updater. Obsahuje stavové indikátory zobrazované během stahování.</string>
 	<string name="push_notifications_group_description">Zobrazuje všechna důležitá oznámení aplikace OS Updater. Patří mezi ně oznámení o aktualizacích systému a oznámení o nejnovějších zprávách.</string>
 	<string name="download_status_notification_channel_name">Stav stahování</string>
@@ -215,7 +203,6 @@ To může být užitečné, pokud chcete:"</string>
 	<string name="news_notification_channel_name">Novinový článek</string>
 	<string name="device_notification_channel_name">Nové podporované zařízení</string>
 	<string name="general_notification_channel_name">Všeobecné</string>
-	<string name="url_submitted_notification_channel_name">Předložená adresa URL OTA</string>
 	<string name="download_status_notification_channel_description">Oznámení, která odrážejí aktuální stav stahování: čekající, aktivní, dokončené nebo neúspěšné</string>
 	<string name="verification_status_notification_channel_description">Oznámení, která odrážejí aktuální stav úlohy ověření souboru: probíhá, dokončena nebo neúspěšná.\nMD5 kontrolní součty stahovaných souborů jsou ověřovány, aby se zajistilo, že se souborem nebylo manipulováno a že se jedná o platný aktualizační soubor.</string>
 	<string name="installation_status_notification_channel_description">Dostat oznámení, zda byla aktualizace úspěšně nainstalována, nebo ne</string>
@@ -223,7 +210,6 @@ To může být užitečné, pokud chcete:"</string>
 	<string name="news_notification_channel_description">Dostaňte upozornění, když zveřejníme novinku</string>
 	<string name="device_notification_channel_description">Dostat upozornění, když aplikace přidá podporu pro nové zařízení</string>
 	<string name="general_notification_channel_description">Všeobecná oznámení, která nepatří do jiných kategorií</string>
-	<string name="url_submitted_notification_channel_description">Dostávejte upozornění, když našemu týmu úspěšně odešlete adresy URL OTA.\nAutomatické odesílání adres URL můžete zrušit v nastavení aplikace.</string>
 
 	<!-- Nápovědné řetězce -->
 
@@ -241,15 +227,6 @@ To může být užitečné, pokud chcete:"</string>
 	<string name="news_empty_state_all_read_text">Přečetli jste všechny články. Dobrá práce! Doufáme, že se vám naše články líbily a že jste se z nich dozvěděli něco nového. Znovu klepněte na banner pro zobrazení všech novinek.</string>
 
 	<!-- Příspěvkové řetězce -->
-	<string name="contribute">Staňte se přispěvatelem</string>
-	<string name="contribute_title">Pomozte vylepšit OS Updater</string>
-	<string name="contribute_explanation">Abychom vám mohli poskytnout nejnovější aktualizace, musíme zachytit adresy URL ZIP OTA.\n\nJak vám mohu pomoci?\n\nProgram OS Updater může automaticky odesílat nové adresy URL OTA našim správcům. Využije se přitom malé množství dat a může se trochu vybít baterie. Aplikaci budete muset udělit oprávnění roota, protože čte databázový soubor, který je přístupný pouze prostřednictvím roota. Po úspěšném odeslání adresy URL budete upozorněni.</string>
-	<string name="contribute_agree">Přispějte URL adresami OTA (vyžaduje root)</string>
-	<string name="contribute_save">Uložit nastavení</string>
-	<string name="contribute_more_info">Další informace</string>
-	<string name="contribute_allow_storage">Udělte prosím oprávnění k ukládání a oprávnění roota, abyste pomohli aplikaci vylepšit</string>
-	<string name="contribute_successful_notification_title">Úspěšný příspěvek</string>
-	<string name="contribute_successful_notification_text">Děkujeme, že jste s námi sdíleli adresy URL OTA!</string>
 
 	<!-- Chybové řetězce-->
 	<string name="error_app_outdated">Ale ne!</string>
@@ -279,8 +256,6 @@ To může být užitečné, pokud chcete:"</string>
 	<string name="do_not_show_again_checkbox">Znovu se neukázat</string>
 
 	<!-- Nákupní řetězce -->
-	<string name="purchase_error_pending_payment">Váš nákup je ve stavu \"čekání na platbu\". Po dokončení platby vám budou poskytnuty všechny výhody, na které máte nárok.</string>
-	<string name="purchase_error_after_payment">Nákup verze bez reklam se nezdařil, protože došlo k interní chybě. Zkuste to prosím za několik minut znovu. Pokud jste již zaplatili, kontaktujte prosím podporu Google Play a požádejte o pomoc.</string>
 
 	<!-- Other strings-->
 	<string name="icon">Ikona</string>

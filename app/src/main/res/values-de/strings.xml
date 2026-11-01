@@ -74,7 +74,6 @@
 	<string name="download_verifying_start">"Dein Download wird verifiziert…"</string>
 
 	<!-- Settings strings -->
-	<string name="preference_header_support">Unterstütze uns</string>
 	<string name="preference_header_device">Gerät</string>
 	<string name="preference_header_ui">UI</string>
 	<string name="preference_header_notifications">Benachrichtigungen</string>
@@ -90,7 +89,6 @@
 	<string name="summary_privacy_policy">Online ansehen</string>
 	<string name="summary_rate_app">Hinterlasse eine 5 Sterne Bewertung</string>
 
-	<string name="label_buy_ad_free">Werbung entfernen</string>
 	<string name="label_theme">Theme</string>
 	<string name="label_language">Sprache</string>
 	<string name="label_privacy_policy">Datenschutz-Bestimmungen</string>
@@ -108,12 +106,7 @@
 	<string name="theme_additional_note">Alle Designs unterstützen Material 3/You. Hinweis: Wenn das \"Auto\" Theme und der Energiesparmodus aktiviert ist, wird das Dunkle Theme automatisch unabhängig von der Tageszeit verwendet um Akku zu sparen.</string>
 
 	<string name="settings">"Einstellungen"</string>
-	<string name="settings_buy_button_buy">"Kaufen (%1$s)"</string>
-	<string name="settings_buy_button_bought">"Gekauft"</string>
-	<string name="settings_buy_button_not_possible">"Nicht verfügbar"</string>
-	<string name="settings_buy_ad_free_label">"Zur werbefreien Version Upgraden"</string>
 
-	<string name="settings_contribute_label">Hilf uns die App zu verbessern</string>
 
 	<string name="settings_device">"Gerät"</string>
 	<string name="settings_search_devices">"Geräte suchen"</string>
@@ -129,9 +122,6 @@ Dies kann nützlich sein, wenn Sie Folgendes möchten:"</string>
 	<string name="settings_advanced_mode_caption">"Der erweiterte Modus wird nur in den oben genannten Fällen benötigt. Sie sollten ihn nicht aktivieren, wenn Sie nicht wissen, was Sie tun."</string>
 	<string name="settings_update_method">"Aktualisierungsmethode"</string>
 
-	<string name="settings_upload_logs">Teile Nutzungsdaten und Protokolle</string>
-	<string name="settings_ad_privacy">GDPR-Zustimmung zur Werbung</string>
-	<string name="settings_ad_privacy_subtitle">"Für Nutzer in EEA/UK"</string>
 	<string name="settings_clear_cache">Cache löschen</string>
 
 	<!-- FAQ strings -->
@@ -190,7 +180,6 @@ Falls es einen Download Fehler gibt, öffne die App und versuche das Update erne
 	<!-- About screen strings -->
 	<string name="about">"Über"</string>
 	<string name="about_description">Diese App lädt Updates direkt von den OPPO/OnePlus/realme Servern herunter und überprüft die heruntergeladene ZIP Datei ob sie zu deinem Gerät, passt bevor du sie installierst. Dies verringert die Wartezeit auf deine Updates und du bekommst die neusten Updates so schnell wie möglich. Wenn du Bugs bemerkst, melde diese direkt an OPPO/OnePlus/realme weiter: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. Du willst vielleicht unserem <a href="https://discord.gg/5TXdhKJ">Discord server</a> beitreten, sodass du mit anderen Leuten über die neusten Updates reden kannst. Oder schreib uns einfach eine Email an <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> mit deinen Vorschlägen oder Bewertungen.</string>
-	<string name="about_support">Wenn du uns unterstützen möchtest kannst du entweder die werbefrei Version kaufen (Verfügbar über die App Einstellungen) oder besuchen Sie unsere <a href="https://patreon.com/oxygenupdater">Patreon Seite</a>.</string>
 	<string name="about_background_story_header">Geschichte</string>
 	<string name="about_background_story">Diese App wurde ursprünglich von Arjan Vlek als Nachfolger einer anderen seiner Apps, namens <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a> (sie bietet ähnliche Funktionen für Cyanogen OS-Nutzer), entwickelt.\n\nNach 4 Jahren, im Juli 2019, hat sich Arjan entschieden von seinen Projekten zurück zu treten und sie einem Team von Entwicklern von verschiedenen Herkunften zu überlassen. Diese haben die Verantwortung auf sich genommen der Community einen perfekten Service zu bieten &amp; OPPO/OnePlus/realme Geräte schneller mit Updates zu versorgen.\nDu kannst mehr über die Ankündigung herausfinden und zwar <a href="https://oxygenupdater.com/article/81/">hier</a>.\n\n14 August 2019 war der erste release unter neuer Leitung, welcher mit neuen Features wie dem Darkmode und einem kompletten Redesign erschienen ist.\n\nFür mehr Infos besuche <a href="https://oxygenupdater.com/team/">die Webseite</a>.</string>
 	<string name="about_third_party_app_notice">Bitte beachte, diese App ist nicht offiziell von OPPO/OnePlus/realme.\nDer OPPO/OnePlus/realme Name, das OPPO/OnePlus/realme Logo und OxygenOS/ColorOS sind Eigentum von OPPO/OnePlus/realme.\nAndroid, Google, Google Play und das Google Play Logo gehören mit Trademarks Google Inc.\nDiese App benutzt Daten von OPPO/OnePlus/realme und seiner Vaterfirma Oppo um Update Informationen anzuzeigen.</string>
@@ -206,7 +195,6 @@ Falls es einen Download Fehler gibt, öffne die App und versuche das Update erne
 	<string name="notification_version">"%1$s ist jetzt verfügbar für das %2$s!"</string>
 	<string name="download_and_installation_notifications_group_name">Download &amp; Installation</string>
 	<string name="push_notifications_group_name">"Push Nachrichten"</string>
-	<string name="miscellaneous_notifications_group_name">Verschiedenes</string>
 	<string name="download_and_installation_notifications_group_description">Zeigt alle nicht-kritischen Nachrichten von der OS Updater App. Beinhaltet den Status Indikator der während des Downloads angezeigt wird.</string>
 	<string name="push_notifications_group_description">"Zeigt alle wichtigen Nachrichten von der OS Updater App. Dies beinhaltet System Update Nachrichten und Neuigkeiten."</string>
 	<string name="download_status_notification_channel_name">Download Status</string>
@@ -216,7 +204,6 @@ Falls es einen Download Fehler gibt, öffne die App und versuche das Update erne
 	<string name="news_notification_channel_name">Nyhedsartikel</string>
 	<string name="device_notification_channel_name">"Neues Gerät unterstützt"</string>
 	<string name="general_notification_channel_name">Allgemein</string>
-	<string name="url_submitted_notification_channel_name">OTA-URL übermittelt</string>
 	<string name="download_status_notification_channel_description">Benachrichtigungen die den aktuellen Status eines Download anzeigen: Steht aus, Aktiv, Fertig oder Fehlgeschlagen</string>
 	<string name="verification_status_notification_channel_description">Benachrichtigungen die den aktuellen Status einer Datei Verifizierung anzeigt: Läuft, Fertig oder Fehlgeschlagen.\nMD5 Prüfsummen werden überprüft und sicherzustellen, dass die heruntergeladene Daten gültige Update Daten, verifiziert und nicht manipuliert sind.</string>
 	<string name="installation_status_notification_channel_description">Werde benachrichtigt ob ein Update erfolgreich installiert wurde</string>
@@ -224,7 +211,6 @@ Falls es einen Download Fehler gibt, öffne die App und versuche das Update erne
 	<string name="news_notification_channel_description">Werde benachrichtigt wenn ein neuer Nachrichtenartikel veröffentlicht wurde</string>
 	<string name="device_notification_channel_description">Werde benachrichtigt wenn wir ein neues Gerät unterstützen</string>
 	<string name="general_notification_channel_description">Allgemeine Nachrichten die in keine andere Kategorie passen</string>
-	<string name="url_submitted_notification_channel_description">Sie werden benachrichtigt, wenn Sie OTA-URLs erfolgreich an unser Team übermittelt haben.\nSie können die automatische Übermittlung von URLs in den Einstellungen der App deaktivieren.</string>
 
 	<!-- News strings -->
 	<string name="news">"Neuigkeiten"</string>
@@ -239,15 +225,6 @@ Falls es einen Download Fehler gibt, öffne die App und versuche das Update erne
 	<string name="news_empty_state_none_available_text">Zurzeit sind keine Artikel verfügbar, komme später noch einmal.</string>
 	<string name="news_empty_state_all_read_text">Du hast alle Artikel gelesen. Gute Arbeit! Wir hoffen du hattest Spaß beim Lesen unserer Artikel und hast etwas neues gelernt. Tippe das Banner erneut um alle Nachrichten anzuzeigen.</string>
 
-	<string name="contribute">Hilf mit</string>
-	<string name="contribute_title">Hilf mit OS Updater zu verbessern</string>
-	<string name="contribute_explanation">Um Ihnen die neuesten Updates zur Verfügung stellen zu können, müssen wir die OTA-ZIP-URLs erfassen.\n\nWie kann ich Ihnen dabei helfen?\n\nOS Updater kann automatisch neue OTA-URLs an unsere Administratoren übermitteln. Dies erfordert eine geringe Datenmenge und kann Ihren Akku ein wenig belasten. Sie müssen der Anwendung Root-Rechte erteilen, da sie eine Datenbankdatei liest, die nur über Root zugänglich ist. Sie werden benachrichtigt, wenn eine URL erfolgreich übermittelt wurde.</string>
-	<string name="contribute_agree">OTA-URLs beitragen (erfordert Root-Rechte)</string>
-	<string name="contribute_save">Speichern</string>
-	<string name="contribute_more_info">Mehr Informationen</string>
-	<string name="contribute_allow_storage">Bitte gewähren Sie Speicher- und Root-Rechte, um die App zu verbessern</string>
-	<string name="contribute_successful_notification_title">Du hast erfolgreich beigetragen</string>
-	<string name="contribute_successful_notification_text">Danke, dass Sie die OTA-URLs mit uns teilen!</string>
 
 	<!-- Error strings -->
 	<string name="error_app_outdated">"Oh nein!"</string>
@@ -280,8 +257,6 @@ Andere Geräte, inklusive OPPO/OnePlus/realme Geräten mit Custom ROMs, werden n
 	<string name="do_not_show_again_checkbox">"Nicht mehr anzeigen"</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">Ihr Kauf befindet sich im Status "Zahlung ausstehend". Sobald die Zahlung abgeschlossen ist, erhalten Sie alle Leistungen, auf die Sie Anspruch haben.</string>
-	<string name="purchase_error_after_payment">"Der Kauf der Werbe-freien Version ist durch einen internen Fehler fehlgeschlagen. Bitte versuche es in ein paar Minuten nochmal. Wenn du bereits bezahlt hast, kontaktiere bitte den Google Play Support für Hilfe."</string>
 	Halte die App auf dem neuesten Stand um sicherzustellen, dass du alle neuen Features und Bugfixes bekommst
 	<!-- Other strings -->
 	<string name="icon">"Icon"</string>

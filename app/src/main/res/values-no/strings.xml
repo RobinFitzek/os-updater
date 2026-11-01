@@ -79,7 +79,6 @@
 	<string name="download_verifying_start">Nedlastingen din blir nå bekreftet…</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">Støtt oss</string>
 	<string name="preference_header_device">Enhet</string>
 	<string name="preference_header_ui">UI</string>
 	<string name="preference_header_notifications">Varsler</string>
@@ -95,7 +94,6 @@
 	<string name="summary_privacy_policy">Se på nettet</string>
 	<string name="summary_rate_app">Legg igjen en 5-stjerners anmeldelse</string>
 
-	<string name="label_buy_ad_free">Fjern ads</string>
 	<string name="label_theme">Tema</string>
 	<string name="label_language">Språk</string>
 	<string name="label_privacy_policy">Personvern</string>
@@ -113,12 +111,7 @@
 	<string name="theme_additional_note">Alle temaene støtter Material 3/You. Merk: Hvis \"Auto\" -temaet er aktivt og batterisparing er aktivert, blir mørke temaer automatisk brukt uansett tidspunkt på dagen til å spare batteri.</string>
 
 	<string name="settings">Innstillinger</string>
-	<string name="settings_buy_button_buy">Kjøp (%1$s)</string>
-	<string name="settings_buy_button_bought">Kjøpt</string>
-	<string name="settings_buy_button_not_possible">Utilgjengelig</string>
-	<string name="settings_buy_ad_free_label">Oppgrader til ad-free</string>
 
-	<string name="settings_contribute_label">Hjelp til å forbedre appen</string>
 
 	<string name="settings_device">Enhet</string>
 	<string name="settings_search_devices">Søk enheter</string>
@@ -137,9 +130,6 @@ Dette kan være nyttig hvis du vil:"</string>
 	<string name="settings_advanced_mode_caption">"Avansert modus er kanskje bare nødvendig i de ovennevnte situasjonene. Du bør ikke aktivere den med mindre du vet hva du gjør."</string>
 
 	<string name="settings_update_method">Oppdateringsmetode</string>
-	<string name="settings_upload_logs">Del bruksdata og logger</string>
-	<string name="settings_ad_privacy">GDPR-samtykke til annonsering</string>
-	<string name="settings_ad_privacy_subtitle">"For brukere i EØS/Storbritannia"</string>
 	<string name="settings_clear_cache">Tøm cache</string>
 
 	<!-- FAQ strings -->
@@ -192,7 +182,6 @@ Dette kan være nyttig hvis du vil:"</string>
 	<string name="about">Om denne appen</string>
 	<!-- TODO: translate these 3 strings below -->
 	<string name="about_description">This app downloads official updates directly from OPPO/OnePlus/realme servers, and even verifies the integrity of the downloaded ZIP before allowing you to install. By doing so, the app allows you to skip the rollout queue and install official updates ASAP. If you encounter bugs in the OS, report them to OPPO/OnePlus/realme directly: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. You might want to join our <a href="https://discord.gg/5TXdhKJ">Discord server</a> as well, so that you can talk to other users about the latest updates. Otherwise feel free to email us at <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> with your suggestions/feedback.</string>
-	<string name="about_support">If you\'d like to support us, you can either buy the ad-free unlock (app\'s settings), or check our <a href="https://patreon.com/oxygenupdater">Patreon page</a>.</string>
 	<string name="about_background_story_header">Background story</string>
 	<string name="about_background_story">Denne appen ble opprinnelig utviklet av Arjan Vlek som en oppfølging av en annen av appene hans, kalt <a href="https://cyanogenupdatetracker.com/">Cyanogen Oppdaterings Følger</a> (det gir lignende funksjonalitet for brukere av Cyanogen OS).\n\nEtter 4 år, i juli 2019, bestemte Arjan seg for å trekke seg fra begge prosjektene og overførte eierskapet til appen til et team av utviklere som kommer fra forskjellige land. De påtok seg ansvaret for å gi samfunnet utmerket service &amp; støtte for å få OPPO/OnePlus/realme-oppdateringer raskere.\nDu finner mer informasjon om kunngjøringen <a href="https://oxygenupdater.com/article/81/">her</a>.\n\n14th August 2019 markerte den første utgivelsen under nytt eierskap, som kom med nye funksjoner som mørk modus og et komplett redesign.\n\nFor mer informasjon om teamet, sjekk <a href="https://oxygenupdater.com/team/">nettsiden</a>.</string>
 	<string name="about_third_party_app_notice">Vær oppmerksom på at dette ikke er et offisielt OPPO/OnePlus/realme-program.\nOnePlus-navnet, OPPO/OnePlus/realme-logoen og OxygenOS/ColorOS tilhører OPPO/OnePlus/realme.\nAndroid, Google, Google Play og Google Play-logoen er registrerte varemerker for Google Inc.\nDenne appen bruker data fra OPPO/OnePlus/realme og hovedselskapet Oppo for å vise oppdateringsinformasjon.</string>
@@ -209,7 +198,6 @@ Dette kan være nyttig hvis du vil:"</string>
 	<!-- TODO: translate these 21 strings below -->
 	<string name="download_and_installation_notifications_group_name">Download &amp; Installation</string>
 	<string name="push_notifications_group_name">Push-varsler</string>
-	<string name="miscellaneous_notifications_group_name">Miscellaneous</string>
 	<string name="download_and_installation_notifications_group_description">Viser alle ikke-viktige varsler om OS Updater-appen. Inneholder statusindikatorene som vises under nedlasting.</string>
 	<string name="push_notifications_group_description">Viser alle viktige varsler om OS Updater-appen. Disse inkluderer systemoppdateringsvarsler og meldinger om nyheter.</string>
 	<string name="download_status_notification_channel_name">Download status</string>
@@ -219,7 +207,6 @@ Dette kan være nyttig hvis du vil:"</string>
 	<string name="news_notification_channel_name">Nyhetsartikkel</string>
 	<string name="device_notification_channel_name">Ny enhet utgitt</string>
 	<string name="general_notification_channel_name">General</string>
-	<string name="url_submitted_notification_channel_name">OTA-URL sendt inn</string>
 	<string name="download_status_notification_channel_description">Notifications that reflect the current state of a download: pending, active, completed, or failed</string>
 	<string name="verification_status_notification_channel_description">Notifications that reflect the current state of a file verification task: in-progress, completed, or failed.\nMD5 checksums for downloaded files are verified to ensure the file hasn\'t been tampered with, and is a valid update file.</string>
 	<string name="installation_status_notification_channel_description">Get notified if an update was successfully installed or not</string>
@@ -227,7 +214,6 @@ Dette kan være nyttig hvis du vil:"</string>
 	<string name="news_notification_channel_description">Get notified when we publish a news article</string>
 	<string name="device_notification_channel_description">Get notified when the app adds support for a new device</string>
 	<string name="general_notification_channel_description">General notifications that don\'t fit into other categories</string>
-	<string name="url_submitted_notification_channel_description">Bli varslet når du har sendt inn OTA-URL-er til teamet vårt.\nDu kan velge bort automatisk innsending av nettadresser i appens innstillinger.</string>
 
 	<!-- News strings -->
 	<string name="news">Nyheter</string>
@@ -244,15 +230,6 @@ Dette kan være nyttig hvis du vil:"</string>
 	<string name="news_empty_state_all_read_text">Du har lest alle artiklene. Bra jobb! Vi håper du likte å lese artiklene våre, og lærte noe nytt av dem. Trykk på banneret igjen for å vise alle nyhetsartikler.</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">Bli en bidragsyter</string>
-	<string name="contribute_title">Hjelp med å forbedre OS Updater</string>
-	<string name="contribute_explanation">For å kunne gi deg de nyeste oppdateringene må vi registrere OTA ZIP-URL-adresser.\n\nHvordan kan jeg hjelpe til?\n\nOS Updater kan automatisk sende nye OTA-URL-er til administratorene våre. Dette vil bruke en liten mengde data og kan bruke litt av batteriet ditt. Du må gi root-tillatelse til appen, fordi den leser en databasefil som bare er tilgjengelig via root. Du vil bli varslet når en URL er sendt inn.</string>
-	<string name="contribute_agree">Bidra med OTA-URL-er (krever root)</string>
-	<string name="contribute_save">Lagre innstillinger</string>
-	<string name="contribute_more_info">Mer informasjon …</string>
-	<string name="contribute_allow_storage">Vennligst gi lagrings- og root-tillatelser for å forbedre appen</string>
-	<string name="contribute_successful_notification_title">Bidrag vellykket</string>
-	<string name="contribute_successful_notification_text">Takk for at du deler OTA-nettadresser med oss!</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">Å nei!</string>
@@ -283,8 +260,6 @@ Dette kan være nyttig hvis du vil:"</string>
 	<string name="do_not_show_again_checkbox">Ikke vis igjen</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">Kjøpet ditt er i tilstanden \"betaling venter\". Når betalingen er fullført, vil du få alle fordelene du har rett til.</string>
-	<string name="purchase_error_after_payment">Kjøpet av den annonsefrie versjonen mislyktes fordi det oppstod en intern feil. Vennligst prøv igjen om noen minutter. Hvis du allerede har betalt, kan du kontakte brukerstøtten for Google Play for å få hjelp.</string>
 
 	<!-- Other strings-->
 	<string name="icon">Ikon</string>

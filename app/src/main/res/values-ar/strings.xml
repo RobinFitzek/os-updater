@@ -79,7 +79,6 @@
 	<string name="download_verifying_start">تحميلك سيتم التحقق منه الآن…</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">إدعمنا</string>
 	<string name="preference_header_device">الجهاز</string>
 	<string name="preference_header_ui">واجهة المستخدم</string>
 	<string name="preference_header_notifications">الإشعارات</string>
@@ -93,7 +92,6 @@
 	<string name="summary_important_notifications_disabled">تم تعطيل بعض الإشعارات المهمة:</string>
 	<string name="summary_privacy_policy">مشاهدة حية</string>
 	<string name="summary_rate_app">أترك مراجعة من خمس نجوم</string>
-	<string name="label_buy_ad_free">إزالة الإعلانات</string>
 	<string name="label_theme">الشكل</string>
 	<string name="label_language">لغة</string>
 	<string name="label_privacy_policy">سياسة الخصوصية</string>
@@ -109,11 +107,6 @@
 	<string name="theme_auto_subtitle">الإنتقال بين الشكل الفاتح والداكن إعتماداً على أي وقت من اليوم, وذلك تجنباً لإجهاد العين ليلاً</string>
 	<string name="theme_additional_note">جميع السمات متوافقة مع Material 3 وYou. ملحوظة: إذا كان وضع إختيار الشكل تلقائياً نشط ووضع حفظ البطارية فعال, فسيتم تفعيل الشكل الداكن تلقائياً بغض النظر عن الوقت سواء أكان ليلاً أو نهاراً وذلك لحفظ البطارية</string>
 	<string name="settings">الإعدادات</string>
-	<string name="settings_buy_button_buy">إشتري (%1$s)</string>
-	<string name="settings_buy_button_bought">تم الشراء</string>
-	<string name="settings_buy_button_not_possible">غير متاح</string>
-	<string name="settings_buy_ad_free_label">الترقية للتخلص من الإعلانات</string>
-	<string name="settings_contribute_label">المساعدة في تحسين التطبيق</string>
 	<string name="settings_device">الجهاز</string>
 	<string name="settings_search_devices">أجهزة البحث</string>
 	<string name="settings_entered_incorrectly">خطأ في حفظ إعداداتك. فضلاً عد وإختر جهازك وطريقة التحديث مرة أخرى.</string>
@@ -127,9 +120,6 @@
 &#8226; التبديل إلى مسار تحديث مختلف"</string>
 	<string name="settings_advanced_mode_caption">"قد تكون هناك حاجة إلى الوضع المتقدم فقط في المواقف المذكورة أعلاه. يجب ألا تقوم بتمكينه إلا إذا كنت تعرف ما تفعله."</string>
 	<string name="settings_update_method">طريقة التحديث</string>
-	<string name="settings_upload_logs">مشاركة بيانات الإستخدام والسجل</string>
-	<string name="settings_ad_privacy">الموافقة على إعلان القانون العام لحماية البيانات (GDPR).</string>
-	<string name="settings_ad_privacy_subtitle">"لمستخدمي المنطقة الاقتصادية الأوروبية/المملكة المتحدة"</string>
 	<string name="settings_clear_cache">مسح ذاكرة التخزين المؤقت</string>
 
 	<!-- FAQ strings -->
@@ -182,7 +172,6 @@
 	<string name="about">حول</string>
 	<!-- TODO: translate these 3 strings below -->
 	<string name="about_description">This app downloads official updates directly from OPPO/OnePlus/realme servers, and even verifies the integrity of the downloaded ZIP before allowing you to install. By doing so, the app allows you to skip the rollout queue and install official updates ASAP. If you encounter bugs in the OS, report them to OPPO/OnePlus/realme directly: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. You might want to join our <a href="https://discord.gg/5TXdhKJ">Discord server</a> as well, so that you can talk to other users about the latest updates. Otherwise feel free to email us at <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> with your suggestions/feedback.</string>
-	<string name="about_support">If you\'d like to support us, you can either buy the ad-free unlock (app\'s settings), or check our <a href="https://patreon.com/oxygenupdater">Patreon page</a>.</string>
 	<string name="about_background_story_header">Background story</string>
 	<string name="about_background_story">تم تطوير هذا التطبيق في الأصل بواسطة Arjan Vlek كمتابعة لأحد تطبيقاته الأخرى ، المسمى <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a> (حيث أنه يوفر وظائف مماثلة لمستخدمي نظام التشغيل سيانوجين).\n\nبعد أربع سنوات في يوليو 2019 قرر Arjan التخلي عن كلا المشروعين وتحويل ملكيتهم إلى فريق من المطورين من عدة دول المشيدة بعمله. حيث أخذوا المسؤولية على عاتقهم خدمة الجماعة خدمة ممتازة &amp; وتقديم الدعم للحصول على تحديثات ون بلس بشكل أسرع.\nتستطيع أن تجد المزيد من المعلومات عن هذا الإعلان <a href="https://oxygenupdater.com/article/81/">هنا</a>.\n\nالرابع عشر من أغسطس 2019 كان المؤشر للإصدار الجديد تحت المَلاك الجدد للتطبيق, والذي أتى بإضافات جديدة كالوضع الداكن وتصميم جديد كلياً.\n\nللمزيد من المعلومات عن الفريق, تفحص هذا <a href="https://oxygenupdater.com/team/">الموقع الإلكتروني</a>.</string>
 	<string name="about_third_party_app_notice"> فضلاً لاحظ, أن هذا التطبيق غير رسمي من شركة ون بلس.\nإسم وشعار ونظام أكسجين هي ملكيات تخص شركة ون بلس.\nكما أن شعارات أندرويد وجوجل وسوق بلاي هي علامات مسجلة تخص شركة جوجل.\nهذا التطبيق يستخدم البيانات من شركة ون بلس وشركتها الأم شركة أوبو لعرض بيانات التحديث.</string>
@@ -200,7 +189,6 @@
 	<!-- TODO: translate these 19 strings below -->
 	<string name="download_and_installation_notifications_group_name">Download &amp; Installation</string>
 	<string name="push_notifications_group_name">الإشعارات</string>
-	<string name="miscellaneous_notifications_group_name">Miscellaneous</string>
 	<string name="download_and_installation_notifications_group_description">يعرض جميع الإشعارات غير المهمة لتطبيق OS Updater. محتوياً على مؤشرات الحالة التي تظهر أثناء التحميل.</string>
 	<string name="push_notifications_group_description">يعرض جميع الإخطارات المهمة في تطبيق OS Updater. ويشتمل هذا على إشعارات تحديث النظام وإشعارات الأخبار العاجلة.</string>
 	<string name="download_status_notification_channel_name">Download status</string>
@@ -210,7 +198,6 @@
 	<string name="news_notification_channel_name">مقال إخباري</string>
 	<string name="device_notification_channel_name">جهاز جديد مدعوم</string>
 	<string name="general_notification_channel_name">General</string>
-	<string name="url_submitted_notification_channel_name">تم إرسال عنوان OTA URL</string>
 	<string name="download_status_notification_channel_description">Notifications that reflect the current state of a download: pending, active, completed, or failed</string>
 	<string name="verification_status_notification_channel_description">Notifications that reflect the current state of a file verification task: in-progress, completed, or failed.\nMD5 checksums for downloaded files are verified to ensure the file hasn\'t been tampered with, and is a valid update file.</string>
 	<string name="installation_status_notification_channel_description">Get notified if an update was successfully installed or not</string>
@@ -218,7 +205,6 @@
 	<string name="news_notification_channel_description">Get notified when we publish a news article</string>
 	<string name="device_notification_channel_description">Get notified when the app adds support for a new device</string>
 	<string name="general_notification_channel_description">General notifications that don\'t fit into other categories</string>
-	<string name="url_submitted_notification_channel_description">احصل على إشعار عند إرسال عناوين URL لـ OTA بنجاح إلى فريقنا. \n يمكنك إلغاء الاشتراك في إرسال عناوين URL تلقائيًا في إعدادات التطبيق.</string>
 
 	<!-- News strings -->
 	<string name="news">أخبار</string>
@@ -237,15 +223,6 @@
 	<string name="news_empty_state_all_read_text">You\'ve read all articles. Good job! We hope you enjoyed reading our articles, and learnt something new from them. Tap the banner again to show all news articles.</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">كن مساهماً</string>
-	<string name="contribute_title">المساعدة في تحسين OS Updater</string>
-	<string name="contribute_explanation">من أجل تزويدك بآخر التحديثات ، نحتاج إلى التقاط عناوين OTA ZIP.\n\nكيف يمكنني أن أقدم المساعدة؟\n\nيمكن لبرنامج OS Updater إرسال عناوين OTA الجديدة تلقائيًا إلى مسؤولينا. سيستخدم هذا قدرًا صغيرًا من البيانات وقد يستهلك القليل من بطاريتك. ستحتاج إلى منح إذن الجذر للتطبيق ، لأنه يقرأ ملف قاعدة بيانات لا يمكن الوصول إليه إلا عبر الجذر. سيتم إخطارك عند إرسال عنوان URL بنجاح.</string>
-	<string name="contribute_agree">المساهمة بعناوين URL OTA (يتطلب حق الوصول إلى الجذر)</string>
-	<string name="contribute_save">حفظ الإعدادات</string>
-	<string name="contribute_more_info">معلومات إضافية</string>
-	<string name="contribute_allow_storage">يرجى منح أذونات التخزين والجذر للمساعدة في تحسين التطبيق</string>
-	<string name="contribute_successful_notification_title">مساهمة ناجحة</string>
-	<string name="contribute_successful_notification_text">نشكرك على مشاركة عناوين OTA معنا!</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">كلا!</string>
@@ -277,8 +254,6 @@
 
 	<!-- Purchasing strings -->
 	<!-- TODO: translate this string below -->
-	<string name="purchase_error_pending_payment">Your purchase is in the \"payment pending\" state. Once payment is completed, you\'ll be granted all benefits that you\'re entitled to.</string>
-	<string name="purchase_error_after_payment">فشل شراء الإصدار الخالي من الإعلانات، نظرًا لحدوث خطأ داخلي. يرجى المحاولة مرة أخرى بعد بضع دقائق. إذا كنت قد دفعت بالفعل فيرجى الاتصال بدعم متجر بلاي للحصول على المساعدة.</string>
 
 	<!-- Other strings-->
 	<!-- TODO: translate this string below -->

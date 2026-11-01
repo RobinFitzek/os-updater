@@ -84,7 +84,6 @@
 	<string name="download_verifying_start">La descarga se verificará ahora…</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">Apóyanos</string>
 	<string name="preference_header_device">Dispositivo</string>
 	<string name="preference_header_ui">IU</string>
 	<string name="preference_header_notifications">Notificaciones</string>
@@ -100,7 +99,6 @@
 	<string name="summary_privacy_policy">Ver online</string>
 	<string name="summary_rate_app">Deja un comentario de 5 estrellas</string>
 
-	<string name="label_buy_ad_free">Eliminar anuncios</string>
 	<string name="label_theme">Tema</string>
 	<string name="label_language">Idioma</string>
 	<string name="label_privacy_policy">Política de privacidad</string>
@@ -118,12 +116,7 @@
 	<string name="theme_additional_note">Todos los temas son compatibles con Material 3/You. Nota: si el tema \"Auto\" está activo y el ahorro de batería está activado, el tema oscuro se usará automáticamente independientemente de la hora del día para conservar la batería.</string>
 
 	<string name="settings">Ajustes</string>
-	<string name="settings_buy_button_buy">Comprar (%1$s)</string>
-	<string name="settings_buy_button_bought">Comprado</string>
-	<string name="settings_buy_button_not_possible">No disponible</string>
-	<string name="settings_buy_ad_free_label">Actualizar a la versión sin publicidad</string>
 
-	<string name="settings_contribute_label">Ayuda a mejorar la app</string>
 
 	<string name="settings_device">Dispositivo</string>
 	<string name="settings_search_devices">Buscar dispositivos</string>
@@ -142,9 +135,6 @@ Esto puede ser útil si quieres:"</string>
 	<string name="settings_advanced_mode_caption">"El modo avanzado puede ser necesario sólo en las situaciones anteriores. No deberías activarlo a menos que sepas lo que estás haciendo."</string>
 
 	<string name="settings_update_method">Método de actualización</string>
-	<string name="settings_upload_logs">Comparte con nosotros datos de uso y registros</string>
-	<string name="settings_ad_privacy">Consentimiento de publicidad GDPR</string>
-	<string name="settings_ad_privacy_subtitle">"Para usuarios del EEE/Reino Unido"</string>
 	<string name="settings_clear_cache">Borrar caché</string>
 
 	<!-- FAQ strings -->
@@ -198,7 +188,6 @@ Esto puede ser útil si quieres:"</string>
 	<string name="about">Acerca de</string>
 	<!-- TODO: translate these 3 strings below -->
 	<string name="about_description">This app downloads official updates directly from OPPO/OnePlus/realme servers, and even verifies the integrity of the downloaded ZIP before allowing you to install. By doing so, the app allows you to skip the rollout queue and install official updates ASAP. If you encounter bugs in the OS, report them to OPPO/OnePlus/realme directly: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. You might want to join our <a href="https://discord.gg/5TXdhKJ">Discord server</a> as well, so that you can talk to other users about the latest updates. Otherwise feel free to email us at <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> with your suggestions/feedback.</string>
-	<string name="about_support">If you\'d like to support us, you can either buy the ad-free unlock (app\'s settings), or check our <a href="https://patreon.com/oxygenupdater">Patreon page</a>.</string>
 	<string name="about_background_story_header">Background story</string>
 	<string name="about_background_story">Esta app ha sido originalmente escrita por Arjan Vlek como la continuación de una de sus apps llamada <a href="https://cyanogenupdatetracker.com">Cyanogen Update Tracker</a>. Cyanogen Update Tracker ofrece funciones similares a los usuarios de Cyanogen OS.\n\n\n4 años después, en julio de 2019, Arjan decidió abandonar ambos proyectos y dejar el liderazco de la app a su equipo de desarrolladores provenientes de diferentes países. Ellos tomaron la responsabilidad de proveer a la comunidad de unos excelentes servicios de soporte &amp; para obtener actualizaciones de OPPO/OnePlus/realme más rápido.\nPuedes encontrar más información sobre el anuncio <a href="https://oxygenupdater.com/article/81/">aquí</a>.\n\nEl 14 de agosto de 2019 fue la primera vez que se libera una actualización con su nuevo propietario, que vino con novedades como el modo noche y un rediseño completo.\n\nPara más información del equipo, consulta <a href="https://oxygenupdater.com/team/">este web</a>.</string>
 	<string name="about_third_party_app_notice">Por favor,en cuenta que esta no es una aplicación oficial de OPPO/OnePlus/realme.\nLa marca OPPO/OnePlus/realme, el Logo de OPPO/OnePlus/realme y OxygenOS/ColorOS son propiedad de OPPO/OnePlus/realme.\nAndroid, Google, Google Play y el logo de Google Play son marcas registradas de Google Inc.\nEsta app usa datos de OPPO/OnePlus/realme y OPPO para mostrar la información de las actualizaciones.</string>
@@ -216,7 +205,6 @@ Esto puede ser útil si quieres:"</string>
 	<!-- TODO: translate these 19 strings below -->
 	<string name="download_and_installation_notifications_group_name">Download &amp; Installation</string>
 	<string name="push_notifications_group_name">Notificaciones push</string>
-	<string name="miscellaneous_notifications_group_name">Miscellaneous</string>
 	<string name="download_and_installation_notifications_group_description">Muestra todas las notificaciones que no sean importantes de la app OS Updater. Muestra el progreso de las descargas.</string>
 	<string name="push_notifications_group_description">Muestra todas las notificaciones importanmtes de la app OS Updater. Estas incluyen notificaciones de actualizaciones del sistema y notificaciones de nuevas noticias.</string>
 	<string name="download_status_notification_channel_name">Download status</string>
@@ -226,7 +214,6 @@ Esto puede ser útil si quieres:"</string>
 	<string name="news_notification_channel_name">Artículo de prensa</string>
 	<string name="device_notification_channel_name">Nuevo dispositivo compatible</string>
 	<string name="general_notification_channel_name">General</string>
-	<string name="url_submitted_notification_channel_name">URL OTA enviada</string>
 	<string name="download_status_notification_channel_description">Notifications that reflect the current state of a download: pending, active, completed, or failed</string>
 	<string name="verification_status_notification_channel_description">Notifications that reflect the current state of a file verification task: in-progress, completed, or failed.\nMD5 checksums for downloaded files are verified to ensure the file hasn\'t been tampered with, and is a valid update file.</string>
 	<string name="installation_status_notification_channel_description">Get notified if an update was successfully installed or not</string>
@@ -234,7 +221,6 @@ Esto puede ser útil si quieres:"</string>
 	<string name="news_notification_channel_description">Get notified when we publish a news article</string>
 	<string name="device_notification_channel_description">Get notified when the app adds support for a new device</string>
 	<string name="general_notification_channel_description">General notifications that don\'t fit into other categories</string>
-	<string name="url_submitted_notification_channel_description">Recibe una notificación cuando hayas enviado URL de OTA a nuestro equipo.\nPuedes desactivar el envío automático de URL en los ajustes de la aplicación.</string>
 
 	<!-- News strings -->
 	<string name="news">Noticias</string>
@@ -253,15 +239,6 @@ Esto puede ser útil si quieres:"</string>
 	<string name="news_empty_state_all_read_text">You\'ve read all articles. Good job! We hope you enjoyed reading our articles, and learnt something new from them. Tap the banner again to show all news articles.</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">Hazte colaborador</string>
-	<string name="contribute_title">Ayuda a mejorar OS Updater</string>
-	<string name="contribute_explanation">Para poder ofrecerte las últimas actualizaciones, necesitamos capturar las URL ZIP OTA.\n\n¿Cómo puedo ayudar?\n\nOS Updater puede enviar automáticamente nuevas URL OTA a nuestros administradores. Esto utilizará una pequeña cantidad de datos y puede usar un poco de tu batería. Tendrás que conceder permisos de root a la aplicación, ya que lee un archivo de base de datos al que sólo se puede acceder a través de root. Recibirás una notificación cuando una URL se haya enviado correctamente.</string>
-	<string name="contribute_agree">Contribuir con URL OTA (requiere root)</string>
-	<string name="contribute_save">Guardar ajustes</string>
-	<string name="contribute_more_info">Más información</string>
-	<string name="contribute_allow_storage">Por favor, concede permisos de almacenamiento y root para ayudar a mejorar la aplicación</string>
-	<string name="contribute_successful_notification_title">Contribución completa</string>
-	<string name="contribute_successful_notification_text">¡Gracias por compartir con nosotros las URL de las OTA!</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">¡Oh no!</string>
@@ -295,8 +272,6 @@ Esto puede ser útil si quieres:"</string>
 
 	<!-- Purchasing strings -->
 	<!-- TODO: translate this string below -->
-	<string name="purchase_error_pending_payment">Your purchase is in the \"payment pending\" state. Once payment is completed, you\'ll be granted all benefits that you\'re entitled to.</string>
-	<string name="purchase_error_after_payment">La compra de la versión sin anuncios ha fallado a causa de un error interno. Por favor, inténtalo de nuevo en unos minutos. Si ya has hecho el pago, por favor, contacta con el soporte de Google Play para que lo resuelvan.</string>
 
 	<!-- Other strings-->
 	<string name="icon">Icono</string>

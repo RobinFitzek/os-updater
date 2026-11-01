@@ -77,7 +77,6 @@
 	<string name="download_verifying_start">Descărcarea va fi verificată…</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">Susțineți dezvoltatorii</string>
 	<string name="preference_header_device">Dispozitiv</string>
 	<string name="preference_header_ui">Interfață</string>
 	<string name="preference_header_notifications">Notificări</string>
@@ -93,7 +92,6 @@
 	<string name="summary_privacy_policy">Vizualizați online</string>
 	<string name="summary_rate_app">Acordați-ne 5 stele</string>
 
-	<string name="label_buy_ad_free">Înlătură reclamele</string>
 	<string name="label_theme">Temă</string>
 	<string name="label_language">Limbă</string>
 	<string name="label_privacy_policy">Politica de confidențialitate</string>
@@ -111,12 +109,7 @@
 	<string name="theme_additional_note">Toate temele sunt compatibile cu Material 3/You. Atenție: dacă tema \"Automată\" este activă și economizorul bateriei este pornit, se va trece automat la tema întunecată, indiferent de momentul zilei, pentru a prelungi durata de viață a bateriei.</string>
 
 	<string name="settings">Setări</string>
-	<string name="settings_buy_button_buy">Cumpărați (%1$s)</string>
-	<string name="settings_buy_button_bought">Cumpărat</string>
-	<string name="settings_buy_button_not_possible">Indisponibil</string>
-	<string name="settings_buy_ad_free_label">Treceți la versiunea făra reclame</string>
 
-	<string name="settings_contribute_label">Contribuiți la îmbunătățirea aplicației</string>
 
 	<string name="settings_device">Dispozitiv selectat</string>
 	<string name="settings_search_devices">Căutare dispozitive</string>
@@ -135,9 +128,6 @@ Acest lucru poate fi util dacă doriți să:"</string>
 	<string name="settings_advanced_mode_caption">"Modul avansat poate fi necesar doar în situațiile de mai sus. Nu ar trebui să îl activați decât dacă știți ce faceți."</string>
 
 	<string name="settings_update_method">Metoda de actualizare</string>
-	<string name="settings_upload_logs">Împărtășiți date de utilizare și jurnale ale aplicației</string>
-	<string name="settings_ad_privacy">Consimțământul pentru reclame GDPR</string>
-	<string name="settings_ad_privacy_subtitle">"Pentru utilizatorii din SEE/UK"</string>
 	<string name="settings_clear_cache">Goliți memoria cache</string>
 
 	<!-- FAQ strings -->
@@ -189,7 +179,6 @@ Acest lucru poate fi util dacă doriți să:"</string>
 	<!-- About screen strings -->
 	<string name="about">Despre</string>
 	<string name="about_description">Această aplicație descarcă actualizări oficiale direct de pe serverele OPPO/OnePlus/realme și verifică integritatea fișierului ZIP descărcat, înainte de a vă permite să instalați actualizarea. Astfel, aplicația vă permite să săriți peste perioada de lansare a actualizărilor și să instalați actualizări oficiale cât mai curând posibil. Dacă întâmpinați erori în sistemul de operare, raportați-le direct la OPPO/OnePlus/realme: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. Puteți, de asemenea, să vă alăturați <a href="https://discord.gg/5TXdhKJ">server-ului nostru de Discord</a> pentru a discuta cu alți utilizatori în legătură cu ultimele actualizări. În rest, ne puteți scrie oricând un e-mail pe adresa <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> cu sugestii și păreri în legătură cu aplicația.</string>
-	<string name="about_support">Dacă doriți să ne sprijiniți, puteți cumpăra aplicația fără anunțuri (din setările aplicației) sau puteți să consultați <a href="https://patreon.com/oxygenupdater">pagina de Patreon</a>.</string>
 	<string name="about_background_story_header">Scurt istoric</string>
 	<string name="about_background_story">Această aplicație a fost creată inițial de Arjan Vlek, ca urmare a unei aplicații deja existente, numită <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a> (aplicație ce oferă funcționalitate similară pentru utilizatorii Cyanogen OS).\n\nDupă 4 ani, în iulie 2019, Arjan a decis să-și reducă activitatea în cele două proiecte și a transferat conducerea aplicației către o echipă de dezvoltatori provenind dintr-o varietate de țări. Aceștia și-au asumat responsabilitatea de a oferi comunității un suport excelent pentru primirea de actualizări OPPO/OnePlus/realme mai rapide.\nPuteți găsi mai multe informații legate de anunț <a href="https://oxygenupdater.com/article/81/">aici</a>.\n\nPe data de 14 august 2019 a avut loc prima lansare sub noua conducere, care a adus utilizatorilor funcții noi precum tema întunecată și un design complet nou.\n\nPentru mai multe informații referitoare la echipă, încercați <a href="https://oxygenupdater.com/team/">acest website</a>.</string>
 	<string name="about_third_party_app_notice">Atenție, aceasta nu este o aplicație oficială OPPO/OnePlus/realme.\nNumele OPPO/OnePlus/realme, logo-ul OPPO/OnePlus/realme și OxygenOS/ColorOS aparțin companiei OPPO/OnePlus/realme.\nAndroid, Google, Google Play și logo-ul Google Play sunt mărci înregistrate ale Google Inc.\nAceastă aplicație folosește date de la OPPO/OnePlus/realme și de la compania părinte Oppo pentru a oferi informații legate de actualizări.</string>
@@ -205,7 +194,6 @@ Acest lucru poate fi util dacă doriți să:"</string>
 	<string name="notification_version">Actualizarea %1$s este acum disponibilă pentru %2$s!</string>
 	<string name="download_and_installation_notifications_group_name">Descărcare &amp; Instalare</string>
 	<string name="push_notifications_group_name">Notificări push</string>
-	<string name="miscellaneous_notifications_group_name">Diverse</string>
 	<string name="download_and_installation_notifications_group_description">Afișează toate notificările mai puțin importante ale aplicației OS Updater. Conține indicatorii de stare afișați în timpul descărcării.</string>
 	<string name="push_notifications_group_description">Afișează toate notificările importante ale aplicației OS Updater. Acestea includ notificări de actualizare a sistemului și notificări de știri de ultimă oră.</string>
 	<string name="download_status_notification_channel_name">Stadiul descărcării</string>
@@ -215,7 +203,6 @@ Acest lucru poate fi util dacă doriți să:"</string>
 	<string name="news_notification_channel_name">Articol de știri</string>
 	<string name="device_notification_channel_name">Dispozitiv nou suportat</string>
 	<string name="general_notification_channel_name">General</string>
-	<string name="url_submitted_notification_channel_name">URL-ul OTA trimis</string>
 	<string name="download_status_notification_channel_description">Notificări care reflectă stadiul actual al unei descărcări: în așteptare, activă, finalizată sau eșuată</string>
 	<string name="verification_status_notification_channel_description">Notificări care reflectă stadiul curent al unei sarcini de verificare a fișierului: în curs, finalizată sau eșuată.\nSumele de verificare MD5 pentru fișierele descărcate sunt verificate pentru a ne asigura că acestea nu au suferit modificări și că sunt fișiere de actualizare valide.</string>
 	<string name="installation_status_notification_channel_description">Primiți o notificare dacă actualizarea a fost instalată cu succes sau nu</string>
@@ -223,7 +210,6 @@ Acest lucru poate fi util dacă doriți să:"</string>
 	<string name="news_notification_channel_description">Primiți o notificare când publicăm un articol nou</string>
 	<string name="device_notification_channel_description">Primiți o notificare când este adăugat suport pentru un nou dispozitiv</string>
 	<string name="general_notification_channel_description">Notificări generale care nu se încadrează în alte categorii</string>
-	<string name="url_submitted_notification_channel_description">Primiți o notificare atunci când trimiteți cu succes URL-uri OTA către echipa noastră.\nPuteți renunța la trimiterea automată a URL-urilor în setările aplicației.</string>
 
 	<!-- News strings -->
 	<string name="news">Noutăți</string>
@@ -239,15 +225,6 @@ Acest lucru poate fi util dacă doriți să:"</string>
 	<string name="news_empty_state_all_read_text">Ați citit toate articolele. Felicitări! Sperăm că le-ați citit cu plăcere și că ați aflat ceva nou. Apăsați banner-ul din nou pentru a vedea toate articolele.</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">Deveniți un contribuitor</string>
-	<string name="contribute_title">Ajutați-ne să îmbunătățim aplicația OS Updater</string>
-	<string name="contribute_explanation">Pentru a vă oferi cele mai recente actualizări, trebuie să capturăm URL-urile OTA ZIP.\n\nCum vă pot ajuta?\n\nOS Updater poate trimite automat noile URL-uri OTA către administratorii noștri. Acest lucru va utiliza o cantitate mică de date și poate consuma puțin din bateria dvs. Va trebui să acordați permisiunea de root aplicației, deoarece aceasta citește un fișier de bază de date care este accesibil doar prin root. Veți fi notificat atunci când un URL a fost trimis cu succes.</string>
-	<string name="contribute_agree">Contribuie cu adrese URL OTA (necesită drepturi de administrator)</string>
-	<string name="contribute_save">Salvează setările</string>
-	<string name="contribute_more_info">Mai multe informații…</string>
-	<string name="contribute_allow_storage">Vă rugăm să acordați permisiuni de stocare și root pentru a ajuta la îmbunătățirea aplicației</string>
-	<string name="contribute_successful_notification_title">Ați contribuit cu succes</string>
-	<string name="contribute_successful_notification_text">Vă mulțumim pentru că ați împărtășit URL-urile OTA cu noi!</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">O nu!</string>
@@ -278,8 +255,6 @@ Acest lucru poate fi util dacă doriți să:"</string>
 	<string name="do_not_show_again_checkbox">Nu mai apare din nou</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">Achiziția se află în stadiul de \"procesare a plății\". Odată ce plata este efectuată, veți avea parte de toate beneficiile oferite dumneavoastră.</string>
-	<string name="purchase_error_after_payment">Achiziția nu a avut loc din cauza unei erori interne. Vă rugăm să încercați din nou în câteva minute. Dacă ați efectuat deja plata, vă rugăm să contactați asistența Google Play pentru detalii.</string>
 
 	<!-- Other strings-->
 	<string name="icon">Icoană</string>

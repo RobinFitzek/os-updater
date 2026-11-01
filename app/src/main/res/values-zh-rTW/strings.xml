@@ -77,7 +77,6 @@
 	<string name="download_verifying_start">即將開始校驗您下載的檔案…</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">支援開發</string>
 	<string name="preference_header_device">裝置</string>
 	<string name="preference_header_ui">UI</string>
 	<string name="preference_header_notifications">通知</string>
@@ -92,7 +91,6 @@
 	<string name="summary_privacy_policy">線上檢視</string>
 	<string name="summary_rate_app">留下 5 星評分</string>
 
-	<string name="label_buy_ad_free">移除廣告</string>
 	<string name="label_theme">佈景主題</string>
 	<string name="label_language">語言</string>
 	<string name="label_privacy_policy">隱私條款</string>
@@ -110,11 +108,6 @@
 	<string name="theme_additional_note">所有主題均支援 Material 3/You。注意：如果您在使用「自動」切換佈景主題的時候同時啟用了省電模式，那麼將會無視目前時間，強制調至深色模式以達到節省電量的目的</string>
 
 	<string name="settings">設定</string>
-	<string name="settings_buy_button_buy">購買 (%1$s)</string>
-	<string name="settings_buy_button_bought">已購買</string>
-	<string name="settings_buy_button_not_possible">暫不提供</string>
-	<string name="settings_buy_ad_free_label">移除廣告服務</string>
-	<string name="settings_contribute_label">協助改進更新器</string>
 
 	<string name="settings_device">裝置</string>
 	<string name="settings_search_devices">搜尋裝置</string>
@@ -132,9 +125,6 @@
 &#8226; 切換到不同的更新軌道"</string>
 	<string name="settings_advanced_mode_caption">"僅在上述情況下才可能需要高級模式。 除非您知道自己在做什麼，否則不應啟用它。"</string>
 	<string name="settings_update_method">更新方式</string>
-	<string name="settings_upload_logs">分享使用日誌</string>
-	<string name="settings_ad_privacy">GDPR 廣告同意書</string>
-	<string name="settings_ad_privacy_subtitle">"對於歐洲經濟區/英國用戶"</string>
 	<string name="settings_clear_cache">清除快取</string>
 
 	<!-- FAQ strings -->
@@ -187,7 +177,6 @@
 	<!-- About screen strings -->
 	<string name="about">關於</string>
 	<string name="about_description">本應用程式的更新檔案直接從 OPPO/OnePlus/realme 伺服器取得，並且在您安裝前確保它可供使用。這樣，您就可以不用再忍受 OPPO/OnePlus/realme 的分階段推送，盡快安裝官方的系統更新了。如果您遇到了系統 Bug，請直接向 OPPO/OnePlus/realme 反映意見： <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>。 您也可以加入我們的<a href="https://discord.gg/5TXdhKJ">Discord 伺服器</a>，來和各位加友交流您對系統的意見。也可以透過電子郵件：<a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a>與我們聯絡。</string>
-	<string name="about_support">如果您願意支持我們，可以去購買移除廣告服務（在設定裡），也可以看看我們的 <a href="https://patreon.com/oxygenupdater">Patreon 網頁</a>。</string>
 	<string name="about_background_story_header">幕後故事</string>
 	<string name="about_background_story">本應用程式原本由 Arjan Vlek 開發，作為他的另一款應用程式 <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a> 的續作。(它可以為 Cyanogen OS 使用者提供與本應用程式類似的功能)\n\n2019 年 6 月，距離發布四年之後，Arjan 決定停止支援這兩款應用程式，並將它們的所有權轉讓给其它團隊。而這個團隊，則擔負起了為整個 OPPO/OnePlus/realme 社群提供優秀的支援服務的責任，協助無數使用者更快地取得 OPPO/OnePlus/realme 系統更新。\n您可以在 <a href="https://oxygenupdater.com/article/81/">這裡</a> 了解更多資訊。\n\n2019 年 8 月 14 日，新團隊發布了他所負責以來的第一個版本。該版本為使用者們帶來了深色模式的支援、令人耳目一新的界面設計，以及其它的新功能。\n\n如果您想更深入了解這個團隊，您可以去看看他們的<a href="https://oxygenupdater.com/team/">網站</a>。</string>
 	<string name="about_third_party_app_notice">請注意，這並不是 OPPO/OnePlus/realme 官方推出的應用程式！\nOnePlus 的名稱、Logo、以及 OxygenOS/ColorOS 都由 OPPO/OnePlus/realme 所有！\nAndroid、Google、Google Play 以及 Play 商店的 Logo 均為 Google LLC. 所擁有的商標。\n本應用程式使用來自 OPPO/OnePlus/realme 及其母公司 OPPO 的資料，為使用者提供更新訊息。</string>
@@ -203,7 +192,6 @@
 	<string name="notification_version">%1$s 現在可用於 %2$s！</string>
 	<string name="download_and_installation_notifications_group_name">下載 &amp; 安裝</string>
 	<string name="push_notifications_group_name">推送通知</string>
-	<string name="miscellaneous_notifications_group_name">雜項</string>
 	<string name="download_and_installation_notifications_group_description">顯示 Nitrogen 更新器應用程式的所有非重要通知。 包含下載期間顯示的狀態指示器。</string>
 	<string name="push_notifications_group_description">顯示 Nitrogen 更新器應用程式的所有重要通知。其中包括系統更新通知和突發新聞通知。</string>
 	<string name="download_status_notification_channel_name">下載狀態</string>
@@ -213,7 +201,6 @@
 	<string name="news_notification_channel_name">新聞報導</string>
 	<string name="device_notification_channel_name">支援新裝置</string>
 	<string name="general_notification_channel_name">一般</string>
-	<string name="url_submitted_notification_channel_name">已提交 OTA 網址</string>
 	<string name="download_status_notification_channel_description">反映目前下載狀態的通知：等待中、正在進行、完成或失敗</string>
 	<string name="verification_status_notification_channel_description">反映目前驗證情況的通知：正在進行、已完成或失敗\n為已下載的檔案進行 MD5 校驗可以確保檔案沒有被竄改並且有效。</string>
 	<string name="installation_status_notification_channel_description">取得通知，了解更新成功與否</string>
@@ -221,7 +208,6 @@
 	<string name="news_notification_channel_description">在新文章發布時推送通知</string>
 	<string name="device_notification_channel_description">在更新器支援新裝置時推送通知</string>
 	<string name="general_notification_channel_description">不屬於其他類別的一般通知</string>
-	<string name="url_submitted_notification_channel_description">當您成功向我們的團隊提交 OTA URL 時，您會收到通知。\n您可以在應用程序的設置中選擇退出自動提交 URL。</string>
 
 	<!-- News strings -->
 	<string name="news">新聞</string>
@@ -238,15 +224,6 @@
 	<string name="news_empty_state_all_read_text">所有文章都已閱讀完畢，做的真好！ 希望您喜歡我們的文章，並能夠從中了解到新的訊息。 再次點選横幅即可顯示所有新聞文章。</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">參與共研</string>
-	<string name="contribute_title">加入 Nitrogen 更新器共同研究計畫</string>
-	<string name="contribute_explanation">為了向您提供最新更新，我們需要捕獲 OTA ZIP URL。\n\n我能提供什麼幫助？\n\nOS Updater 可以自動向我們的管理員提交新的 OTA URL。 這將使用少量數據，並且可能會消耗一些電池電量。 您需要授予該應用程序 root 權限，因為它讀取的數據庫文件只能通過 root 訪問。 成功提交 URL 後，您將收到通知。</string>
-	<string name="contribute_agree">貢獻 OTA 網址（需 root 權限）</string>
-	<string name="contribute_save">儲存設定</string>
-	<string name="contribute_more_info">了解更多</string>
-	<string name="contribute_allow_storage">請授予存儲和根權限以幫助改進應用程序</string>
-	<string name="contribute_successful_notification_title">共研完成</string>
-	<string name="contribute_successful_notification_text">感謝您與我們分享 OTA 網址！</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">糟糕！</string>
@@ -276,8 +253,6 @@
 	<string name="do_not_show_again_checkbox">不再顯示</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">您的購買正處於「正在等待付款」狀態。一旦付款完成，您將獲得所有付款後的權益。</string>
-	<string name="purchase_error_after_payment">由於內部錯誤，購買移除廣告服務失敗，請稍候重試。 如果您已付款，請與 Google Play 支援小組聯絡以取得協助。</string>
 
 	<!-- Other strings-->
 	<string name="icon">圖示</string>

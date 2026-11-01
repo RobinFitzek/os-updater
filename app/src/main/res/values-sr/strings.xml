@@ -78,7 +78,6 @@
 	<string name="download_verifying_start">Ваше преузимање ће сада биди верификовано…</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">Подржите нас</string>
 	<string name="preference_header_device">Уређај</string>
 	<string name="preference_header_ui">UI</string>
 	<string name="preference_header_notifications">Нотификације</string>
@@ -93,7 +92,6 @@
 	<string name="summary_privacy_policy">Погледајте на интернету</string>
 	<string name="summary_rate_app">Оставите нам 5 звездица</string>
 
-	<string name="label_buy_ad_free">Уклоните рекламе</string>
 	<string name="label_theme">Тема</string>
 	<string name="label_language">Језик</string>
 	<string name="label_privacy_policy">Политика приватности</string>
@@ -111,12 +109,7 @@
 	<string name="theme_additional_note">Све теме су омогућене за Material 3/You. Белешка: ако је \'Аутоматски\' тема активна и чувар батерије, тамна тема ће аутоматски бити активна невезано за доба дана ради уштеде батерије.</string>
 
 	<string name="settings">Подешавања</string>
-	<string name="settings_buy_button_buy">Купи (%1$s)</string>
-	<string name="settings_buy_button_bought">Купљено</string>
-	<string name="settings_buy_button_not_possible">Недоступно</string>
-	<string name="settings_buy_ad_free_label">Надогради за без реклама</string>
 
-	<string name="settings_contribute_label">Помозите напредовању апликације</string>
 
 	<string name="settings_device">Уређај</string>
 	<string name="settings_search_devices">Претражи уређаје</string>
@@ -135,9 +128,6 @@
 	<string name="settings_advanced_mode_caption">"Напредни режим може бити потребан само у горе наведеним ситуацијама. Не би требало да га омогућавате осим ако не знате шта радите."</string>
 
 	<string name="settings_update_method">Методе ажурирања</string>
-	<string name="settings_upload_logs">Подели податке коришћења и записе</string>
-	<string name="settings_ad_privacy">ГДПР сагласност за оглашавање</string>
-	<string name="settings_ad_privacy_subtitle">"За кориснике ЕЕА/УК"</string>
 	<string name="settings_clear_cache">Очисти кеш</string>
 
 	<!-- FAQ strings -->
@@ -188,7 +178,6 @@
 	<!-- About screen strings -->
 	<string name="about">О томе</string>
 	<string name="about_description">Ова апликација преузима ажурирања директно са OPPO/OnePlus/realme сервера, чак и проверава интегритет преузетих ZIP фајлова пре него што ти допусти да их инсталираш. Радећи то, апликација ти омогућава да инсталираш ажурирања без чекања што је пре могуће. Ако наиђеш на багове у оперативном систему, пријави их директно OPPO/OnePlus/realme-у: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. Можеш такође да се придружиш нашем <a href="https://discord.gg/5TXdhKJ">Discord серверу</a> , где можеш да причаш са осталим корисницима. У супротном, можеш нам слободно писати на мејл <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> са твојом сугестијом или повратном информацијом.</string>
-	<string name="about_support">Ако желиш да нас подржиш, можеш да купиш апликацију без реклама у подешавањима апликације, или посетиш нашу <a href="https://patreon.com/oxygenupdater">Patreon страницу</a>.</string>
 	<string name="about_background_story_header">Позадинска прича</string>
 	<string name="about_background_story">Ова апликација је оригинално направљена од стране Arjan Vlek-а као наследник за још једну од његових апликација звану <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a> (која пружа сличну употребу као ова апликација за Cyanogen OS кориснике).\n\nНакон 4 године, у јулу 2019, Arjan је одлучио да препусти оба пројекта и преда њихово власнишство тиму програмера из различитих држава. Они су преузели одговорност да пруже људима одличне услуге &amp; подршку добијања OPPO/OnePlus/realme ажурирања брже.\nМожете пронаћи више информација о обавештењу <a href="https://oxygenupdater.com/article/81/">here</a>.\n\n14. Август 2019. означава прво издање под новим власништвом, које долази са новим опцијама као што су тамни режим и комплетно мењање дизајна.\n\nЗа више информација о тиму погледајте <a href="https://oxygenupdater.com/team/">веб сајт</a>.</string>
 	<string name="about_third_party_app_notice">Ово није званична OPPO/OnePlus/realme апликација.\nOnePlus име, OPPO/OnePlus/realme лого и OxygenOS/ColorOS су власништво OPPO/OnePlus/realme-а.\nAndroid, Google, Google Play и Google Play лого су регистровани заштитни знакови код Google Inc.\nОва апликација користи податке од OPPO/OnePlus/realme-а и његове матичне компаније Oppo да прикаже податке о ажурирањуn.</string>
@@ -204,7 +193,6 @@
 	<string name="notification_version">%1$s је сада доступан за %2$s!</string>
 	<string name="download_and_installation_notifications_group_name">Преузми &amp; Инсталацију</string>
 	<string name="push_notifications_group_name">Обавештења</string>
-	<string name="miscellaneous_notifications_group_name">Разно</string>
 	<string name="download_and_installation_notifications_group_description">Прикажи сва мање битна обавештења о OS Updater апликацији. То садржи обавештења о статусу преузимања и слично.</string>
 	<string name="push_notifications_group_description">Прикажи сва битна обавештења OS Updater апликације. Ово подразумева обавештења о ажурирању система и битне вести.</string>
 	<string name="download_status_notification_channel_name">Статус преузимања</string>
@@ -214,7 +202,6 @@
 	<string name="news_notification_channel_name">Новински чланак</string>
 	<string name="device_notification_channel_name">Нови уређај подржан</string>
 	<string name="general_notification_channel_name">Генерално</string>
-	<string name="url_submitted_notification_channel_name">ОТА УРЛ је послат</string>
 	<string name="download_status_notification_channel_description">Обавештења која приказују тренутни статус преузимања: на чекању, активно, завршено, или неуспело</string>
 	<string name="verification_status_notification_channel_description">Обевештења која приказују тренутно стање провере датотеке: у процесу, завршено, или неуспело.\nMD5 контролне суме за преузете датотеке се проверавају како би се осигурало да датотека није измењена и да је важећа датотека за ажурирање.</string>
 	<string name="installation_status_notification_channel_description">Прими обавештење уколико је ажурирање успешно завршено или не</string>
@@ -222,7 +209,6 @@
 	<string name="news_notification_channel_description">Прими обавештење када избацимо нови чланак</string>
 	<string name="device_notification_channel_description">Прими обавештење када апликација добије подршку за нови уређај</string>
 	<string name="general_notification_channel_description">Генерална обавештења која не спадају у остале категорије</string>
-	<string name="url_submitted_notification_channel_description">Примите обавештење када нашем тиму успешно пошаљете ОТА УРЛ адресе.\nМожете да онемогућите аутоматско слање УРЛ-ова у подешавањима апликације.</string>
 
 	<!-- News strings -->
 	<string name="news">Вести</string>
@@ -239,15 +225,6 @@
 	<string name="news_empty_state_all_read_text">Прочитали сте све вести. Одличан посао! Надамо се да сте уживали читајући наше чланке и научили нешто ново из њих. Додирните банер поново да бисте приказали све вести.</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">Постани сарадник</string>
-	<string name="contribute_title">Помози напредовању OS Updater-а</string>
-	<string name="contribute_explanation">Да бисмо вам дали најновија ажурирања, морамо да ухватимо ОТА ЗИП УРЛ адресе.\n\nКако могу да помогнем?\n\nОкиген Упдатер може аутоматски да пошаље нове ОТА УРЛ адресе нашим администраторима. Ово ће користити малу количину података и можда ће потрошити мало батерије. Мораћете да доделите роот дозволу за апликацију, јер она чита датотеку базе података којој се може приступити само преко роот-а. Бићете обавештени када УРЛ буде успешно послат.</string>
-	<string name="contribute_agree">Допринесите OTA URL-овима (захтева рут)</string>
-	<string name="contribute_save">Сачувај подешавања</string>
-	<string name="contribute_more_info">Више информација</string>
-	<string name="contribute_allow_storage">Дајте дозволе за складиштење и роот да бисте помогли у побољшању апликације</string>
-	<string name="contribute_successful_notification_title">Учествовање успешно</string>
-	<string name="contribute_successful_notification_text">Хвала што сте поделили ОТА УРЛ-ове са нама!</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">О не!</string>
@@ -278,8 +255,6 @@
 	<string name="do_not_show_again_checkbox">Не приказуј поново</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">Твоја куповина је у \"чекање на плаћање\" статусу. Када плаћање буде завршено, добићете све бенефите који вам припадају.</string>
-	<string name="purchase_error_after_payment">Куповина апликације без реклама није успела због интерне грешке. Молимо вас покушајте за неколико минута. Ако сте већ платили, молимо вас контактирајте Google Play подршку.</string>
 
 	<!-- Other strings-->
 	<string name="icon">Иконица</string>

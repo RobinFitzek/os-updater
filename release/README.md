@@ -3,11 +3,14 @@
 Built from branch `vibe/lightweight-auto-pull-f3dea3` (PR #1) with Corretto 17 + Android SDK 37:
 `./gradlew :app:assembleDebug` → BUILD SUCCESSFUL, `:app:test` → 34/34 pass.
 
-- File: `os-updater-7.1.0-lightweight-debug.apk` (~10.2 MB, debug-signed)
-- SHA-256 (latest): `7d6e0be037fdf925971753ff0bd1432f5c1fd1f0d315d6cafa2b418a014249ed`
+- **Release APK (use this one — it talks to the live prod server `oxygenupdater.com`)**:
+  `os-updater-7.1.0-lightweight-release.apk` (4.4 MB, minified, signed with local key `CN=OS Updater,O=RobinFitzek`)
+  - SHA-256: `579307e9a4cb42c93c7c42ed00466d2134f5ab294f2dfed5e3e286b188f077f2`
+  - applicationId `com.arjanvlek.oxygenupdater`, versionName `7.1.0`, V2-signed (verified with apksigner)
+- Older debug APK (`os-updater-7.1.0-lightweight-debug.apk`) points at the dead test server — do NOT use it.
 
-Debug-signed means you must **uninstall the Play Store version first** (different signature),
-then install this APK. Enable "Install unknown apps" for your browser/file manager if prompted.
+Because the signature differs from the Play Store build, **uninstall the Play version first**,
+then install the release APK. Enable "Install unknown apps" for your browser/file manager if prompted.
 
 ## What's inside
 No ads, no billing, no root contribution feature, no analytics/crashlytics telemetry (settings toggle removed; nothing is sent). Background update check across **all**

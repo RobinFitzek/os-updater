@@ -77,7 +77,6 @@
 	<string name="download_verifying_start">הורדת הקובץ תעבור כעת תהליך אימות</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">תמוך בנו</string>
 	<string name="preference_header_device">מכשיר</string>
 	<string name="preference_header_ui">ממשק</string>
 	<string name="preference_header_notifications">התראות</string>
@@ -93,7 +92,6 @@
 	<string name="summary_privacy_policy">צפה בדפדפן</string>
 	<string name="summary_rate_app">השאר דירוג 5 כוכבים</string>
 
-	<string name="label_buy_ad_free">הסר פרסומות</string>
 	<string name="label_theme">עיצוב</string>
 	<string name="label_language">שפה</string>
 	<string name="label_privacy_policy">מדיניות הפרטיות</string>
@@ -112,12 +110,7 @@
 	<string name="theme_additional_note">כל העיצובים תומכים ב-Material 3 וב-You. הערה: אם מצב \"אוטומטי\" מופעל וחיסכון בסוללה מופעל, עיצוב כהה יופעל למשך כל שעות היום.</string>
 
 	<string name="settings">הגדרות</string>
-	<string name="settings_buy_button_buy">קנה (%1$s)</string>
-	<string name="settings_buy_button_bought">נרכש</string>
-	<string name="settings_buy_button_not_possible">לא זמין</string>
-	<string name="settings_buy_ad_free_label">שדרג לגרסה בלי פרסומות</string>
 
-	<string name="settings_contribute_label">שתף אותנו בקבצי השמות של העדכונים</string>
 
 	<string name="settings_device">מכשיר</string>
 	<string name="settings_search_devices">חיפוש מכשירים</string>
@@ -135,9 +128,6 @@
 	<string name="settings_advanced_mode_caption">"ייתכן שיהיה צורך במצב מתקדם רק במצבים שלעיל. אתה לא צריך להפעיל את זה אלא אם כן אתה יודע מה אתה עושה."</string>
 
 	<string name="settings_update_method">שיטת עדכון</string>
-	<string name="settings_upload_logs">שתף נתוני שימוש</string>
-	<string name="settings_ad_privacy">הסכמה למודעות GDPR</string>
-	<string name="settings_ad_privacy_subtitle">"עבור משתמשי EEA/בריטניה"</string>
 	<string name="settings_clear_cache">נקה את המטמון</string>
 
 	<!-- FAQ strings -->
@@ -189,7 +179,6 @@
 	<!-- About screen strings -->
 	<string name="about">אודות</string>
 	<string name="about_description">אפליקציה זו מורידה עדכונים רשמיים היישר מתוך השרתים של OPPO/OnePlus/realme, ואף מאשרת את שלמות קובץ העדכון לפני שהמשתמש יוכל להוריד אותו מהאפליקציה. על ידי כך, האפליקציה מאפשרת לך לדלג על ההמתנה של שחרור העדכונים ולהוריד עדכונים רשמיים במהירות האפשרית. אם אתם נתקלים בבאגים בתוכנה, דווחו זאת ל־OnePlus ישירות: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. אתם מוזמנים להצטרף<a href="https://discord.gg/5TXdhKJ"> לשרת ה־Discord שלנו </a>בשביל שתוכלו לדבר עם משתמשים אחרים על העדכונים האחרונים. בנוסף תרגישו חופשי לשלוח לנו אימייל בכתובת <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> עם הרעיונות/המשוב שלכם.</string>
-	<string name="about_support">אם ברצונך לתמוך בנו, באפשרותך לקנות תוספת המעניקה לך חופש מפרסומות (יישום/ הגדרות), או לתרום לנו בעמוד ה- <a href="https://patreon.com/oxygenupdater">Patreon page</a>.</string>
 	<string name="about_background_story_header">סיפור רקע</string>
 	<string name="about_background_story">אפליקציית OS Updater פותחה במקור על ידי Arjan Vlek ככלי מעקב אחר תוכנה אחרת שלו, המכונה <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a> (היא מספקת פונקציונליות דומה עבור משתמשי Cyanogen OS).\n\nאחרי 4 שנים, ביולי 2019, Arjan החליט לפרוש משני הפרויקטים והעביר את הבעלות על האפליקציה לצוות מפתחים שמגיעים ממדינות שונות. הם לקחו על עצמם את האחריות לספק לקהילה שירות מצויין ומהיר; תמיכה לקבלת עדכונים למכשירי OPPO/OnePlus/realme מהר יותר.\nהינך מוזמן לקרוא את ההכרזה <a href="https://oxygenupdater.com/article/81/">כאן</a>.\n\nב-14 לאוגוסט 2019 נרשמה המהדורה הראשונה תחת הבעלים החדשים, שהגיע עם תכונות חדשות כמו מצב חושך ועיצוב שונה לגמרי.\n\nעבור עוד מידע על הצוות בדוק את <a href="https://oxygenupdater.com/team/">האתר שלנו</a></string>
 	<string name="about_third_party_app_notice">שימו לב, זוהי אינה אפליקציה רשמית מ-OnePlus.\nשם ה-OnePlus, לוגו ה-OnePlus ו-OxygenOS/ColorOS הם רכוש של OPPO/OnePlus/realme.\nAndroid, Google, Google Play, Google Play Logo הם סימנים מסחריים רשומים של Google Inc.\nאפליקציה זאת משתמשת בנתונים מבית OPPO/OnePlus/realme ומחברת האם שלה Oppo כדי להראות מידע על עדכונים.</string>
@@ -205,7 +194,6 @@
 	<string name="notification_version">%1$s עכשיו זמין עבור %2$s!</string>
 	<string name="download_and_installation_notifications_group_name">Download &amp; Installation</string>
 	<string name="push_notifications_group_name">התראות דחיפה</string>
-	<string name="miscellaneous_notifications_group_name">שונות</string>
 	<string name="download_and_installation_notifications_group_description">מציג את כל ההתראות הלא חשובות של אפליקצית OS Updater. מכיל את מחווני המצב המוצגים במהלך ההורדה</string>
 	<string name="push_notifications_group_description">מציג את כל ההתראות החשובות של אפליקציית הOS Updater. אלה כוללים התראות על עדכוני מערכת והודעות חדשות ומתפרצות</string>
 	<string name="download_status_notification_channel_name">מצב הורדה</string>
@@ -215,7 +203,6 @@
 	<string name="news_notification_channel_name">כתבה חדשותית</string>
 	<string name="device_notification_channel_name">מכשיר חדש נתמך</string>
 	<string name="general_notification_channel_name">כללי</string>
-	<string name="url_submitted_notification_channel_name">כתובת ה-URL של OTA נשלחה</string>
 	<string name="download_status_notification_channel_description">התראות המשקפות את המצב הנוכחי של ההורדה: המתנה, פעיל, הושלם או נכשל</string>
 	<string name="verification_status_notification_channel_description">התראות המשקפות את המצב הנוכחי של מטלת אימות קובץ: בתהליך, הושלם או נכשל.\nבדיקות MD5 עבור קבצים שהורדו מאומתות כדי לוודא שהקובץ לא טופל, והוא קובץ עדכון תקף.</string>
 	<string name="installation_status_notification_channel_description">קבל הודעה אם העדכון הותקן בהצלחה או לא</string>
@@ -223,7 +210,6 @@
 	<string name="news_notification_channel_description">קבל הודעה כשאנחנו מפרסמים מאמר חדשות</string>
 	<string name="device_notification_channel_description">קבל התראה כשהאפליקציה מוסיפה תמיכה למכשיר חדש</string>
 	<string name="general_notification_channel_description">התראות כלליות שאינן משתלבות בקטגוריות אחרות</string>
-	<string name="url_submitted_notification_channel_description">קבל התראה כששלחת בהצלחה כתובות OTA לצוות שלנו.\nתוכל לבטל את ההסכמה לשליחת כתובות אתרים אוטומטית בהגדרות האפליקציה.</string>
 
 	<!-- News strings -->
 	<string name="news">חדשות</string>
@@ -239,15 +225,6 @@
 	<string name="news_empty_state_all_read_text">קראת את כל הכתבות. עבודה טובה! אנחנו מקווים שנהנתה לקרוא את הכתבות שלנו, ולמדת משהו חדש מהם. הקש על הבאנר שנית כדי להציג את כל הכתבות.</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">עזור לנו לשפר את האפליקציה</string>
-	<string name="contribute_title">עזור לשפר את OS Updater</string>
-	<string name="contribute_explanation">על מנת לתת לך את העדכונים האחרונים, עלינו ללכוד כתובות URL של OTA ZIP.\n\nאיך אני יכול לעזור?\n\nOS Updater יכול להגיש אוטומטית כתובות OTA חדשות למנהלים שלנו. פעולה זו תשתמש בכמות קטנה של נתונים ועשויה לנצל מעט מהסוללה שלך. תצטרך להעניק הרשאת שורש לאפליקציה, מכיוון שהיא קוראת קובץ מסד נתונים שנגיש רק דרך השורש. תקבל הודעה כאשר כתובת אתר נשלחה בהצלחה.</string>
-	<string name="contribute_agree">תרום כתובות URL של OTA (נדרשת הרשאת root)</string>
-	<string name="contribute_save">שמור הגדרות</string>
-	<string name="contribute_more_info">מידע נוסף</string>
-	<string name="contribute_allow_storage">אנא הענק הרשאות אחסון ובסיס כדי לעזור בשיפור האפליקציה</string>
-	<string name="contribute_successful_notification_title">התרומה התקבלה בהצלחה</string>
-	<string name="contribute_successful_notification_text">תודה על שיתוף כתובות ה-URL של OTA איתנו!</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">אוי לא!</string>
@@ -276,8 +253,6 @@
 	<string name="do_not_show_again_checkbox">אל תראה שוב</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">הרכישה שלך נמצאת במצב \"תשלום בהמתנה\". לאחר השלמת התשלום, תקבל את כל ההטבות שאתה זכאי להן.</string>
-	<string name="purchase_error_after_payment">רכישת הגרסה חסרת המודעות נכשלה, מכיוון שהתרחש שגיאה פנימית. נסה שוב בעוד מספר דקות. אם חוייבת בכרטיס האשראי, אנאא פנה לתמיכה של Google Play לקבלת סיוע.</string>
 
 	<string name="icon">סמל</string>
 	<string name="loading">טוען…</string>

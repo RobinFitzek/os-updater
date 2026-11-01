@@ -79,7 +79,6 @@
 	<string name="download_verifying_start">A letöltést most ellenőrizni fogjuk…</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">Támogass minket</string>
 	<string name="preference_header_device">Eszköz</string>
 	<string name="preference_header_ui">UI</string>
 	<string name="preference_header_notifications">Értesítések</string>
@@ -95,7 +94,6 @@
 	<string name="summary_privacy_policy">Megtekintés interneten</string>
 	<string name="summary_rate_app">Hagyj 5 csillagos értékelést</string>
 
-	<string name="label_buy_ad_free">Hirdetések eltávolítása</string>
 	<string name="label_theme">Téma</string>
 	<string name="label_language">Nyelv</string>
 	<string name="label_privacy_policy">Adatvédelmi irányelvek</string>
@@ -113,12 +111,7 @@
 	<string name="theme_additional_note">Minden téma támogatja a Material 3/You stílust. Megjegyzés: Ha az \"Automatikus\" téma aktív, és az akkumulátor kímélő engedélyezve van, akkor a sötét téma napszaktól függetlenül automatikusan engedélyezve lesz az akkumulátor megtakarításának érdekében.</string>
 
 	<string name="settings">Beállítások</string>
-	<string name="settings_buy_button_buy">(%1$s) megvásárlása</string>
-	<string name="settings_buy_button_bought">Megvásárolt</string>
-	<string name="settings_buy_button_not_possible">Nem érhető el</string>
-	<string name="settings_buy_ad_free_label">Frissítés hirdetés-mentesre</string>
 
-	<string name="settings_contribute_label">Segíts az alkalmazás fejlesztésében</string>
 
 	<string name="settings_device">Eszköz</string>
 	<string name="settings_search_devices">Eszközök keresése</string>
@@ -137,9 +130,6 @@ Ez hasznos lehet, ha szeretné:"</string>
 	<string name="settings_advanced_mode_caption">"A speciális módra csak a fenti helyzetekben lehet szükség. Nem szabad engedélyeznie, hacsak nem tudja, mit csinál."</string>
 
 	<string name="settings_update_method">Frissítési módszer</string>
-	<string name="settings_upload_logs">Használati adatok és a naplók megosztása</string>
-	<string name="settings_ad_privacy">GDPR hirdetési hozzájárulás</string>
-	<string name="settings_ad_privacy_subtitle">"EGT/UK felhasználói számára"</string>
 	<string name="settings_clear_cache">Cache törlése</string>
 
 	<!-- FAQ strings -->
@@ -191,7 +181,6 @@ Ez hasznos lehet, ha szeretné:"</string>
 	<!-- About screen strings -->
 	<string name="about">Az alkalmazásról</string>
 	<string name="about_description">Ez az alkalmazás közvetlenül a OPPO/OnePlus/realme szerverekről tölti le a hivatalos frissítéseket, és még a telepítés engedélyezése előtt ellenőrzi a letöltött ZIP integritását. Ezzel az alkalmazás lehetővé teszi, hogy kihagyd a frissítési sorrendet, és minél előbb telepítsd a hivatalos frissítéseket. Ha hibákat tapasztalsz az operációs rendszerben, jelentsd őket közvetlenül a OPPO/OnePlus/realme-nak: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. Csatlakozhatsz a <a href="https://discord.gg/5TXdhKJ">Discord szerverünkre</a> is, hogy más felhasználokkal beszélj a legújabb frissítésekről. Egyéb bátran írj emailt a <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> címre ha javaslatod/észrevételed van.</string>
-	<string name="about_support">Ha szeretnél minket támogatni, megveheted a reklám mentes verziót (a beállításokban), vagy megnézheted a <a href="https://patreon.com/oxygenupdater">Patreon oldalunkat</a>.</string>
 	<string name="about_background_story_header">Háttértörténet</string>
 	<string name="about_background_story">Ezt az alkalmazást eredetileg Arjan Vlek fejlesztette ki egy másik alkalmazásának, a <a href="https://cyanogenupdatetracker.com/">Cyanogen Frissítés Követő</a> folytatásaként (hasonló funkciókat kínál a Cyanogen OS rendszer felhasználói számára).\n\n4 év elteltével, 2019 júliusában, Arjan úgy döntött, hogy kilép mindkét projektből, és az alkalmazás tulajdonjogát átruházta a különböző országokból származó fejlesztői csapatra. Ők vállalták a felelősséget a kitűnő szoláltatás nyújtásáért a közösség számára &amp; támogatás a OPPO/OnePlus/realme frissítéseinek gyorsabb eléréséhez.\nTovábbi információk a bejelentésről: <a href="https://oxygenupdater.com/article/81/">itt</a>.\n\n2019. augusztus 14-én jelent meg az első kiadás új tulajdonjog alatt, amely olyan új funkciókkal rendelkezett, mint a sötét mód és az alkalmazás teljes újratervezése.\n\nTovábbi információ a csapatról a <a href="https://oxygenupdater.com/team/">weboldalon</a>.</string>
 	<string name="about_third_party_app_notice">Felhívjuk a figyelmedet, hogy ez nem egy hivatalos OPPO/OnePlus/realme alkalmazás.\nA OPPO/OnePlus/realme név, a OPPO/OnePlus/realme embléma és az OxygenOS/ColorOS a OPPO/OnePlus/realme tulajdonát képezik.\nAz Android, a Google, a Google Play és a Google Play logó a Google Inc. bejegyzett védjegye.\nEz az alkalmazás a OPPO/OnePlus/realme és az anyavállalata, az Oppo adatait használja a frissítési információk megjelenítéséhez.</string>
@@ -207,7 +196,6 @@ Ez hasznos lehet, ha szeretné:"</string>
 	<string name="notification_version">%1$s már elérhető a %2$s számára!</string>
 	<string name="download_and_installation_notifications_group_name">Letöltés &amp; Telepítés</string>
 	<string name="push_notifications_group_name">Push értesítések</string>
-	<string name="miscellaneous_notifications_group_name">Egyéb</string>
 	<string name="download_and_installation_notifications_group_description">Megjeleníti az OS Updater alkalmazás összes nem fontos értesítését. A letöltés során megjelenített állapotjelzőket tartalmazza.</string>
 	<string name="push_notifications_group_description">Megjeleníti az OS Updater alkalmazás összes fontos értesítését. Ide tartoznak a rendszerfrissítési értesítések és a friss hírekről szóló értesítések.</string>
 	<string name="download_status_notification_channel_name">Letöltés állapota</string>
@@ -217,7 +205,6 @@ Ez hasznos lehet, ha szeretné:"</string>
 	<string name="news_notification_channel_name">Hírcikk</string>
 	<string name="device_notification_channel_name">Új eszköz támogatott</string>
 	<string name="general_notification_channel_name">Általános</string>
-	<string name="url_submitted_notification_channel_name">Beküldött OTA URL</string>
 	<string name="download_status_notification_channel_description">Értesítések, amelyek tükrözik a letöltés pillanatnyi állapotát: függőben lévő, aktív, befejezett vagy sikertelen</string>
 	<string name="verification_status_notification_channel_description">Értesítések, amelyek tükrözik a fájlellenőrzési feladat aktuális állapotát: folyamatban lévő, befejezett vagy sikertelen.\nA letöltött fájlok MD5 ellenőrző összegei ellenőrizve vannak, hogy megbizonyosodjon arról, hogy a fájlt nem hamisították meg, és hogy ez egy érvényes frissítési fájl.</string>
 	<string name="installation_status_notification_channel_description">Értesítést kapsz, hogy egy frissítést sikeresen telepítetve lett-e, vagy sem</string>
@@ -225,7 +212,6 @@ Ez hasznos lehet, ha szeretné:"</string>
 	<string name="news_notification_channel_description">Értesítést kapsz, ha hírcikket teszünk közzé</string>
 	<string name="device_notification_channel_description">Értesítést kapsz, ha az alkalmazás támogat egy új eszközt</string>
 	<string name="general_notification_channel_description">Általános értesítések, amelyek nem illenek más kategóriákba</string>
-	<string name="url_submitted_notification_channel_description">Értesítést kap, ha sikeresen elküldte OTA URL-jét a csapatunknak.\nAz alkalmazás beállításaiban lemondhat az URL-ek automatikus elküldéséről.</string>
 
 	<!-- News strings -->
 	<string name="news">Hírek</string>
@@ -241,15 +227,6 @@ Ez hasznos lehet, ha szeretné:"</string>
 	<string name="news_empty_state_all_read_text">Elolvastad az összes cikket. Szép munka! Reméljük, hogy élvezted a cikkek elolvasását, és valami újat tanultál belőlük. Az összes hír megjelenítéséhez érintsd meg ismét a szalagot.</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">Közreműködés</string>
-	<string name="contribute_title">Segíts az OS Updater javításában</string>
-	<string name="contribute_explanation">Ahhoz, hogy a legfrissebb frissítésekkel szolgálhassunk, az OTA ZIP URL-eket kell rögzítenünk.\n\nHogyan segíthetek?\n\nAz OS Updater automatikusan elküldheti az új OTA URL-eket az adminisztrátorainknak. Ez kis mennyiségű adatot használ, és egy kicsit igénybe veheti az akkumulátorát. Az alkalmazásnak root jogosultságot kell adnia, mivel egy olyan adatbázisfájlt olvas be, amely csak a root rendszeren keresztül érhető el. Értesítést kap, ha egy URL-t sikeresen elküldött.</string>
-	<string name="contribute_agree">OTA URL-ek hozzáadása (root jogosultság szükséges)</string>
-	<string name="contribute_save">Beállítások mentése</string>
-	<string name="contribute_more_info">Bővebb információ</string>
-	<string name="contribute_allow_storage">Kérjük, adjon tárhely- és root-jogosultságokat az alkalmazás fejlesztéséhez</string>
-	<string name="contribute_successful_notification_title">Közreműködés sikeres</string>
-	<string name="contribute_successful_notification_text">Köszönjük, hogy megosztotta velünk az OTA URL-eket!</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">Jajj ne!</string>
@@ -279,8 +256,6 @@ Ez hasznos lehet, ha szeretné:"</string>
 	<string name="do_not_show_again_checkbox">Ne mutasd meg újra</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">A vásárlás \"fizetés függőben\" állapotban van. A fizetés befejezése után minden olyan juttatást megkapsz, amelyre jogosult vagy.</string>
-	<string name="purchase_error_after_payment">A hirdetésmentes verzió megvásárlása sikertelen, mert belső hiba történt. Kérjük, próbáld újra néhány perc múlva. Ha már fizettél, vedd fel a kapcsolatot a Google Play ügyfélszolgálatával.</string>
 
 	<!-- Other strings-->
 	<string name="icon">Ikon</string>

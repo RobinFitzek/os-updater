@@ -78,7 +78,6 @@
 	<string name="download_verifying_start">Ваше завантаження перевіряється…</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">Підтримати нас</string>
 	<string name="preference_header_device">Пристрій</string>
 	<string name="preference_header_ui">Інтерфейс</string>
 	<string name="preference_header_notifications">Сповіщення</string>
@@ -94,7 +93,6 @@
 	<string name="summary_privacy_policy">Переглянути онлайн</string>
 	<string name="summary_rate_app">Зилишіть відгук з 5-ма зірочками</string>
 
-	<string name="label_buy_ad_free">Видалити рекламу</string>
 	<string name="label_theme">Тема</string>
 	<string name="label_language">Мова</string>
 	<string name="label_privacy_policy">Політика приватності</string>
@@ -112,12 +110,7 @@
 	<string name="theme_additional_note">Усі теми підтримують Material 3/You. Зверніть увагу: якщо вибрано \"Автоматично\", і увімкнено режим енергозбереження, тоді буде автоматично використовуватися темна тема, незалежно від часу доби, щоб зекономити заряд батареї.</string>
 
 	<string name="settings">Налаштування</string>
-	<string name="settings_buy_button_buy">Купити (%1$s)</string>
-	<string name="settings_buy_button_bought">Куплено</string>
-	<string name="settings_buy_button_not_possible">Недоступно</string>
-	<string name="settings_buy_ad_free_label">Видалити рекламу із застосунку</string>
 
-	<string name="settings_contribute_label">Допомогти покращити застосунок</string>
 
 	<string name="settings_device">Вибрати пристрій</string>
 	<string name="settings_search_devices">Пошукові пристрої</string>
@@ -136,9 +129,6 @@
 	<string name="settings_advanced_mode_caption">"Розширений режим може знадобитися лише у вищезазначених ситуаціях. Не вмикайте його, якщо не знаєте, що робите."</string>
 
 	<string name="settings_update_method">Спосіб оновлення</string>
-	<string name="settings_upload_logs">Ділитися даними про використання та журналом помилок</string>
-	<string name="settings_ad_privacy">Згода на рекламу GDPR</string>
-	<string name="settings_ad_privacy_subtitle">"Для користувачів з ЄЕЗ/Великобританії"</string>
 	<string name="settings_clear_cache">Очистити кеш</string>
 
 	<!-- FAQ strings -->
@@ -191,7 +181,6 @@
 	<!-- About screen strings -->
 	<string name="about">Про</string>
 	<string name="about_description">Цей застосунок завантажує офіційні оновлення напряму із серверів OPPO/OnePlus/realme, потім перевіряє цілісність завантаженого ZIP-файлу перед встановленням. Таким чином, застосунок дозволяє встановлювати офіційні оновлення якнайшвидше. Якщо ви помітили помилки в операційній системі, повідомте про це напряму в OPPO/OnePlus/realme: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>. Також ви можете приєднатися до нашого <a href="https://discord.gg/5TXdhKJ">серверу Discord</a>, де зможете поспілкуватися з іншими користувачами про оновлення. Щоб зв\'язатися з нами, напишіть листа на цю пошту: <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> (для побажань/відгуку тощо).</string>
-	<string name="about_support">Якщо бажаєте нас підтримати, ви можете купити видалення реклами (в налаштуваннях застосунку), або внести пожертву на <a href="https://patreon.com/oxygenupdater">сторінці Patreon</a>.</string>
 	<string name="about_background_story_header">Історія застосунку</string>
 	<string name="about_background_story">Спочатку цей застосунок розроблявся Аржаном Влеком, як продовження іншого його застосунку, який називається <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a> (він надає схожий функціонал, але для користувачів Cyanogen OS).\n\nПісля 4 років, в липні 2019 року, Аржан вирішив піти з цих обидвох проєктів і передав право власності на застосунок команді розробників з різних країн. Вони взяли на себе відповідальність за подальшу розробку цього застосунку і надання спільноті відмінної сервісної підтримки.\nВи можете знайти більше інформації <a href="https://oxygenupdater.com/article/81/">в цьому оголошенні</a>.\n\n14 серпня 2019 року відбувся перший випуск під новим керівництвом, який отримав нові функції, такі як темний режим та повний редизайн.\n\nДетальніше про нашу команду можна прочитати <a href="https://oxygenupdater.com/team/">на сайті</a>.</string>
 	<string name="about_third_party_app_notice">Зверніть увагу, це не офіційний застосунок від OPPO/OnePlus/realme.\nІм\'я та бренд OPPO/OnePlus/realme, логотип OPPO/OnePlus/realme і OxygenOS/ColorOS є власністю компанії OPPO/OnePlus/realme.\nAndroid, Google, Google Play та логотип Google Play є зареєстрованими товарними знаками Google Inc.\nЦей застосунок використовує дані OPPO/OnePlus/realme та її материнської компанії Oppo, щоб показувати інформацію про оновлення.</string>
@@ -207,7 +196,6 @@
 	<string name="notification_version">%1$s доступне для %2$s!</string>
 	<string name="download_and_installation_notifications_group_name">Завантаження і встановлення</string>
 	<string name="push_notifications_group_name">Пуш-сповіщення</string>
-	<string name="miscellaneous_notifications_group_name">Вирішення проблем</string>
 	<string name="download_and_installation_notifications_group_description">Показує всі не важливі сповіщення застосунку OS Updater. Включає індикатор завантаження.</string>
 	<string name="push_notifications_group_description">Показує всі важливі сповіщення застосунку OS Updater. Включає сповіщення про оновлення системи і сповіщення про важливі новини.</string>
 	<string name="download_status_notification_channel_name">Стан завантаження</string>
@@ -217,7 +205,6 @@
 	<string name="news_notification_channel_name">Новина</string>
 	<string name="device_notification_channel_name">Підтримується новий пристрій</string>
 	<string name="general_notification_channel_name">Загальні</string>
-	<string name="url_submitted_notification_channel_name">Надіслано URL-адресу OTA</string>
 	<string name="download_status_notification_channel_description">Сповіщення, які показують поточний стан завантаження: очікування, активний, завершено чи помилка</string>
 	<string name="verification_status_notification_channel_description">Сповіщення, які показують поточний стан перевірки файлу: в процесі, завершено чи помилка.\nДля завантаженого файлу обчислюється хешсума MD5 і перевіряється із завантаженою хешсумою, щоб переконатися що файл оновлення коректний і не пошкоджений.</string>
 	<string name="installation_status_notification_channel_description">Отримувати сповіщення коли оновлення успішно встановиться (або сповіщення про помилку)</string>
@@ -225,7 +212,6 @@
 	<string name="news_notification_channel_description">Отримувати сповіщення, коли публікують нову новину</string>
 	<string name="device_notification_channel_description">Отримувати сповіщення, коли до застосунку додають підтримку нового пристрою</string>
 	<string name="general_notification_channel_description">Загальні сповіщення, які не підпадають ні під одну категорію</string>
-	<string name="url_submitted_notification_channel_description">Отримайте сповіщення, коли ви успішно надішлете URL-адреси OTA нашій команді.\nВи можете відмовитися від автоматичного надсилання URL-адрес у налаштуваннях програми.</string>
 
 	<!-- News strings -->
 	<string name="news">Новини</string>
@@ -241,15 +227,6 @@
 	<string name="news_empty_state_all_read_text">Ви прочитали всі новини. Чудово! Сподіваємося, вам сподобалося читати наші новини, і надіємося що ви почерпнули щось нове для себе. Натисніть на банер, щоб знову показати всі новини.</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">Стати помічником</string>
-	<string name="contribute_title">Допомога в покращенні OS Updater</string>
-	<string name="contribute_explanation">Для того, щоб надавати вам останні оновлення, нам потрібно перехоплювати URL-адреси OTA ZIP.\n\nЯк я можу допомогти?\n\nOS Updater може автоматично надсилати нові OTA-адреси нашим адміністраторам. Для цього буде використано невелику кількість даних і може витрачатися трохи заряду вашого акумулятора. Вам потрібно надати програмі привілеї root, тому що вона читає файл бази даних, доступ до якого є лише у привілейованих користувачів. Ви отримаєте сповіщення, коли URL буде успішно надіслано.</string>
-	<string name="contribute_agree">Додайте URL-адреси OTA (потрібні права суперкористувача)</string>
-	<string name="contribute_save">Зберегти налаштування</string>
-	<string name="contribute_more_info">Детальніше</string>
-	<string name="contribute_allow_storage">Будь ласка, надайте права доступу до сховища та root, щоб допомогти покращити додаток</string>
-	<string name="contribute_successful_notification_title">Ви дуже допомогли!</string>
-	<string name="contribute_successful_notification_text">Дякуємо, що поділилися з нами URL-адресами OTA!</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">От халепа!</string>
@@ -279,8 +256,6 @@
 	<string name="do_not_show_again_checkbox">"Більше не з'являйся"</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">Ваша покупка знаходиться в статусі \"очікування платежу\". Після надходження платежу, вам будуть доступні всі переваги платної версії.</string>
-	<string name="purchase_error_after_payment">Не вдалося купити видалення реклами, тому що виникла внутрішня помилка. Будь ласка, спробуйте знову через декілька хвилин. Якщо ви вже купляли, будь ласка, зверніться до підтримки Google Play за допомогою.</string>
 
 	<!-- Other strings-->
 	<string name="icon">Значок</string>

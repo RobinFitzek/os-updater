@@ -117,6 +117,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001657004975:android:8b70efa466c6871b",
+        "android_client_info": {
+          "package_name": "com.arjanvlek.oxygenupdater.instrumentation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001657004975-qd0qq2ptji3h0h8mfutlnu7akrgenhb2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arjanvlek.oxygenupdater.debug",
+            "certificate_hash": "f955475f97259517a820f0caafb6adbf9a612bf3"
+          }
+        },
+        {
+          "client_id": "1001657004975-pknrr0lh6ujura1445gure3co4nl7lg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXJ8hFaIflJkIevO-JhQQUCse0k1Yrj7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001657004975-pknrr0lh6ujura1445gure3co4nl7lg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

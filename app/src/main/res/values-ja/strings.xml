@@ -78,7 +78,6 @@
 	<string name="download_verifying_start">ダウンロードファイルを確認します…</string>
 
 	<!-- Settings strings-->
-	<string name="preference_header_support">支援する</string>
 	<string name="preference_header_device">デバイス</string>
 	<string name="preference_header_ui">UI</string>
 	<string name="preference_header_notifications">通知</string>
@@ -94,7 +93,6 @@
 	<string name="summary_privacy_policy">オンラインで表示</string>
 	<string name="summary_rate_app">レビューに 5 つ星を残す</string>
 
-	<string name="label_buy_ad_free">広告の除去</string>
 	<string name="label_theme">テーマ</string>
 	<string name="label_language">言語</string>
 	<string name="label_privacy_policy">プライバシーポリシー</string>
@@ -112,12 +110,7 @@
 	<string name="theme_additional_note">すべてのテーマはMaterial 3およびYouに対応しています。注意： \'自動\' テーマを選択し、バッテリセーバーが有効な場合、ダークテーマはバッテリーを節約するために時刻に関係なく自動的に使用されます。</string>
 
 	<string name="settings">設定</string>
-	<string name="settings_buy_button_buy">購入 (%1$s)</string>
-	<string name="settings_buy_button_bought">購入済</string>
-	<string name="settings_buy_button_not_possible">無効</string>
-	<string name="settings_buy_ad_free_label">広告消去のためアップグレード</string>
 
-	<string name="settings_contribute_label">アプリの改善にご協力ください</string>
 
 	<string name="settings_device">デバイス</string>
 	<string name="settings_search_devices">検索デバイス</string>
@@ -136,9 +129,6 @@
 	<string name="settings_advanced_mode_caption">"アドバンスモードが必要になるのは、上記のような場合のみです。自分が何をしているのか分かっていない限り、有効にすべきではありません。"</string>
 
 	<string name="settings_update_method">アップデート方法</string>
-	<string name="settings_upload_logs">利用データとログを共有</string>
-	<string name="settings_ad_privacy">GDPR広告の同意</string>
-	<string name="settings_ad_privacy_subtitle">"EEA/UKのユーザー"</string>
 	<string name="settings_clear_cache">キャッシュをクリアする</string>
 
 	<!-- FAQ strings -->
@@ -191,7 +181,6 @@
 	<!-- About screen strings -->
 	<string name="about">情報</string>
 	<string name="about_description">このアプリは直接 OPPO/OnePlus/realme のサーバーから正式なアップデートをダウンロードし、インストールを許可する前にダウンロードされた ZIP の整合性を確認することができます。そうすることで、このアプリはロールアウトをスキップし、アップデートを即座にインストールすることができます。OS の不具合に遭遇した場合、OnePlus に直接報告してください: <a href="https://forums.oneplus.com/feedback">https://forums.oneplus.com/feedback</a>。私たちの <a href="https://discord.gg/5TXdhKJ">Discord サーバー</a>に参加し、最新のアップデートについて話してみませんか。また、提案やフィードバックは <a href="mailto:support@oxygenupdater.com">support@oxygenupdater.com</a> にお気軽にどうぞ。</string>
-	<string name="about_support">私たちを支援したい場合は、広告の除去を購入もしくは <a href="https://patreon.com/oxygenupdater">Patreon のページ</a>を確認してください。</string>
 	<string name="about_background_story_header">経緯</string>
 	<string name="about_background_story">本アプリは Arjan Vlek が彼の他のアプリ <a href="https://cyanogenupdatetracker.com/">Cyanogen Update Tracker</a>(Cyanogen OS ユーザ向けに同様の機能を提供する) のフォローアップとして開発したものです。\n\n4年後、2019年7月にArjan は双方のプロジェクトから辞任することを決定し、アプリの所有権をさまざまな国からの開発者チームに移しました。彼らは、OnePlusの更新を迅速に取得するための優れたサービスとサポートをコミュニティに提供する責任を負っています。\n\n発表の詳細については、<a href="https://oxygenupdater.com/article/81/">こちら</a>をご覧ください。\n\n2019年8月14日 ダークモードや完全な再設計などの新機能を備えた新しい所有権の下での最初のリリース。\n\nチームの詳細については、<a href="https://oxygenupdater.com/team/">ウェブサイト</a>.</string>
 	<string name="about_third_party_app_notice">注意、これは OPPO/OnePlus/realme 公式のアプリケーションではありません。\nOnePlus、OnePlus ロゴ、および OxygenOS/ColorOS は OPPO/OnePlus/realme の登録商標です。\nAndroid、Google、Google Play、および Google Play ロゴは Google Inc. の登録商標です。\nこのアプリは OPPO/OnePlus/realme およびその親会社 Oppo のデータを使用して更新情報を表示します。</string>
@@ -207,7 +196,6 @@
 	<string name="notification_version">%2$s 向けの %1$s が利用可能です!</string>
 	<string name="download_and_installation_notifications_group_name">ダウンロードとインストール</string>
 	<string name="push_notifications_group_name">通知のプッシュ</string>
-	<string name="miscellaneous_notifications_group_name">その他</string>
 	<string name="download_and_installation_notifications_group_description">OS Updater アプリの重要でない通知をすべて表示します。 ダウンロード中に表示されるステータスインジケータが含まれます。</string>
 	<string name="push_notifications_group_description">OS Updater アプリに重要な通知を表示します。システムアップデート通知やニュース速報を含みます。</string>
 	<string name="download_status_notification_channel_name">ダウンロードの進捗状況</string>
@@ -217,7 +205,6 @@
 	<string name="news_notification_channel_name">ニュース記事</string>
 	<string name="device_notification_channel_name">新しいデバイスのサポート</string>
 	<string name="general_notification_channel_name">一般</string>
-	<string name="url_submitted_notification_channel_name">OTAのURLを送信</string>
 	<string name="download_status_notification_channel_description">待機中、アクティブ、完了または失敗などのダウンロードの状況を反映する通知</string>
 	<string name="verification_status_notification_channel_description">処理中、完了または失敗などのファイル検証の状況を反映する通知。\nダウンロードされたファイルの MD5 チェックサムを検証し、ファイルが改ざんされていないこと、有効なアップデートファイルであることを確認します。</string>
 	<string name="installation_status_notification_channel_description">アップデートがイントールされたかどうかをお知らせします</string>
@@ -225,7 +212,6 @@
 	<string name="news_notification_channel_description">新しいニュース記事が公開されたときお知らせします</string>
 	<string name="device_notification_channel_description">アプリが新しいデバイスをサポートしたときお知らせします</string>
 	<string name="general_notification_channel_description">どのカテゴリにも属さない一般的な通知</string>
-	<string name="url_submitted_notification_channel_description">OTA URLの提出が完了したら、通知を受け取ることができます。\nアプリの設定で、URLの自動送信を停止することができます。</string>
 
 	<!-- News strings -->
 	<string name="news">ニュース</string>
@@ -241,15 +227,6 @@
 	<string name="news_empty_state_all_read_text">すべての記事を読みました。お疲れ様！ 私たちの記事を読み、新しい何かを学んでいただけたら幸いです。 ここをタップしてすべてのニュース記事を再表示します。</string>
 
 	<!-- Contribute strings -->
-	<string name="contribute">貢献者になる</string>
-	<string name="contribute_title">OS Updater の改善に協力する</string>
-	<string name="contribute_explanation">最新のアップデートを提供するために、OTA ZIP URLを取得する必要があります。\n\nどうすればいいのでしょうか？\n\nOS Updaterは、新しいOTA URLを管理者に自動的に送信することができます。これは少量のデータを使用し、あなたのバッテリーを少し使用するかもしれません。このアプリはroot権限でのみアクセス可能なデータベースファイルを読み込むため、root権限を付与する必要があります。URLの送信に成功すると、通知されます。</string>
-	<string name="contribute_agree">OTA URLの追加（root権限が必要）</string>
-	<string name="contribute_save">設定を保存</string>
-	<string name="contribute_more_info">詳細情報</string>
-	<string name="contribute_allow_storage">アプリの改善のため、ストレージ＆ルート権限の付与をお願いします</string>
-	<string name="contribute_successful_notification_title">貢献に成功</string>
-	<string name="contribute_successful_notification_text">OTAのURLを教えていただきありがとうございます！</string>
 
 	<!-- Error strings-->
 	<string name="error_app_outdated">Oh no!</string>
@@ -279,8 +256,6 @@
 	<string name="do_not_show_again_checkbox">二度と見せない</string>
 
 	<!-- Purchasing strings -->
-	<string name="purchase_error_pending_payment">購入は \"支払い保留中\" になっています。支払いが完了すると特典が付与されます。</string>
-	<string name="purchase_error_after_payment">内部エラーが発生したため、広告なしバージョンの購入に失敗しました。 数分後にもう一度お試しください。 既に支払いを済ませている場合は、Google Play サポートにお問い合わせください。</string>
 
 	<!-- Other strings-->
 	<string name="icon">アイコン</string>
