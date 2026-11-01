@@ -281,7 +281,7 @@ private fun UpdateCheckInterval(
 ) {
     var showSheet by rememberState(false)
 
-    val intervals = remember { listOf(15L, 30L, 60L, 120L, 360L, 720L, 1440L) }
+    val intervals = remember { listOf(1L, 2L, 5L, 10L, 15L, 30L, 60L, 120L, 360L, 720L, 1440L) }
     val current = getPrefLong(KeyUpdateCheckIntervalMinutes, DefaultUpdateCheckIntervalMinutes)
         .coerceAtLeast(MinUpdateCheckIntervalMinutes)
     val subtitle = stringResource(R.string.settings_update_check_interval_summary, current)

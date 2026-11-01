@@ -141,7 +141,7 @@ This can be useful if you want to:"</string>
 
 	<string name="settings_update_check_interval">Background update check</string>
 	<string name="settings_update_check_interval_summary">Every %1$d min</string>
-	<string name="settings_update_check_interval_caption">"The app automatically checks for new updates in the background — for every update method of your device, so whichever (full or incremental) rolls out first is detected. Minimum: 15 minutes."</string>
+	<string name="settings_update_check_interval_caption">"The app automatically checks for new updates in the background — for every update method of your device, so whichever (full or incremental) rolls out first is detected. Minimum: 1 minute (may use more battery)."</string>
 
 	<!-- FAQ strings -->
 	<string name="faq">FAQ</string>
