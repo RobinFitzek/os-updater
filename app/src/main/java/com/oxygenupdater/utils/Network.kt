@@ -95,6 +95,13 @@ private fun createOkHttpCache(context: Context) = if (SDK_INT >= VERSION_CODES.O
 private fun httpClient(cache: Cache) = OkHttpClient.Builder().apply {
     cache(cache)
 
+    // Explicit timeouts: a hung connection must fail fast so the UI can show
+    // an error + retry instead of waiting forever
+    connectTimeout(10, TimeUnit.SECONDS)
+    readTimeout(15, TimeUnit.SECONDS)
+    writeTimeout(15, TimeUnit.SECONDS)
+    callTimeout(30, TimeUnit.SECONDS)
+
     // Use a network interceptor to log all requests, even intermediary ones like redirects.
     // Note that this won't be invoked for cached responses as they short-circuit the network.
     if (BuildConfig.DEBUG) addNetworkInterceptor(HttpLoggingInterceptor().setLevel(Level.BASIC))
