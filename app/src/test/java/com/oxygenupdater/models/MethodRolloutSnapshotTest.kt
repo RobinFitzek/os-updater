@@ -1,10 +1,10 @@
 package com.oxygenupdater.models
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNull
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
+import kotlin.test.Test
 
 class MethodRolloutSnapshotTest {
 
@@ -43,9 +43,13 @@ class MethodRolloutSnapshotTest {
 
     @Test
     fun `isNewerThanCurrent compares build dates`() {
-        // SystemVersionProperties.otaVersion is read from the device; on the test
-        // runner it's typically UNKNOWN, so getBuildDate returns 0
-        assertTrue(snap("CPH2649_17.0.0.102(EX01)", 1761800000000).isNewerThanCurrent)
-        assertFalse(snap("CPH2649_16.0.0.100(EX01)", 0).isNewerThanCurrent)
+        val original = MethodRolloutSnapshot.currentBuildDateProvider
+        try {
+            MethodRolloutSnapshot.currentBuildDateProvider = { 1000L }
+            assertTrue(snap("CPH2649_17.0.0.102(EX01)", 1761800000000).isNewerThanCurrent)
+            assertFalse(snap("CPH2649_16.0.0.100(EX01)", 0).isNewerThanCurrent)
+        } finally {
+            MethodRolloutSnapshot.currentBuildDateProvider = original
+        }
     }
 }

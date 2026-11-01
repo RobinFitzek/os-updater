@@ -1,5 +1,6 @@
 package com.oxygenupdater.ui.dialogs
 
+import androidx.compose.runtime.getValue
 import androidx.annotation.StringRes
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.performClick

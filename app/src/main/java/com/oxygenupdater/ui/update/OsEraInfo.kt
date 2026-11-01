@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.oxygenupdater.R
+import com.oxygenupdater.icons.MobileInfo
 import com.oxygenupdater.icons.Symbols
 import com.oxygenupdater.models.OsBrand
 import com.oxygenupdater.models.SystemVersionProperties

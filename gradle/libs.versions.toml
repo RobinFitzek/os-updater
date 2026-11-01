@@ -178,9 +178,6 @@ firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 google-play-app-update = { module = "com.google.android.play:app-update", version.ref = "play-app-update" }
 google-play-services-base = { module = "com.google.android.gms:play-services-base", version.ref = "play-services-base" }
 
-libsu-core = { module = "com.github.topjohnwu.libsu:core", version.ref = "libsu" }
-libsu-nio = { module = "com.github.topjohnwu.libsu:nio", version.ref = "libsu" }
-libsu-service = { module = "com.github.topjohnwu.libsu:service", version.ref = "libsu" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }

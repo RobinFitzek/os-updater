@@ -1,5 +1,6 @@
 package com.oxygenupdater.ui.update
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.Immutable
 
 @Immutable

@@ -3,6 +3,7 @@ package com.oxygenupdater
 import android.content.ClipboardManager
 import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.semantics.SemanticsNode
 import androidx.compose.ui.test.SemanticsNodeInteraction

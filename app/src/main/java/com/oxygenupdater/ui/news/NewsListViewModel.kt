@@ -1,5 +1,6 @@
 package com.oxygenupdater.ui.news
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

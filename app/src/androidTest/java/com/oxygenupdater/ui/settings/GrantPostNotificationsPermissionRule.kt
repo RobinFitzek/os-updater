@@ -1,5 +1,6 @@
 package com.oxygenupdater.ui.settings
 
+import androidx.compose.runtime.getValue
 import android.Manifest.permission.POST_NOTIFICATIONS
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.TIRAMISU

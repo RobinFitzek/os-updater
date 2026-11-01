@@ -16,7 +16,7 @@ import com.oxygenupdater.models.UpdateData
 import com.oxygenupdater.utils.json
 import com.oxygenupdater.repositories.ServerRepository
 import com.oxygenupdater.utils.LocalNotifications
-import com.google.firebase.crashlytics.FirebaseCrashlytics.logWarning
+import android.util.Log
 import com.oxygenupdater.utils.logDebug
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -50,7 +50,7 @@ class UpdateCheckWorker @AssistedInject constructor(
 
         val methods = serverRepository.fetchUpdateMethodsForDevice(deviceId)
         if (methods.isNullOrEmpty()) return@withContext Result.retry().also {
-            logWarning(TAG, "Couldn't fetch update methods for device $deviceId")
+            Log.w(TAG, "Couldn't fetch update methods for device $deviceId")
         }
 
         var newest: UpdateData? = null

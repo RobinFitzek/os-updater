@@ -197,8 +197,6 @@ const val OnboardingScreen_MainColumnTestTag = TAG + "_MainColumn"
 const val OnboardingScreen_SecondaryColumnTestTag = TAG + "_SecondaryColumn"
 
 @VisibleForTesting
-
-@VisibleForTesting
 const val OnboardingScreen_DisclaimerTestTag = TAG + "_Disclaimer"
 
 @SuppressLint("VisibleForTests")

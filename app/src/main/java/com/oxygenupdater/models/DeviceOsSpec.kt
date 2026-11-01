@@ -1,5 +1,6 @@
 package com.oxygenupdater.models
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.Immutable
 
 /**

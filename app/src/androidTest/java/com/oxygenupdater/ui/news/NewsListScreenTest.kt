@@ -1,5 +1,6 @@
 package com.oxygenupdater.ui.news
 
+import androidx.compose.runtime.getValue
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.mutableIntStateOf

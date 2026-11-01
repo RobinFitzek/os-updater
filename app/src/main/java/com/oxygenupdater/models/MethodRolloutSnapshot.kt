@@ -35,10 +35,16 @@ data class MethodRolloutSnapshot(
         }
 
     val isNewerThanCurrent: Boolean
-        get() = buildDate > UpdateData.getBuildDate(SystemVersionProperties.otaVersion)
+        get() = buildDate > currentBuildDateProvider()
 
     companion object {
         @VisibleForTesting
         val Empty = MethodRolloutSnapshot(0, null, null, 0, 0)
+
+        /** Overridable in tests; defaults to the device's current OTA build date */
+        var currentBuildDateProvider: () -> Long = {
+            UpdateData.getBuildDate(SystemVersionProperties.otaVersion)
+        }
     }
+
 }

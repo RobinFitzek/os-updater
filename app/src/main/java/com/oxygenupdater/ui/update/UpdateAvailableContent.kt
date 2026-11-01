@@ -191,9 +191,9 @@ fun UpdateAvailable(
             refreshing = refreshing,
             updateData = updateData,
             getPrefStr = getPrefStr,
+        )
 
         MethodRolloutTable(snapshotsJson = rolloutSnapshotsJson, refreshing = refreshing)
-        )
 
         Spacer(Modifier.weight(1f))
         HorizontalDivider()

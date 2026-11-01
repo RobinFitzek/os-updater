@@ -26,6 +26,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.remember
@@ -62,6 +64,7 @@ import com.oxygenupdater.icons.Logos
 import com.oxygenupdater.icons.Mobile
 import com.oxygenupdater.icons.Notifications
 import com.oxygenupdater.icons.Palette
+import com.oxygenupdater.icons.Schedule
 import com.oxygenupdater.icons.Policy
 import com.oxygenupdater.icons.Star
 import com.oxygenupdater.icons.Symbols
@@ -72,7 +75,7 @@ import com.oxygenupdater.internal.settings.KeyShareAnalyticsAndLogs
 import com.oxygenupdater.internal.settings.KeyUpdateCheckIntervalMinutes
 import com.oxygenupdater.internal.settings.KeyUpdateMethod
 import com.oxygenupdater.models.Device
-import com.oxygenupdater.models.SelectableModel
+import com.oxygenupdater.models.UpdateCheckIntervalOption
 import com.oxygenupdater.models.UpdateMethod
 import com.oxygenupdater.ui.SettingsListConfig
 import com.oxygenupdater.ui.Theme
@@ -275,7 +278,7 @@ private fun UpdateCheckInterval(
         SelectableSheet(
             hide = hide,
             config = SettingsListConfig(
-                list = intervals.map { IntervalOption(it) },
+                list = intervals.map { UpdateCheckIntervalOption(it) },
                 recommendedId = DefaultUpdateCheckIntervalMinutes,
                 selectedId = current,
             ),
@@ -288,13 +291,6 @@ private fun UpdateCheckInterval(
             },
         )
     }
-}
-
-private data class IntervalOption(
-    override val id: Long,
-) : SelectableModel {
-    override val name: String = "$id min"
-    override val subtitle: String? = null
 }
 
 @Composable

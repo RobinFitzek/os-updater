@@ -1,5 +1,6 @@
 package com.oxygenupdater.models
 
+import androidx.compose.runtime.getValue
 import android.os.Build
 import android.os.Build.UNKNOWN
 import android.os.Build.VERSION.SDK_INT

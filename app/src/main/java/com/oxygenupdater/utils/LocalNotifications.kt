@@ -1,5 +1,7 @@
 package com.oxygenupdater.utils
 
+import androidx.compose.runtime.getValue
+import android.app.Notification
 import android.app.Notification.CATEGORY_ERROR
 import android.app.Notification.CATEGORY_PROGRESS
 import android.app.Notification.CATEGORY_STATUS

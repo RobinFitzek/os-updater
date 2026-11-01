@@ -1,5 +1,6 @@
 package com.oxygenupdater.internal.settings
 
+import androidx.compose.runtime.getValue
 /**
  * Added in v5.4.0
  *

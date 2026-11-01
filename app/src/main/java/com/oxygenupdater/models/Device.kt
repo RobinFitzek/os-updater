@@ -1,5 +1,6 @@
 package com.oxygenupdater.models
 
+import androidx.compose.runtime.getValue
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Immutable
 import com.oxygenupdater.BuildConfig

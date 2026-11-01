@@ -1,5 +1,6 @@
 package com.oxygenupdater
 
+import androidx.compose.runtime.getValue
 import android.app.Application
 import android.content.SharedPreferences
 import android.net.ConnectivityManager

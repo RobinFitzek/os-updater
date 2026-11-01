@@ -27,6 +27,8 @@ import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposeRuntimeFlags
 import androidx.compose.runtime.Composer
@@ -430,7 +432,6 @@ class MainActivity : AppCompatActivity() {
                         val serverMessages by viewModel.serverMessages.collectAsStateWithLifecycle()
                         MainMenu(
                             serverMessages = serverMessages,
-                            getPrefBool = viewModel::getPref,
                             showMarkAllRead = currentRoute === MainRoute.NewsList,
                             onMarkAllReadClick = newsListViewModel::markAllRead,
                         )
