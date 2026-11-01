@@ -241,6 +241,8 @@ private fun VersionAndChangelog(
         )
     }
 
+    OsEraInfo()
+
     updateData.Changelog(
         refreshing = refreshing,
         extraTextPadding = true,

@@ -3,7 +3,7 @@ package com.oxygenupdater.utils
 import android.os.Build
 import android.os.Build.VERSION
 import androidx.annotation.VisibleForTesting
-import com.oxygenupdater.models.SystemVersionProperties
+import com.oxygenupdater.models.OsBrand
 import com.oxygenupdater.models.UpdateData
 import java.util.regex.Pattern
 
@@ -51,8 +51,9 @@ object UpdateDataVersionFormatter {
      * - Update without "(#)OS Version": "V. OnePlus5TOxygen_23_1804231200"
      * - Null [versionInfo] / no internal version number in [versionInfo]: "OS Update"
      *
-     * Note: the OS prefix depends on the device brand/manufacturer; i.e. ColorOS for OPPO,
-     * and OxygenOS for OnePlus.
+     * Note: the OS prefix is derived from the version itself when possible; from ColorOS 17
+     * onwards OnePlus devices are unified under ColorOS (there is no OxygenOS 17), so the
+     * brand alone (ColorOS for OPPO, OxygenOS for OnePlus) is no longer reliable.
      *
      * @param versionInfo Update version information to get the formatted version number for.
      *
@@ -62,18 +63,16 @@ object UpdateDataVersionFormatter {
         versionInfo: UpdateData?,
         default: String = "OS Update",
     ) = getFormattedVersionNumber(
-        osPrefix = when (SystemVersionProperties.brandLowercase) {
-            "oppo" -> "ColorOS " // space must be kept
-            "realme" -> "realme UI " // space must be kept
-            "oneplus" -> "OxygenOS " // space must be kept
-            else -> ""
-        },
+        // Dynamic prefix: from ColorOS 17 onwards OnePlus devices are unified under
+        // ColorOS (there is no OxygenOS 17), so prefer the version's own OS name.
+        osPrefix = OsBrand.parse(versionInfo?.versionNumber ?: versionInfo?.description)?.prefix
+            ?: OsBrand.current.prefix,
         versionInfo = versionInfo,
         default = default,
     )
 
     /**
-     * Required only for testing purposes, as [SystemVersionProperties.brandLowercase]
+     * Required only for testing purposes, as [OsBrand.current]
      * cannot be used without mocking.
      */
     @VisibleForTesting
@@ -107,9 +106,7 @@ object UpdateDataVersionFormatter {
         }
     }
 
-    /**
-     * Used for formatting [com.oxygenupdater.models.SystemVersionProperties.osVersion]
-     */
+    /** Used for formatting the device's OS version string */
     fun getFormattedOsVersion(version: String) = if (version.isBlank()) Build.UNKNOWN else {
         val alphaBetaDpMatcher = AlphaBetaDpPattern.matcher(version)
         if (alphaBetaDpMatcher.find()) when (alphaBetaDpMatcher.group(1)?.lowercase() ?: "") {

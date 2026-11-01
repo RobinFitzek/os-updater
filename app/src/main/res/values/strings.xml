@@ -16,6 +16,8 @@
 	<string name="update_information_different_version_changelog_notice_advanced">. If you intend to install this update, you must enable \"Advanced mode\" in settings.</string>
 	<string name="update_information_no_update_data_available">No update information is available</string>
 	<string name="update_information_system_is_up_to_date">Your system is up to date</string>
+	<string name="update_information_os_era">OS &amp; variant</string>
+	<string name="update_information_os_era_note">Android 17+ on OnePlus is ColorOS 17 — there is no OxygenOS 17. OxygenOS 16 is the last OxygenOS version.</string>
 	<string name="update_information_unknown_update_name">Unnamed update for %1$s</string>
 	<string name="update_information_view_update_information">View update information</string>
 

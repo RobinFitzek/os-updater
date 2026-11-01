@@ -103,6 +103,7 @@ fun UpToDate(
 
                 HorizontalDivider()
                 DeviceSoftwareInfo(showHeader = false)
+                OsEraInfo()
                 ConditionalNavBarPadding(navType)
             }
 
@@ -154,6 +155,7 @@ fun UpToDate(
 
         HorizontalDivider(Modifier.padding(top = 2.dp))
         DeviceSoftwareInfo(showHeader = false)
+        OsEraInfo()
         HorizontalDivider(modifierDefaultPaddingTop)
 
         ExpandableChangelog(
