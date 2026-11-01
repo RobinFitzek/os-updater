@@ -62,30 +62,36 @@ class UpdateCheckWorker @AssistedInject constructor(
         }
 
         var newest: UpdateData? = null
-        val snapshots = HashMap<Long, MethodRolloutSnapshot>(methods.size)
+        val snapshots = HashMap<String, MethodRolloutSnapshot>(methods.size * 6)
         val checkedAt = System.currentTimeMillis()
         for (method in methods) {
             val methodId = method.id ?: continue
-            val updateData = serverRepository.fetchUpdateData(deviceId, methodId, persist = false)
-            if (updateData == null) continue
+            // Probe every region (plus the device's own) so the rollout table shows
+            // which variants already have a newer build
+            val regions = MethodRolloutSnapshot.RolloutRegions + ""
+            for (region in regions) {
+                val updateData = serverRepository.fetchUpdateData(deviceId, methodId, persist = false, regionOverride = region)
+                if (updateData == null) continue
 
-            // Record what this method currently reports, even if up-to-date, so the
-            // rollout table can show the latest known build per method
-            val ota = updateData.otaVersionNumber
-            snapshots[methodId] = MethodRolloutSnapshot(
-                methodId = methodId,
-                methodName = method.name,
-                otaVersionNumber = ota,
-                buildDate = UpdateData.getBuildDate(ota),
-                checkedAtEpochMs = checkedAt,
-            )
+                val ota = updateData.otaVersionNumber
+                snapshots["$methodId:$region"] = MethodRolloutSnapshot(
+                    methodId = methodId,
+                    methodName = method.name,
+                    region = region,
+                    otaVersionNumber = ota,
+                    buildDate = UpdateData.getBuildDate(ota),
+                    checkedAtEpochMs = checkedAt,
+                )
 
-            if (updateData.systemIsUpToDate || !updateData.isUpdateInformationAvailable) continue
+                // Only the device's own region decides the "new update" notification
+                if (region.isNotEmpty()) continue
+                if (updateData.systemIsUpToDate || !updateData.isUpdateInformationAvailable) continue
 
-            val candidate = newest
-            if (candidate == null || UpdateData.getBuildDate(updateData.otaVersionNumber) >
-                UpdateData.getBuildDate(candidate.otaVersionNumber)
-            ) newest = updateData
+                val candidate = newest
+                if (candidate == null || UpdateData.getBuildDate(updateData.otaVersionNumber) >
+                    UpdateData.getBuildDate(candidate.otaVersionNumber)
+                ) newest = updateData
+            }
         }
 
         // Persist snapshots (client-side only; no backend endpoint needed)

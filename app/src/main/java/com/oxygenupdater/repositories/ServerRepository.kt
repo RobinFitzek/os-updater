@@ -54,7 +54,13 @@ class ServerRepository @Inject constructor(
      *
      * @return the freshly fetched [UpdateData], or `null` on failure
      */
-    suspend fun fetchUpdateData(deviceId: Long, methodId: Long, persist: Boolean = true): UpdateData? {
+    suspend fun fetchUpdateData(
+        deviceId: Long,
+        methodId: Long,
+        persist: Boolean = true,
+        regionOverride: String = "",
+    ): UpdateData? {
+        val isEu = regionOverride == "EU" || (regionOverride.isEmpty() && SystemVersionProperties.isEuBuild)
         val fetched = performServerRequest {
             serverApi.fetchUpdateData(
                 deviceId = deviceId,
@@ -63,12 +69,13 @@ class ServerRepository @Inject constructor(
                 osVersion = SystemVersionProperties.osVersion,
                 osType = SystemVersionProperties.osType,
                 fingerprint = SystemVersionProperties.fingerprint,
-                oplusPipeline = SystemVersionProperties.pipeline,
+                oplusPipeline = regionOverride.ifEmpty { SystemVersionProperties.pipeline },
                 oplusPipelineCode = SystemVersionProperties.pipelineCode,
                 oplusManifestHash = SystemVersionProperties.manifestHash,
                 deviceMarketName = SystemVersionProperties.deviceMarketName,
-                isEuBuild = SystemVersionProperties.isEuBuild,
+                isEuBuild = isEu,
                 appVersion = BuildConfig.VERSION_NAME,
+                regionOverride = regionOverride,
             )
         } ?: return null
 

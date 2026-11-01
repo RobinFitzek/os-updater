@@ -15,6 +15,8 @@ import kotlinx.serialization.Serializable
 data class MethodRolloutSnapshot(
     val methodId: Long,
     val methodName: String?,
+    /** Region this row was probed with: EU / IN / CN / GLO / NA / "" (device's own) */
+    val region: String = "",
     val otaVersionNumber: String?,
     val buildDate: Long,
     val checkedAtEpochMs: Long,
@@ -22,7 +24,8 @@ data class MethodRolloutSnapshot(
     val variantCode: String?
         get() = otaVersionNumber?.let { Regex("""\(([A-Z0-9]+)\)\s*$""").find(it)?.groupValues?.get(1) }
 
-    val region: String?
+    /** Region derived from the variant code in [otaVersionNumber] */
+    val regionFromVariant: String?
         get() = variantCode?.let { code ->
             when {
                 code.startsWith("EX") -> "EU"
@@ -39,7 +42,10 @@ data class MethodRolloutSnapshot(
 
     companion object {
         @VisibleForTesting
-        val Empty = MethodRolloutSnapshot(0, null, null, 0, 0)
+        val Empty = MethodRolloutSnapshot(0, null, "", null, 0, 0)
+
+        /** Regions probed for the rollout table, in display order */
+        val RolloutRegions = listOf("EU", "IN", "CN", "GLO", "NA")
 
         /** Overridable in tests; defaults to the device's current OTA build date */
         var currentBuildDateProvider: () -> Long = {

@@ -580,6 +580,7 @@ class MainActivity : AppCompatActivity() {
             onRefresh = {
                 viewModel.fetchServerStatus()
                 updateViewModel.refresh()
+                viewModel.refreshRolloutSnapshots()
             },
             _downloadStatus = downloadStatus,
             failureType = failureType,

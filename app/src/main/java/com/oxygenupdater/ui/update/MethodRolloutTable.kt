@@ -40,10 +40,11 @@ fun MethodRolloutTable(
 ) {
     val snapshots = remember(snapshotsJson) {
         if (snapshotsJson.isEmpty()) emptyList() else try {
-            json.decodeFromString<Map<Long, MethodRolloutSnapshot>>(snapshotsJson)
+            json.decodeFromString<Map<String, MethodRolloutSnapshot>>(snapshotsJson)
                 .values.sortedWith(
                     compareByDescending<MethodRolloutSnapshot> { it.buildDate }
                         .thenBy { it.methodName ?: "" }
+                        .thenBy { it.region }
                 )
         } catch (_: Exception) {
             emptyList()
@@ -80,8 +81,8 @@ fun MethodRolloutTable(
         // Header row
         RolloutRow(
             method = stringResource(R.string.update_information_rollout_col_method),
+            region = stringResource(R.string.update_information_rollout_col_region),
             version = stringResource(R.string.update_information_rollout_col_build),
-            variant = stringResource(R.string.update_information_rollout_col_variant),
             date = stringResource(R.string.update_information_rollout_col_date),
             isHeader = true,
         )
@@ -89,8 +90,8 @@ fun MethodRolloutTable(
             if (index > 0) HorizontalDivider()
             RolloutRow(
                 method = snap.methodName ?: "#${snap.methodId}",
+                region = snap.region.ifBlank { "—" },
                 version = snap.otaVersionNumber ?: "—",
-                variant = snap.variantCode?.let { code -> snap.region?.let { "$it ($code)" } ?: code } ?: "—",
                 date = if (snap.buildDate > 0) dateFormat.format(Date(snap.buildDate)) else "—",
                 isNewer = snap.buildDate > currentBuildDate,
                 isHeader = false,
@@ -102,8 +103,8 @@ fun MethodRolloutTable(
 @Composable
 private fun RolloutRow(
     method: String,
+    region: String,
     version: String,
-    variant: String,
     date: String,
     isNewer: Boolean = false,
     isHeader: Boolean,
@@ -126,20 +127,20 @@ private fun RolloutRow(
             modifier = Modifier.weight(1.2f),
         )
         Text(
+            text = region,
+            style = style,
+            color = color,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.weight(0.7f),
+        )
+        Text(
             text = version,
             style = style,
             color = if (isNewer && !isHeader) MaterialTheme.colorScheme.primary else color,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(2f),
-        )
-        Text(
-            text = variant,
-            style = style,
-            color = color,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.weight(1f),
         )
         Text(
             text = date,

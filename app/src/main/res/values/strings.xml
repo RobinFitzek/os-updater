@@ -19,11 +19,11 @@
 	<string name="update_information_os_era">OS &amp; variant</string>
 	<string name="update_information_os_era_note">Android 17+ on OnePlus is ColorOS 17 — there is no OxygenOS 17. OxygenOS 16 is the last OxygenOS version.</string>
 	<string name="update_information_rollout_table_header">Rollout per update method</string>
-	<string name="update_information_rollout_table_caption">Latest build seen by the background check for each method of your device. Highlighted builds are newer than your current one.</string>
+	<string name="update_information_rollout_table_caption">Latest build seen for each update method × region of your device (probed on every check, manual or background). Highlighted builds are newer than your current one.</string>
 	<string name="update_information_rollout_table_empty">No data yet — the background check fills this in automatically.</string>
 	<string name="update_information_rollout_col_method">Method</string>
 	<string name="update_information_rollout_col_build">Build</string>
-	<string name="update_information_rollout_col_variant">Variant</string>
+	<string name="update_information_rollout_col_region">Region</string>
 	<string name="update_information_rollout_col_date">Build date</string>
 	<string name="update_information_unknown_update_name">Unnamed update for %1$s</string>
 	<string name="update_information_view_update_information">View update information</string>

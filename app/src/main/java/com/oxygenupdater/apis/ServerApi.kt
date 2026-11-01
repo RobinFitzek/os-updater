@@ -52,6 +52,8 @@ interface ServerApi {
         @Query("deviceMarketName") deviceMarketName: String,
         @Query("isEuBuild") isEuBuild: Boolean,
         @Query("appVersion") appVersion: String,
+        /** Region override for rollout probing: EU / IN / CN / GLO / NA. Blank = device's own region */
+        @Query("regionOverride") regionOverride: String = "",
     ): Response<UpdateData>
 
     @GET("mostRecentUpdateData/{deviceId}/{updateMethodId}")
