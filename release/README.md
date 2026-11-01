@@ -4,7 +4,7 @@ Built from branch `vibe/lightweight-auto-pull-f3dea3` (PR #1) with Corretto 17 +
 `./gradlew :app:assembleDebug` → BUILD SUCCESSFUL, `:app:test` → 34/34 pass.
 
 - File: `os-updater-7.1.0-lightweight-debug.apk` (~10.2 MB, debug-signed)
-- SHA-256 (latest, no telemetry): `bd003674367c78000ead723b81aa24a097a49bba7222c603e3a35ea947d01130`
+- SHA-256 (latest): `7d6e0be037fdf925971753ff0bd1432f5c1fd1f0d315d6cafa2b418a014249ed`
 
 Debug-signed means you must **uninstall the Play Store version first** (different signature),
 then install this APK. Enable "Install unknown apps" for your browser/file manager if prompted.
