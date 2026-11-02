@@ -38,7 +38,8 @@ import java.util.Date
  * required — snapshots are persisted locally as JSON after every check.
  *
  * One card per method; inside, one row per region (device's own first) with the build,
- * its date, and whether it's newer than / the same as the build installed on this device.
+ * its date, when this app first saw it there, and whether it's newer than / the same as
+ * the build installed on this device.
  */
 @Composable
 fun MethodRolloutTable(
@@ -78,6 +79,13 @@ fun MethodRolloutTable(
             style = MaterialTheme.typography.bodySmall,
         )
 
+        if (methods.isNotEmpty()) Text(
+            text = stringResource(R.string.update_information_rollout_first_seen_caption),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.padding(top = 4.dp),
+        )
+
         if (refreshing) LinearProgressIndicator(
             modifier = Modifier
                 .fillMaxWidth()
@@ -86,8 +94,9 @@ fun MethodRolloutTable(
     }
 
     val dateFormat = remember { DateFormat.getDateInstance(DateFormat.MEDIUM) }
+    val firstSeenFormat = remember { DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT) }
     methods.forEach { method ->
-        MethodCard(method = method, currentOta = currentOta, dateFormat = dateFormat)
+        MethodCard(method = method, currentOta = currentOta, dateFormat = dateFormat, firstSeenFormat = firstSeenFormat)
     }
 }
 
@@ -96,6 +105,7 @@ private fun MethodCard(
     method: MethodRollout,
     currentOta: String,
     dateFormat: DateFormat,
+    firstSeenFormat: DateFormat,
 ) = Surface(
     color = MaterialTheme.colorScheme.surfaceContainerLow,
     shape = MaterialTheme.shapes.medium,
@@ -116,7 +126,7 @@ private fun MethodCard(
                 color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
                 modifier = Modifier.padding(horizontal = 16.dp),
             )
-            RegionRow(snapshot, snapshot.compareToCurrent(currentOta), dateFormat)
+            RegionRow(snapshot, snapshot.compareToCurrent(currentOta), dateFormat, firstSeenFormat)
         }
     }
 }
@@ -126,6 +136,7 @@ private fun RegionRow(
     snapshot: MethodRolloutSnapshot,
     comparison: Comparison,
     dateFormat: DateFormat,
+    firstSeenFormat: DateFormat,
 ) = Row(
     horizontalArrangement = Arrangement.spacedBy(12.dp),
     verticalAlignment = Alignment.CenterVertically,
@@ -158,13 +169,19 @@ private fun RegionRow(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
-        snapshot.buildDateMillis?.let {
-            Text(
-                text = dateFormat.format(Date(it)),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
+        val details = listOfNotNull(
+            snapshot.buildDateMillis?.let {
+                stringResource(R.string.update_information_rollout_build_date, dateFormat.format(Date(it)))
+            },
+            snapshot.firstSeenAtEpochMs.takeIf { it > 0 }?.let {
+                stringResource(R.string.update_information_rollout_first_seen, firstSeenFormat.format(Date(it)))
+            },
+        )
+        if (details.isNotEmpty()) Text(
+            text = details.joinToString(" · "),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
     }
 
     when (comparison) {

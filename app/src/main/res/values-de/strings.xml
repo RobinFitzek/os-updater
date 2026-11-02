@@ -26,6 +26,9 @@
 		<item quantity="other">%1$d von %2$d Region/Methode-Kombinationen haben schon einen neueren Build.</item>
 	</plurals>
 	<string name="update_information_rollout_last_checked">Zuletzt geprüft: %1$s</string>
+	<string name="update_information_rollout_build_date">Build vom %1$s</string>
+	<string name="update_information_rollout_first_seen">zuerst gesehen %1$s</string>
+	<string name="update_information_rollout_first_seen_caption">„Zuerst gesehen“ ist der Zeitpunkt, an dem die App einen Build in der Region zum ersten Mal entdeckt hat. Builds, die schon beim ersten Check da waren, haben kein solches Datum.</string>
 	<string name="update_information_rollout_own_region">Dein Gerät</string>
 	<string name="update_information_rollout_badge_new">NEU</string>
 	<string name="update_information_rollout_badge_installed">Installiert</string>

@@ -131,8 +131,8 @@ android {
         minSdk = 26
         targetSdk = 37
 
-        versionCode = 136
-        versionName = "7.1.1"
+        versionCode = 137
+        versionName = "7.1.2"
 
         val languages = fileTree("src/main/res") {
             include("values-*/strings.xml")

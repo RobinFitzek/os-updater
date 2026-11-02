@@ -14,6 +14,7 @@ import com.oxygenupdater.internal.NotSetL
 import com.oxygenupdater.internal.settings.KeyDevice
 import com.oxygenupdater.internal.settings.KeyDeviceId
 import com.oxygenupdater.internal.settings.KeyMethodRolloutSnapshots
+import com.oxygenupdater.internal.settings.KeyRolloutFirstSeen
 import com.oxygenupdater.internal.settings.KeyNotificationDelayInSeconds
 import com.oxygenupdater.internal.settings.KeyUpdateMethodId
 import com.oxygenupdater.models.Article
@@ -21,6 +22,7 @@ import com.oxygenupdater.models.DeviceRequestFilter
 import com.oxygenupdater.models.DownloadErrorBody
 import com.oxygenupdater.models.FreshUpdateDataDownloadUrlBody
 import com.oxygenupdater.models.MethodRolloutSnapshot
+import com.oxygenupdater.models.RolloutFirstSeen
 import com.oxygenupdater.models.ServerStatus
 import com.oxygenupdater.models.SystemVersionProperties
 import com.oxygenupdater.models.UpdateData
@@ -31,7 +33,9 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.sync.withPermit
 import retrofit2.Response
 import javax.inject.Inject
@@ -189,10 +193,12 @@ class ServerRepository @Inject constructor(
         serverApi.fetchUpdateMethodsForDevice(deviceId)
     }
 
+    private val rolloutPersistMutex = Mutex()
+
     /**
      * Probes every update method of [deviceId] in every [MethodRolloutSnapshot.RolloutRegions]
      * (plus the device's own region, `""`), a few requests at a time, and persists the resulting
-     * snapshots for the rollout table.
+     * snapshots for the rollout table, along with when each build was first seen per method × region.
      *
      * @return each probe's snapshot paired with the fetched [UpdateData], or `null` if the
      *   update methods couldn't be fetched
@@ -224,10 +230,28 @@ class ServerRepository @Inject constructor(
             }.awaitAll().filterNotNull()
         }
 
-        if (results.isNotEmpty()) sharedPreferences[KeyMethodRolloutSnapshots] = json.encodeToString(
-            results.associate { (snapshot, _) -> "${snapshot.methodId}:${snapshot.region}" to snapshot }
-        )
-        return results
+        if (results.isEmpty()) return results
+
+        // Worker and UI may probe at the same time; keep read-modify-write of the history atomic
+        return rolloutPersistMutex.withLock {
+            val history = try {
+                json.decodeFromString<Map<String, RolloutFirstSeen>>(sharedPreferences[KeyRolloutFirstSeen, "{}"])
+            } catch (_: Exception) {
+                emptyMap()
+            }.toMutableMap()
+
+            val withFirstSeen = results.map { (snapshot, data) ->
+                val entry = RolloutFirstSeen.next(history[snapshot.key], snapshot.otaVersionNumber, checkedAt)
+                history[snapshot.key] = entry
+                snapshot.copy(firstSeenAtEpochMs = entry.atEpochMs) to data
+            }
+
+            sharedPreferences[KeyRolloutFirstSeen] = json.encodeToString(history)
+            sharedPreferences[KeyMethodRolloutSnapshots] = json.encodeToString(
+                withFirstSeen.associate { (snapshot, _) -> snapshot.key to snapshot }
+            )
+            withFirstSeen
+        }
     }
 
     suspend fun logDownloadError(

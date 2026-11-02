@@ -92,3 +92,30 @@ class MethodRolloutSnapshotTest {
         assertNull(MethodRolloutSnapshot.buildDateMillisOf(2730))
     }
 }
+
+class RolloutFirstSeenTest {
+
+    @Test
+    fun `first check is a baseline without date`() {
+        assertEquals(RolloutFirstSeen("A_16.0.0.100(EX01)", 0), RolloutFirstSeen.next(null, "A_16.0.0.100(EX01)", 500))
+    }
+
+    @Test
+    fun `same build keeps its first-seen time`() {
+        val previous = RolloutFirstSeen("A_17.0.0.100(IN01)", 1000)
+        assertEquals(previous, RolloutFirstSeen.next(previous, "A_17.0.0.100(IN01)", 2000))
+    }
+
+    @Test
+    fun `new build is stamped with the check time`() {
+        val previous = RolloutFirstSeen("A_16.0.0.100(IN01)", 0)
+        assertEquals(RolloutFirstSeen("A_17.0.0.100(IN01)", 3000), RolloutFirstSeen.next(previous, "A_17.0.0.100(IN01)", 3000))
+    }
+
+    @Test
+    fun `blank build doesn't overwrite history`() {
+        val previous = RolloutFirstSeen("A_17.0.0.100(IN01)", 1000)
+        assertEquals(previous, RolloutFirstSeen.next(previous, null, 4000))
+        assertEquals(previous, RolloutFirstSeen.next(previous, "", 4000))
+    }
+}

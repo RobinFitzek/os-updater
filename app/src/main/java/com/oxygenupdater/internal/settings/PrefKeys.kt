@@ -37,6 +37,7 @@ const val KeyLastNotifiedOtaVersion = "last_notified_ota_version"
 
 /** JSON map of methodId -> [com.oxygenupdater.models.MethodRolloutSnapshot], written by the background check */
 const val KeyMethodRolloutSnapshots = "method_rollout_snapshots"
+const val KeyRolloutFirstSeen = "rollout_first_seen"
 
 // Notifications properties
 const val KeyFirebaseToken = "firebase_token"

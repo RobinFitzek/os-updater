@@ -21,6 +21,11 @@ data class MethodRolloutSnapshot(
     val otaVersionNumber: String?,
     val buildDate: Long,
     val checkedAtEpochMs: Long,
+    /**
+     * When this app first saw [otaVersionNumber] in this method × region, or `0` if it was
+     * already there when tracking started (see [RolloutFirstSeen])
+     */
+    val firstSeenAtEpochMs: Long = 0,
 ) {
     val variantCode: String?
         get() = otaVersionNumber?.let { VariantRegex.find(it)?.groupValues?.get(1) }
@@ -72,6 +77,10 @@ data class MethodRolloutSnapshot(
 
     enum class Comparison { Newer, Same, Older, Unknown }
 
+    /** Key in the persisted maps: one entry per method × region */
+    val key: String
+        get() = "$methodId:$region"
+
     companion object {
         @VisibleForTesting
         val Empty = MethodRolloutSnapshot(0, null, "", null, 0, 0)
@@ -122,6 +131,27 @@ data class MethodRolloutSnapshot(
                 if (cmp != 0) return cmp
             }
             return 0
+        }
+    }
+}
+
+/**
+ * Persisted separately from the snapshots so a failed probe never loses history.
+ *
+ * @param atEpochMs when [otaVersionNumber] was first seen; `0` if it was already
+ *   present on the very first check of this method × region (real date unknown)
+ */
+@Serializable
+data class RolloutFirstSeen(
+    val otaVersionNumber: String?,
+    val atEpochMs: Long,
+) {
+    companion object {
+        /** Returns the entry to store for a probe that saw [ota] at [checkedAt], given the [previous] entry */
+        fun next(previous: RolloutFirstSeen?, ota: String?, checkedAt: Long) = when {
+            previous == null -> RolloutFirstSeen(ota, 0) // baseline: we don't know when it arrived
+            ota.isNullOrBlank() || previous.otaVersionNumber == ota -> previous
+            else -> RolloutFirstSeen(ota, checkedAt)
         }
     }
 }

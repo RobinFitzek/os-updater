@@ -1,16 +1,16 @@
 # OS Updater — lightweight build
 
-**APK:** `os-updater-7.1.1-lightweight-release.apk` (3.4 MB, minified, talks to the live prod server `oxygenupdater.com`)
+**APK:** `os-updater-7.1.2-lightweight-release.apk` (3.4 MB, minified, talks to the live prod server `oxygenupdater.com`)
 
-- SHA-256: `e4ec18b47e1c26d484d86900a98134c76a4074c9cc4eebfd4a2d155484afdb02`
-- applicationId `com.arjanvlek.oxygenupdater`, versionName `7.1.1` (versionCode 136), minSdk 26 (Android 8+)
+- SHA-256: `bf7bb171a3a150e501e4943ece660bad4a1384e6cc0fc0049080d6386d87f3cf`
+- applicationId `com.arjanvlek.oxygenupdater`, versionName `7.1.2` (versionCode 137), minSdk 26 (Android 8+)
 - V2-signed with local key `CN=OS Updater,O=RobinFitzek`
   (cert SHA-256 `16ce5bfa493b15dc51625ed704d341b6abcfef73a7b4d1004961fc9d5628d384`)
 
 Built with `./gradlew :app:assembleRelease` (JDK 17, Android SDK 37); `:app:test` passes.
 
-The signature differs from both the Play Store build and the earlier 7.1.0 lightweight build,
-so **uninstall the installed version first**, then install this APK. Enable "Install unknown apps"
+Same signing key as 7.1.1, so it installs over 7.1.1 as an update. The signature differs from the
+Play Store build and the earlier 7.1.0 lightweight build: coming from those, **uninstall first**, then install this APK. Enable "Install unknown apps"
 for your browser/file manager if prompted.
 
 ## What's inside
@@ -22,8 +22,13 @@ update check: 1, 2, 5, 10, 15, 30, 60, … min (below 15 min via a self-reschedu
 The home screen shows a **rollout overview**: one card per update method, one row per region
 (your device first, then Europe, India, China, Global, North America) with the build version,
 variant, build date, and a *NEW* / *Installed* badge compared to the build on your device, plus a
-summary of how many region/method combinations already have a newer build. Regions are probed in
+summary of how many region/method combinations already have a newer build. Each row also shows
+when the app **first saw** that build in that region (as precise as your check interval). Builds
+already present on the very first check have no such date, since their real arrival is unknown. Regions are probed in
 parallel on every manual refresh and every background check.
+
+## 7.1.2
+- "First seen" time per method × region, kept in a separate history so failed probes don't lose it.
 
 ## 7.1.1 vs 7.1.0
 - APK 4.4 MB → 3.4 MB: dropped AppCompat (per-app language now uses the platform API on Android 13+

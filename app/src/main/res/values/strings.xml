@@ -25,6 +25,9 @@
 		<item quantity="other">%1$d of %2$d region/method combinations already have a newer build.</item>
 	</plurals>
 	<string name="update_information_rollout_last_checked">Last checked: %1$s</string>
+	<string name="update_information_rollout_build_date">Built %1$s</string>
+	<string name="update_information_rollout_first_seen">first seen %1$s</string>
+	<string name="update_information_rollout_first_seen_caption">\"First seen\" is when this app first spotted a build in that region. Builds already present on the first check have no such date.</string>
 	<string name="update_information_rollout_own_region">Your device</string>
 	<string name="update_information_rollout_badge_new">NEW</string>
 	<string name="update_information_rollout_badge_installed">Installed</string>
