@@ -128,11 +128,11 @@ android {
     defaultConfig {
         applicationId = "com.arjanvlek.oxygenupdater"
 
-        minSdk = 23
+        minSdk = 26
         targetSdk = 37
 
-        versionCode = 135
-        versionName = "7.1.0"
+        versionCode = 136
+        versionName = "7.1.1"
 
         val languages = fileTree("src/main/res") {
             include("values-*/strings.xml")
@@ -142,6 +142,10 @@ android {
             }.joinToString { "\"$it\"" }
         }
         buildConfigField("String[]", "SUPPORTED_LANGUAGES", "{\"en\", $languages}")
+        // Drop library translations (Material, AppCompat, …) for languages the app itself doesn't ship
+        androidResources.localeFilters += listOf("en") + fileTree("src/main/res") {
+            include("values-*/strings.xml")
+        }.files.mapNotNull { it.parentFile?.name?.removePrefix("values-") }
 
         testApplicationId = "$namespace.$testBuildType"
         testHandleProfiling = true

@@ -18,6 +18,23 @@
 	<string name="update_information_unknown_update_name">"Unbenanntes Update für %1$s"</string>
 	<string name="update_information_view_update_information">"Update Informationen ansehen"</string>
 
+	<string name="update_information_rollout_table_header">Rollout pro Update-Methode</string>
+	<string name="update_information_rollout_table_empty">Noch keine Daten. Zum Aktualisieren nach unten ziehen oder auf die Hintergrundprüfung warten.</string>
+	<string name="update_information_rollout_summary_none_newer">Noch keine Region hat einen neueren Build als deiner.</string>
+	<plurals name="update_information_rollout_summary_newer">
+		<item quantity="one">%1$d von %2$d Region/Methode-Kombinationen hat schon einen neueren Build.</item>
+		<item quantity="other">%1$d von %2$d Region/Methode-Kombinationen haben schon einen neueren Build.</item>
+	</plurals>
+	<string name="update_information_rollout_last_checked">Zuletzt geprüft: %1$s</string>
+	<string name="update_information_rollout_own_region">Dein Gerät</string>
+	<string name="update_information_rollout_badge_new">NEU</string>
+	<string name="update_information_rollout_badge_installed">Installiert</string>
+	<string name="update_information_rollout_region_eu">Europa</string>
+	<string name="update_information_rollout_region_in">Indien</string>
+	<string name="update_information_rollout_region_cn">China</string>
+	<string name="update_information_rollout_region_glo">Global</string>
+	<string name="update_information_rollout_region_na">Nordamerika</string>
+
 	<!-- Server status warning strings -->
 	<string name="server_status_error">Manche Features sind zurzeit nicht verfügbar.</string>
 	<string name="server_status_unreachable">"Der Server ist nicht erreichbar. Versuche die Seite zu aktualisieren."</string>
@@ -25,7 +42,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">Es ist ein Update verfügbar (%1$s). Tippen Sie hier, um in den Play Store zu gelangen.</string>
-	<string name="new_app_version_inapp_downloaded">Das App Update wurde heruntergeladen</string>
 	<string name="new_app_version_inapp_failed">Das App Update konnte nicht installiert werden. Tippen Sie hier, um in den Play Store zu gelangen.</string>
 
 	<!-- Downloader strings -->

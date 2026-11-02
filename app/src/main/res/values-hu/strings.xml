@@ -26,7 +26,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">Elérhető egy alkalmazásfrissítés (%1$s). Koppints ide a Play Áruház megnyitásához és az alkalmazás frissítéséhez.</string>
-	<string name="new_app_version_inapp_downloaded">Az alkalmazásfrissítés letöltésre került</string>
 	<string name="new_app_version_inapp_failed">Az alkalmazásfrissítést nem lehetett telepíteni. Koppintson ide a Play Áruház megnyitásához és az alkalmazás frissítéséhez.</string>
 
 	<!-- Downloader strings-->

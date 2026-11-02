@@ -26,7 +26,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">此应用有可用更新 (%1$s)。轻触打开 Play Store 更新应用</string>
-	<string name="new_app_version_inapp_downloaded">应用更新已下载</string>
 	<string name="new_app_version_inapp_failed">无法安装应用更新。轻触打开 Play Store 更新应用</string>
 
 	<!-- Downloader strings-->

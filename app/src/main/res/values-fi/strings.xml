@@ -26,7 +26,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">Sovelluspäivitys saatavilla (%1$s). Paina tästä avataksesi Play Kaupan ja päivitä sovellus.</string>
-	<string name="new_app_version_inapp_downloaded">Sovelluspäivitys ladattu</string>
 	<string name="new_app_version_inapp_failed">Sovelluspäivitystä ei voitu asentaa. Paina tästä avataksesi Play Kaupan ja päivitä sovellus.</string>
 
 	<!-- Downloader strings -->

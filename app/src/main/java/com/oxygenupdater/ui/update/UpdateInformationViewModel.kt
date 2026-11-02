@@ -4,15 +4,10 @@ import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oxygenupdater.extensions.get
-import com.oxygenupdater.extensions.set
 import com.oxygenupdater.internal.NotSetL
 import com.oxygenupdater.internal.settings.KeyDeviceId
-import com.oxygenupdater.internal.settings.KeyMethodRolloutSnapshots
 import com.oxygenupdater.internal.settings.KeyUpdateMethodId
-import com.oxygenupdater.models.MethodRolloutSnapshot
-import com.oxygenupdater.models.UpdateData
 import com.oxygenupdater.repositories.ServerRepository
-import com.oxygenupdater.utils.json
 import com.oxygenupdater.ui.RefreshAwareState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -53,35 +48,10 @@ class UpdateInformationViewModel @Inject constructor(
         refreshingFlow.value = true
         serverRepository.fetchUpdateData(previousDeviceId, previousMethodId)
 
-        // Also check every other update method of this device and record snapshots,
+        // Also check every other update method of this device in every region,
         // so the rollout table on this screen fills in on manual refresh too
-        recordAllMethodSnapshots(previousDeviceId)
+        serverRepository.probeRollout(previousDeviceId)
 
         refreshingFlow.value = false
-    }
-
-    private suspend fun recordAllMethodSnapshots(deviceId: Long) {
-        val methods = serverRepository.fetchUpdateMethodsForDevice(deviceId) ?: return
-        if (methods.isEmpty()) return
-        val snapshots = HashMap<String, MethodRolloutSnapshot>(methods.size * 6)
-        val checkedAt = System.currentTimeMillis()
-        for (method in methods) {
-            val methodId = method.id ?: continue
-            for (region in MethodRolloutSnapshot.RolloutRegions + "") {
-                val data = serverRepository.fetchUpdateData(deviceId, methodId, persist = false, regionOverride = region) ?: continue
-                val ota = data.otaVersionNumber
-                snapshots["$methodId:$region"] = MethodRolloutSnapshot(
-                    methodId = methodId,
-                    methodName = method.name,
-                    region = region,
-                    otaVersionNumber = ota,
-                    buildDate = UpdateData.getBuildDate(ota),
-                    checkedAtEpochMs = checkedAt,
-                )
-            }
-        }
-        if (snapshots.isNotEmpty()) {
-            sharedPreferences[KeyMethodRolloutSnapshots] = json.encodeToString(snapshots)
-        }
     }
 }

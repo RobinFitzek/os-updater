@@ -26,7 +26,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">Actualizare nouă disponibilă pentru aplicație (%1$s). Apăsați aici pentru a accesa Magazinul Google Play și pentru a actualiza aplicația.</string>
-	<string name="new_app_version_inapp_downloaded">Actualizarea a fost descărcată</string>
 	<string name="new_app_version_inapp_failed">Actualizarea aplicației nu a putut fi instalată. Apăsați aici pentru a actualiza aplicația din Google Play.</string>
 
 	<!-- Downloader strings-->

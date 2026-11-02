@@ -26,7 +26,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">Доступне оновлення (%1$s). Натисніть, щоб відкрити Play Маркет і оновити застосунок.</string>
-	<string name="new_app_version_inapp_downloaded">Оновлення застосунку завантажено</string>
 	<string name="new_app_version_inapp_failed">Неможливо встановити оновлення застосунку. Натисніть, щоб відкрити Play Маркет і оновити застосунок.</string>
 
 	<!-- Downloader strings-->

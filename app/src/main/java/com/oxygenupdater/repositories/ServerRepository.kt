@@ -13,18 +13,26 @@ import com.oxygenupdater.extensions.set
 import com.oxygenupdater.internal.NotSetL
 import com.oxygenupdater.internal.settings.KeyDevice
 import com.oxygenupdater.internal.settings.KeyDeviceId
+import com.oxygenupdater.internal.settings.KeyMethodRolloutSnapshots
 import com.oxygenupdater.internal.settings.KeyNotificationDelayInSeconds
 import com.oxygenupdater.internal.settings.KeyUpdateMethodId
 import com.oxygenupdater.models.Article
 import com.oxygenupdater.models.DeviceRequestFilter
 import com.oxygenupdater.models.DownloadErrorBody
 import com.oxygenupdater.models.FreshUpdateDataDownloadUrlBody
+import com.oxygenupdater.models.MethodRolloutSnapshot
 import com.oxygenupdater.models.ServerStatus
 import com.oxygenupdater.models.SystemVersionProperties
 import com.oxygenupdater.models.UpdateData
+import com.oxygenupdater.utils.json
 import com.oxygenupdater.utils.logInfo
 import com.oxygenupdater.utils.logVerbose
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withPermit
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -181,6 +189,47 @@ class ServerRepository @Inject constructor(
         serverApi.fetchUpdateMethodsForDevice(deviceId)
     }
 
+    /**
+     * Probes every update method of [deviceId] in every [MethodRolloutSnapshot.RolloutRegions]
+     * (plus the device's own region, `""`), a few requests at a time, and persists the resulting
+     * snapshots for the rollout table.
+     *
+     * @return each probe's snapshot paired with the fetched [UpdateData], or `null` if the
+     *   update methods couldn't be fetched
+     */
+    suspend fun probeRollout(deviceId: Long): List<Pair<MethodRolloutSnapshot, UpdateData>>? {
+        val methods = fetchUpdateMethodsForDevice(deviceId)
+        if (methods.isNullOrEmpty()) return null
+
+        val checkedAt = System.currentTimeMillis()
+        val regions = MethodRolloutSnapshot.RolloutRegions + ""
+        val semaphore = Semaphore(MaxParallelProbes)
+        val results = coroutineScope {
+            methods.flatMap { method ->
+                regions.map { region ->
+                    async {
+                        val data = semaphore.withPermit {
+                            fetchUpdateData(deviceId, method.id, persist = false, regionOverride = region)
+                        } ?: return@async null
+                        MethodRolloutSnapshot(
+                            methodId = method.id,
+                            methodName = method.name,
+                            region = region,
+                            otaVersionNumber = data.otaVersionNumber,
+                            buildDate = UpdateData.getBuildDate(data.otaVersionNumber),
+                            checkedAtEpochMs = checkedAt,
+                        ) to data
+                    }
+                }
+            }.awaitAll().filterNotNull()
+        }
+
+        if (results.isNotEmpty()) sharedPreferences[KeyMethodRolloutSnapshots] = json.encodeToString(
+            results.associate { (snapshot, _) -> "${snapshot.methodId}:${snapshot.region}" to snapshot }
+        )
+        return results
+    }
+
     suspend fun logDownloadError(
         url: String?,
         filename: String?,
@@ -219,5 +268,8 @@ class ServerRepository @Inject constructor(
 
     companion object {
         private const val TAG = "ServerRepository"
+
+        /** Keeps a full rollout probe (methods × 6 regions) quick without hammering the server */
+        private const val MaxParallelProbes = 4
     }
 }

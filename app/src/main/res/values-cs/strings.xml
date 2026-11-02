@@ -26,7 +26,6 @@
 
 	<!-- Řetězce zpráv nové verze aplikace -->
 	<string name="new_app_version">K dispozici je aktualizace aplikace (%1$s). Klepnutím sem otevřete Obchod Play a aktualizujte aplikaci.</string>
-	<string name="new_app_version_inapp_downloaded">Aktualizace aplikace byla stažena</string>
 	<string name="new_app_version_inapp_failed">Aktualizaci aplikace se nepodařilo nainstalovat. Klepnutím sem otevřete Obchod Play a aktualizujte aplikaci.</string>.
 
 	<!-- Řetězce downloaderu-->

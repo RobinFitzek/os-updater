@@ -26,7 +26,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">Há uma atualização para o aplicativo (%1$s). Toque aqui para abrir a Play Store e atualizar o aplicativo.</string>
-	<string name="new_app_version_inapp_downloaded">Atualização do aplicativo baixada.</string>
 	<string name="new_app_version_inapp_failed">Não foi possível instalar a atualização do aplicativo. Toque aqui para abrir a Play Store e atualizar o aplicativo.</string>
 
 	<!-- Downloader strings-->

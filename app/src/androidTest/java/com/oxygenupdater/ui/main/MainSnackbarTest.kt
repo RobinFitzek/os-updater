@@ -21,7 +21,6 @@ class MainSnackbarTest : ComposeBaseTest() {
             MainSnackbar(
                 snackbarText = snackbarText,
                 openPlayStorePage = { trackCallback("openPlayStorePage") },
-                completeAppUpdate = { trackCallback("completeAppUpdate") },
             )
         }
 
@@ -31,9 +30,6 @@ class MainSnackbarTest : ComposeBaseTest() {
 
         snackbarText = AppUpdateFailedSnackbarData
         validateNodes("openPlayStorePage")
-
-        snackbarText = AppUpdateDownloadedSnackbarData
-        validateNodes("completeAppUpdate")
     }
 
     /**

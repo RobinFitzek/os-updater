@@ -26,7 +26,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">App-opdatering er tilgængelig (%1$s). Tryk her for at åbne Google Play og update.</string>
-	<string name="new_app_version_inapp_downloaded">Opdateringen er blevet hentet</string>
 	<string name="new_app_version_inapp_failed">Opdateringen af app kunne ikke gennemføres. Tryk her for at åbne Google Play og update.</string>
 
 	<!-- Downloader strings-->

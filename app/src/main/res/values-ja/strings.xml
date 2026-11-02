@@ -26,7 +26,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">アプリのアップデートが利用可能です (%1$s)。ここをタップして Play ストアを開きアプリをアップデートします。</string>
-	<string name="new_app_version_inapp_downloaded">アプリのアップデートがダウンロードされました</string>
 	<string name="new_app_version_inapp_failed">アプリのアップデートをインストールできません。ここをタップして Play ストアを開きアプリをアップデートします。</string>
 
 	<!-- Downloader strings-->

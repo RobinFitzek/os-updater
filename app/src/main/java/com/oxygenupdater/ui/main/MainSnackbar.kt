@@ -17,7 +17,6 @@ import com.oxygenupdater.R
 fun MainSnackbar(
     snackbarText: IntIntPair?,
     openPlayStorePage: () -> Unit,
-    completeAppUpdate: () -> Unit,
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     SnackbarHost(hostState = snackbarHostState, modifier = Modifier.statusBarsPadding())
@@ -38,17 +37,12 @@ fun MainSnackbar(
         if (result != SnackbarResult.ActionPerformed) return@LaunchedEffect
         when (actionResId) {
             AppUpdateFailedSnackbarData.second -> openPlayStorePage()
-            AppUpdateDownloadedSnackbarData.second -> completeAppUpdate()
         }
     }
 }
 
 val NoConnectionSnackbarData = IntIntPair(
     R.string.error_app_requires_network_connection, android.R.string.ok
-)
-
-val AppUpdateDownloadedSnackbarData = IntIntPair(
-    R.string.new_app_version_inapp_downloaded, R.string.error_reload
 )
 
 val AppUpdateFailedSnackbarData = IntIntPair(

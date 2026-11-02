@@ -27,7 +27,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">Доступно је ажурирање апликације (%1$s). Кликните овде да отворите Play продавницу и урадите ажурирање апликације.</string>
-	<string name="new_app_version_inapp_downloaded">Преузето је ажурирање апликације</string>
 	<string name="new_app_version_inapp_failed">Ажурирање се не може извршити. Кликните овде да отворите Play продавницу и урадите ажурирање апликације.</string>
 
 	<!-- Downloader strings-->

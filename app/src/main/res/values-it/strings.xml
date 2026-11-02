@@ -25,7 +25,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">Aggiornamento disponibile: (%1$s). Premi qui per aggiornare.</string>
-	<string name="new_app_version_inapp_downloaded">L\'aggiornamento è stato scaricato.</string>
 	<string name="new_app_version_inapp_failed">Non è stato possibile scaricare l\'aggiornamento. Premi qui per aprire il Play Store ed aggiornare l\'app.</string>
 
 	<!-- Downloader strings -->

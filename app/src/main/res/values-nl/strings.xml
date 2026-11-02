@@ -26,7 +26,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">Er is een app-update beschikbaar (%1$s). Tik hier om de Play Store te openen en update de app.</string>
-	<string name="new_app_version_inapp_downloaded">De app-update is gedownload</string>
 	<string name="new_app_version_inapp_failed">De app-update kon niet geïnstalleerd worden. Tik hier om de Play Store te openen en update de app.</string>
 
 	<!-- Downloader strings -->

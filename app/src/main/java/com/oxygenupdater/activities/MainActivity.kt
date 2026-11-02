@@ -1,5 +1,6 @@
 package com.oxygenupdater.activities
 
+import android.content.Context
 import android.util.Log
 import android.content.Intent
 import android.graphics.Color
@@ -10,7 +11,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
 import androidx.collection.IntIntPair
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -66,6 +67,7 @@ import androidx.navigation3.ui.NavDisplay
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.size.Size
+import com.oxygenupdater.ui.AppLocales
 import com.oxygenupdater.BuildConfig
 import com.oxygenupdater.OxygenUpdater
 import com.oxygenupdater.R
@@ -98,7 +100,6 @@ import com.oxygenupdater.ui.faq.FaqScreen
 import com.oxygenupdater.ui.faq.FaqViewModel
 import com.oxygenupdater.ui.install.InstallGuideScreen
 import com.oxygenupdater.ui.install.InstallGuideViewModel
-import com.oxygenupdater.ui.main.AppUpdateInfo
 import com.oxygenupdater.ui.main.ArticleRoute
 import com.oxygenupdater.ui.main.ChildRoute
 import com.oxygenupdater.ui.main.DeepLinkAbout
@@ -112,7 +113,6 @@ import com.oxygenupdater.ui.main.DeepLinkUpdate
 import com.oxygenupdater.ui.main.DownloadedArg
 import com.oxygenupdater.ui.main.ExternalArg
 import com.oxygenupdater.ui.main.FaqRoute
-import com.oxygenupdater.ui.main.FlexibleAppUpdateProgress
 import com.oxygenupdater.ui.main.GuideRoute
 import com.oxygenupdater.ui.main.MainMenu
 import com.oxygenupdater.ui.main.MainNavigationBar
@@ -160,13 +160,13 @@ import javax.inject.Inject
 /**
  * Single activity.
  *
- * We're using [AppCompatActivity] instead of [androidx.activity.ComponentActivity] because of
- * [automatic per-app language](https://developer.android.com/guide/topics/resources/app-languages#androidx-impl)
+ * Per-app language is handled by [AppLocales] (platform API on Android 13+, own backport below),
+ * so a plain [ComponentActivity] is enough and AppCompat isn't needed.
  *
  * @author [Adhiraj Singh Chauhan](https://github.com/adhirajsinghchauhan)
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModels()
     private val updateViewModel: UpdateInformationViewModel by viewModels()
@@ -326,21 +326,6 @@ class MainActivity : AppCompatActivity() {
         // Referential equality because we're reusing static Pairs
         var snackbarText by rememberState<IntIntPair?>(null, referentialEqualityPolicy())
 
-        val appUpdateInfo by viewModel.appUpdateInfo.collectAsStateWithLifecycle()
-        appUpdateInfo?.let { it ->
-            AppUpdateInfo(
-                status = it.installStatus(),
-                availability = it::updateAvailability,
-                snackbarMessageId = { snackbarText?.first },
-                updateSnackbarText = { snackbarText = it },
-                resetAppUpdateIgnoreCount = viewModel::resetAppUpdateIgnoreCount,
-                incrementAppUpdateIgnoreCount = viewModel::incrementAppUpdateIgnoreCount,
-                unregisterAppUpdateListener = viewModel::unregisterAppUpdateListener,
-                requestUpdate = viewModel::requestUpdate,
-                requestImmediateUpdate = viewModel::requestImmediateAppUpdate,
-            )
-        }
-
         // Display the "No connection" banner if required
         val isNetworkAvailable by OxygenUpdater.isNetworkAvailable.collectAsStateWithLifecycle()
         if (!isNetworkAvailable) snackbarText = NoConnectionSnackbarData
@@ -436,17 +421,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                val appUpdateStatus by viewModel.appUpdateStatus.collectAsStateWithLifecycle()
-                appUpdateStatus?.let { it ->
-                    FlexibleAppUpdateProgress(
-                        status = it.installStatus(),
-                        bytesDownloaded = it::bytesDownloaded,
-                        totalBytesToDownload = it::totalBytesToDownload,
-                        updateSnackbarText = { snackbarText = it },
-                        unregisterAppUpdateListener = viewModel::unregisterAppUpdateListener,
-                    )
-                }
-
                 val serverStatus by viewModel.serverStatus.collectAsStateWithLifecycle()
                 ServerStatusDialogs(serverStatus.status, ::openPlayStorePage)
                 ServerStatusBanner(serverStatus, ::openPlayStorePage)
@@ -527,7 +501,6 @@ class MainActivity : AppCompatActivity() {
         MainSnackbar(
             snackbarText = snackbarText,
             openPlayStorePage = ::openPlayStorePage,
-            completeAppUpdate = viewModel::completeAppUpdate,
         )
     }
 
@@ -758,6 +731,8 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    override fun attachBaseContext(newBase: Context) = super.attachBaseContext(AppLocales.wrap(newBase))
+
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -850,13 +825,8 @@ class MainActivity : AppCompatActivity() {
         getDeepLinkFromIntent(intent)?.let { backStack.addIfNot(it) }
     }
 
-    override fun onResume() = super.onResume().also {
-        viewModel.checkForStalledAppUpdate()
-    }
-
     override fun onDestroy() = super.onDestroy().also {
         viewModel.maybePruneWork()
-        viewModel.unregisterAppUpdateListener()
     }
 
     /**

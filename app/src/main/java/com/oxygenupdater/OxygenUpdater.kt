@@ -1,5 +1,6 @@
 package com.oxygenupdater
 
+import com.oxygenupdater.ui.AppLocales
 import androidx.compose.runtime.getValue
 import android.app.Application
 import android.content.SharedPreferences
@@ -83,6 +84,7 @@ class OxygenUpdater : Application(), Configuration.Provider, SingletonImageLoade
 
     override fun onCreate() {
         super.onCreate()
+        AppLocales.init(this)
         setupStrictMode()
 
         setupNetworkCallback()

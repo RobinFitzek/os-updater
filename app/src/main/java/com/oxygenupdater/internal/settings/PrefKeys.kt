@@ -24,7 +24,6 @@ const val KeyIgnoreIncorrectDeviceWarnings = "ignore_incorrect_device_warnings"
 const val KeyIgnoreNotificationPermissionSheet = "ignore_notification_permission_sheet"
 const val KeyDownloadBytesDone = "download_bytes_done"
 
-const val KeyFlexibleAppUpdateIgnoreCount = "flexibleAppUpdateIgnoreCount"
 
 /**
  * Interval (in minutes) between automatic background update checks.

@@ -1,12 +1,12 @@
 package com.oxygenupdater.ui.settings
 
+import android.app.Activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -43,9 +43,9 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import coil3.imageLoader
+import com.oxygenupdater.ui.AppLocales
 import com.oxygenupdater.BuildConfig
 import com.oxygenupdater.R
 import com.oxygenupdater.extensions.formatFileSize
@@ -413,7 +413,7 @@ private fun Language() {
 
     if (showSheet) ModalBottomSheet({ showSheet = false }) { hide ->
         LanguageSheet({
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(it))
+            (context as? Activity)?.let { activity -> AppLocales.set(activity, it) }
             hide()
         }, selectedLocale)
     }
@@ -485,7 +485,7 @@ private fun ClearCache() {
                 // Toggle to let the `size` calculation run again
                 recomputationKey = !recomputationKey
 
-                context.showToast(androidx.appcompat.R.string.abc_action_mode_done)
+                context.showToast(android.R.string.ok)
             } catch (e: Exception) {
                 logInfo(SettingsScreenTestTag, "Error when clearing cache", e)
             }

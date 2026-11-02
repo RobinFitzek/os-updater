@@ -26,7 +26,6 @@
 
 	<!-- New app version message strings -->
 	<string name="new_app_version">קיים עדכון חדש עבור האפליקציה (%1$s) לחץ כאן בשביל לפתוח את חנות הPlay Store ולעדכן את האפליקציה.</string>
-	<string name="new_app_version_inapp_downloaded">האפליקציה עודכנה בהצלחה</string>
 	<string name="new_app_version_inapp_failed">העדכון לא ניתן להתקנה. לחץ כאן על מנת לפתוח את ה־Play Store ולנסות שנית.</string>
 
 	<!-- Downloader strings-->
